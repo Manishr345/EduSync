@@ -25,4 +25,21 @@ router.post('/signup', [
     });
     res.json({ Successfull: "Student signed up" });
 })
+router.post('/login',[
+     body('name' , 'Name should be of atleast 3 characters').isLength({min : 3}),
+     body('email','Please enter a valid email').isEmail(),
+     body('password','Password should be of atleast 8 characters').isLength({min : 8})
+], async (req,res)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json({error: errors.array()});
+    }
+    let student = await Student.findone({email : req.body.email});
+    if(!student){
+    return res.status(400).json({error :'Please enter valid credentials'})
+    }
+    res.json({Successfull :'Student logged in'})
+})  
+router.post('/fetch',[])
+
 module.exports = router;
