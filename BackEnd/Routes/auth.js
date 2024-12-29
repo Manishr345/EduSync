@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router();
 const Student = require('../models/Student');
 const { body, validationResult } = require('express-validator');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const fetchStudent = require('../middlewear/fetchStudent');
 
 router.post('/signup', [
     body('name', 'Name should be of atleast 3 characters').isLength({ min: 3 }),
@@ -13,15 +16,17 @@ router.post('/signup', [
     if(!errors.isEmpty()){
         return res.status(400).json({error: errors.array()});
     }
-    let student = Student.findOne({email: req.body.email});
+    let student = await Student.findOne({email: req.body.email});
     if(student){
         return res.status(400).json({error: 'Student already exists'});
     }
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(req.body.password, salt);
     student = await Student.create({
         name: req.body.name,
         email: req.body.email,
         uid: req.body.uid,
-        password: req.body.password,
+        password: hash
     });
     res.json({ Successfull: "Student signed up" });
 })
@@ -34,12 +39,22 @@ router.post('/login',[
     if(!errors.isEmpty()){
         return res.status(400).json({error: errors.array()});
     }
-    let student = await Student.findone({email : req.body.email});
+    let student = await Student.findOne({email : req.body.email});
     if(!student){
     return res.status(400).json({error :'Please enter valid credentials'})
     }
-    res.json({Successfull :'Student logged in'})
-})  
-router.post('/fetch',[])
+    const studentID = {
+        student: {id: student.id}
+    }
+    const jwtSecret = 'Nothing';
+    const token = jwt.sign(studentID, jwtSecret);
+    res.json({token});
+})
+
+router.post('/fetchstudent', fetchStudent, async (req, res) => {
+    const studentID = req.student.id;
+    const student = await Student.findById(studentID);
+    res.send(student);
+})
 
 module.exports = router;
