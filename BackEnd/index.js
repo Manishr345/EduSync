@@ -1,5 +1,8 @@
-const express = require(express);
+const express = require('express');
 const app = express();
+const connectToMongo = require('./mangodb');
+
+connectToMongo();
 
 app.use(express.json());
 
