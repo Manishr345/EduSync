@@ -2,9 +2,13 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <div className='w-full h-[300px] bg-slate-800 '>
+
+
+      </div>
+    </>
+
   )
 }
 
