@@ -1,10 +1,16 @@
 import React from 'react'
+import Card from '../components/Card'
 
 const Home = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <div className='w-full  bg-black'>
+        <Card className='py-5'/>
+
+
+      </div>
+    </>
+
   )
 }
 
