@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const Student = require('../models/Student');
+const Student = require('../models/student');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -43,7 +43,7 @@ router.post('/login', [
     if (!student) {
         return res.status(400).json({ error: 'Please enter valid credentials' })
     }
-    const verifyPassword = bcrypt.compare(req.body.password, student.password);
+    const verifyPassword = await bcrypt.compare(req.body.password, student.password);
     if (!verifyPassword) {
         return res.status(400).json({ error: 'Please enter valid credentials' });
     }
