@@ -9,16 +9,16 @@ const fetchStudent = require('../middlewear/fetchStudent');
 router.post('/signup', [
     body('name', 'Name should be of atleast 3 characters').isLength({ min: 3 }),
     body('email', 'Please enter a valid email').isEmail(),
-    body('uid', 'uid should be of 8 characters').isLength({min: 8, max: 8}),
+    body('uid', 'uid should be of 8 characters').isLength({ min: 8, max: 8 }),
     body('password', 'Password should be of atleast 8 characters').isLength({ min: 8 })
 ], async (req, res) => {
     const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({error: errors.array()});
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ error: errors.array() });
     }
-    let student = await Student.findOne({email: req.body.email});
-    if(student){
-        return res.status(400).json({error: 'Student already exists'});
+    let student = await Student.findOne({ email: req.body.email });
+    if (student) {
+        return res.status(400).json({ error: 'Student already exists' });
     }
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(req.body.password, salt);
@@ -30,25 +30,29 @@ router.post('/signup', [
     });
     res.json({ Successfull: "Student signed up" });
 })
-router.post('/login',[
-     body('name' , 'Name should be of atleast 3 characters').isLength({min : 3}),
-     body('email','Please enter a valid email').isEmail(),
-     body('password','Password should be of atleast 8 characters').isLength({min : 8})
-], async (req,res)=>{
+router.post('/login', [
+    body('name', 'Name should be of atleast 3 characters').isLength({ min: 3 }),
+    body('email', 'Please enter a valid email').isEmail(),
+    body('password', 'Password should be of atleast 8 characters').isLength({ min: 8 })
+], async (req, res) => {
     const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json({error: errors.array()});
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ error: errors.array() });
     }
-    let student = await Student.findOne({email : req.body.email});
-    if(!student){
-    return res.status(400).json({error :'Please enter valid credentials'})
+    let student = await Student.findOne({ email: req.body.email });
+    if (!student) {
+        return res.status(400).json({ error: 'Please enter valid credentials' })
+    }
+    const verifyPassword = bcrypt.compare(req.body.password, student.password);
+    if (!verifyPassword) {
+        return res.status(400).json({ error: 'Please enter valid credentials' });
     }
     const studentID = {
-        student: {id: student.id}
+        student: { id: student.id }
     }
     const jwtSecret = 'Nothing';
     const token = jwt.sign(studentID, jwtSecret);
-    res.json({token});
+    res.json({ token });
 })
 
 router.post('/fetchstudent', fetchStudent, async (req, res) => {
