@@ -6,11 +6,16 @@ import Footer from '../components/Footer'
 const Home = () => {
   return (
     <>
-      <Header/>
+      <Header />
       <div className='w-full bg-black md:w-[100%]'>
-        <Card className='py-5'/>
+        <Card className='py-5' />
+
       </div>
-      <Footer/>
+
+      <Footer />
+
+
+
 
     </>
   )
