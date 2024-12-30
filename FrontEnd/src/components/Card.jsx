@@ -4,7 +4,7 @@ const Card = () => {
     return (
         <>
             {/* <div className='w-full h-[90vh] bg-gray-500 min-[768px]:max-[1023px]:w-[110%]'></div> */}
-            <div className='w-full sm:max-[800px]:h-[130vh] sm:h-[90vh]   text-white sm:flex flex-col justify-center items-center'>
+            <div className='w-full sm:max-[800px]:h-[130vh] sm:h-[90vh] text-white sm:flex flex-col justify-center items-center mb-7'>
                 <div>
                     <h1 className='text-3xl font-bold text-center'>Features</h1>
                 </div>
