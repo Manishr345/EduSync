@@ -5,24 +5,26 @@ const Footer = () => {
     <>
       <footer class="bg-gray-800 text-white py-10">
         <div class="container mx-auto px-4">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div>
-              <h3 class="text-lg font-semibold mb-2">College Address</h3>
-              <p>6V4F+FPF, Thakur Rd, ठाकुर, Thakur</p>
-              <p>Village, Kandivali East, Mumbai,</p>
-              <p>Maharashtra 400101</p>
+          <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-12">
+            <div className='p-3 rounded-md text-center'>
+              <h3 class="text-lg font-semibold mb-2">Institute Address</h3>
+              <p>Crestwood Institute of Technology &nbsp;<span className='text-blue-400'>CIT</span>&nbsp;<br></br>
+                Legacy Parkway
+                Riverside Hills, NY 10118
+                United States
+              </p>
             </div>
 
-            <div>
+            <div className='p-3 rounded-md text-center'>
               <h3 class="text-lg font-semibold mb-2">Contact Information</h3>
               <p>Phone: 022 2887 0627</p>
-              <p>Email: ctchakraborty tcsc.edu.in</p>
+              <p>Email: DavidMusk@crestwoodelite.edu</p>
             </div>
 
-            <div>
+            <div className='p-3 rounded-md text-center'>
               <h3 class="text-lg font-semibold mb-2">Licenses & Legal</h3>
-              <p>© 2024 ABC College of Technology. All rights reserved.</p>
-              <p>Licensed under XYZ Accreditation Board.</p>
+              <p>© 2025 Crestwood College of Technology. <br></br>All rights reserved.</p>
+              <p>Licensed under EduSync Accreditation Board.</p>
               <p>
                 <a href="#" class="text-blue-400 hover:text-blue-600">Privacy Policy</a> |
                 <a href="#" class="text-blue-400 hover:text-blue-600">Terms of Service</a>
@@ -37,11 +39,14 @@ const Footer = () => {
           </div>
         </div>
       </footer>
+<<<<<<< HEAD
       
 
 
 
 
+=======
+>>>>>>> 27309dea9dc68625abedafce981470ba748f28ae
     </>
 
   )
