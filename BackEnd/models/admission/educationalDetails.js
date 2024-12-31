@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
-const educatonDetailsSchema = mongoose.Schema({
+const educationalDetailsSchema = mongoose.Schema({
+    student: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'personaldetails'
+    },
     schoolName:{
         type: String,
         required: true
@@ -17,9 +21,9 @@ const educatonDetailsSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    highetsQualification:{
+    highestQualification:{
         type: String,
         required: true
     }
 })
-module.exports = educatonDetailsSchema();
+module.exports = mongoose.model('educationDetails', educationalDetailsSchema);
