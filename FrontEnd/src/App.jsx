@@ -1,7 +1,8 @@
 import './App.css'
 import Home from './pages/Home'
-import Profile from './pages/Profile'
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
+import AdminStudent from './components/AdminStudent'
+import Login from './components/Login'
 
 
 function App() {
@@ -16,7 +17,11 @@ function App() {
           <Route path='/courses' element={<Courses/>}></Route>
           <Route path='/examination' element={<Examination/>}></Route>
           <Route path='/admission' element={<Admission/>}></Route> */}
-          <Route path='/profile' element={<Profile/>}></Route>
+          <Route path='/profile' element={<AdminStudent/>}></Route>
+          <Route path='/Login' element={<Login/>}></Route>
+          
+
+
         </Routes>
       </BrowserRouter>
     </>

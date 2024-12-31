@@ -39,14 +39,6 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-<<<<<<< HEAD
-      
-
-
-
-
-=======
->>>>>>> 27309dea9dc68625abedafce981470ba748f28ae
     </>
 
   )
