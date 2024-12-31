@@ -18,7 +18,7 @@ const personalDetailSchema = mongoose.Schema({
         reuired : true
     },
     contact:{
-        type: String,
+        type: Number,
         required : true,
         unique : true
     },
@@ -40,14 +40,12 @@ const personalDetailSchema = mongoose.Schema({
         required: true,
     },
     parentContact:{
-        type: String,
+        type: Number,
         required : true,
-        unique : true
     },
     parentEmail:{
         type: String,
         required: true,
-        unique : true
     },
     occupation:{
         type: String,
