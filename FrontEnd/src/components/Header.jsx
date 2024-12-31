@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 
 const Header = () => {
@@ -15,7 +15,7 @@ const Header = () => {
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % images.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
   useEffect(() => {
-    const intervalId = setInterval(nextSlide, 3000); 
+    const intervalId = setInterval(nextSlide, 3000);
     return () => clearInterval(intervalId);
   }, []);
 
@@ -89,8 +89,22 @@ const Header = () => {
           </div>
         </div>
       </nav>
-
-      <div className="relative w-full mt-2 mb-5 pl-5 pr-5">
+      
+      <div className="relative w-full mt-5 mb-5 pl-5 pr-5 grid grid-cols-1 gap-7 sm:grid-cols-2">
+        {/*Notice part*/}
+        <div className=' bg-black text-white w-full pl-5 pr-5 flex justify-center items-center flex-wrap gap-10 text-center sm:gap-2 md:p-[40px] lg:'>
+          <h1 className='text-7xl font-mono lg:text-9xl xl:text-[220px]'>CIT</h1>
+          <h2 className='text-xl font-mono lg:text-2xl xl:text-3xl'>
+            SYNC LATEST SKILLS WITH US REGRETS ARISE FOR NOT APPLYING ON US, GIVE A TRY!
+            NEW WAY OF LEARNING BEGINS.
+            <br></br><br></br>
+            NO ROOM FOR RACISM
+            SERVE AT YOUR BEST YOU WILL BE HIGHLIGHTED
+            GRIND THE PATH IN WHICH YOU ARE INTERESTED
+            REST LEAVE TO US
+          </h2>
+        </div>
+        {/*Carousel part*/}
         <div className="relative h-[350px] overflow-hidden sm:h-[500px] md:h-[600px] xl:h-[770px] rounded-3xl">
           {images.map((image, index) => (
             <div
@@ -103,12 +117,12 @@ const Header = () => {
           ))}
         </div>
 
-        <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+        <div className="2xl:left-[74%] xl:left-[71%] lg:left-[70%] md:left-[67%] sm:left-[66%] absolute z-30 flex justify-center items-center left-[35%] bottom-[12%] space-x-3 rtl:space-x-reverse">
           {images.map((_, index) => (
             <button
               key={index}
               type="button"
-              className={`w-2 h-2 rounded-full ${index === currentSlide ? "bg-[#0d3645]" : "bg-white"
+              className={`w-3 h-1 rounded-full ${index === currentSlide ? "bg-[#0d3645]" : "bg-white"
                 }`}
               aria-current={index === currentSlide ? "true" : "false"}
               onClick={() => setCurrentSlide(index)}
@@ -116,33 +130,36 @@ const Header = () => {
           ))}
         </div>
 
-        <button
-          type="button"
-          className="absolute top-0 start-5 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-          onClick={prevSlide}
-        >
-          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-2 group-focus:ring-white">
-            <svg className="w-2 h-2 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
-            </svg>
-            <span className="sr-only">Previous</span>
-          </span>
-        </button>
+        {/*btn div*/}
+        <div className='flex justify-between translate-y-[-700%] sm:translate-x-[108%] sm:translate-y-[-900%] md:translate-y-[-1200%] lg:translate-x-[106%] xl:translate-x-[104%] xl:translate-y-[-1500%]'>
+          <button
+            type="button"
+            className="start-5 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none"
+            onClick={prevSlide}
+          >
+            <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-2 group-focus:ring-white">
+              <svg className="w-2 h-2 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+              </svg>
+              <span className="sr-only">Previous</span>
+            </span>
+          </button>
 
-        <button
-          type="button"
-          className="absolute top-0 end-5 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-          onClick={nextSlide}
-        >
-          <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-2 group-focus:ring-white">
-            <svg className="w-2 h-2 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
-            </svg>
-            <span className="sr-only">Next</span>
-          </span>
-        </button>
+          <button
+            type="button"
+            className="end-5 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none"
+            onClick={nextSlide}
+          >
+            <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-2 group-focus:ring-white">
+              <svg className="w-2 h-2 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+              </svg>
+              <span className="sr-only">Next</span>
+            </span>
+          </button>
+        </div>
+
       </div>
-
     </>
   )
 }
