@@ -76,7 +76,7 @@ const Header = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="xl:text-xl block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                <a href="/admission" className="xl:text-xl block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
                   Admission
                 </a>
               </li>
@@ -93,8 +93,8 @@ const Header = () => {
       <div className="relative w-full mt-5 mb-5 pl-5 pr-5 grid grid-cols-1 gap-7 sm:grid-cols-2">
         {/*Notice part*/}
         <div className=' bg-black text-white w-full pl-5 pr-5 flex justify-center items-center flex-wrap gap-10 text-center sm:gap-2 md:p-[40px] lg:'>
-          <h1 className='text-7xl font-mono lg:text-9xl xl:text-[220px]'>CIT</h1>
-          <h2 className='text-xl font-mono lg:text-2xl xl:text-3xl'>
+          <h1 className='text-6xl  lg:text-8xl xl:text-[200px]'>CIT</h1>
+          <h2 className='text-xl  lg:text-2xl xl:text-3xl'>
             SYNC LATEST SKILLS WITH US REGRETS ARISE FOR NOT APPLYING ON US, GIVE A TRY!
             NEW WAY OF LEARNING BEGINS.
             <br></br><br></br>
