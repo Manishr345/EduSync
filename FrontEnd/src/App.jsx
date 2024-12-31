@@ -3,7 +3,6 @@ import Home from './pages/Home'
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import AdminStudent from './components/AdminStudent'
 import Login from './components/Login'
-import Signup from './components/Signup'
 
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
           <Route path='/admission' element={<Admission/>}></Route> */}
           <Route path='/profile' element={<AdminStudent/>}></Route>
           <Route path='/Login' element={<Login/>}></Route>
-          <Route path='/Signup' element={<Signup/>}></Route>   
 
         </Routes>
       </BrowserRouter>
