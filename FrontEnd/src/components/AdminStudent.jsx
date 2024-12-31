@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom'
 
 const AdminStudent = () => {
     const navigate = useNavigate();
-
     const handleClick = () => {
-        navigate('/Login');  // Route to "/about" when the button is clicked
+        navigate('/Login'); 
     };
     return (
         <>
