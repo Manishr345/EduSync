@@ -17,17 +17,6 @@ const Login = () => {
                                 <label
                                     for="login"
                                     className="font-semibold text-sm text-gray-400 pb-1 block"
-                                >UID</label
-                                >
-                                <input
-                                    id="login"
-                                    type="text"
-                                    required
-                                    className="border-2 rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
-                                />
-                                <label
-                                    for="login"
-                                    className="font-semibold text-sm text-gray-400 pb-1 block"
                                 >Username</label
                                 >
                                 <input
@@ -60,7 +49,7 @@ const Login = () => {
                             <div classname="mt-5">
                                 <button
                                     type="submit"
-                                    class="py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+                                    class="mt-4 py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
                                 >
                                     Log in
                                 </button>
@@ -69,8 +58,8 @@ const Login = () => {
                                 <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
                                 <a
                                     href="/Signup"
-                                    class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
-                                >or sign up</a
+                                    class="text-sm text-gray-500 dark:text-gray-400 hover:underline"
+                                >or ENROLL</a
                                 >
                                 <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
                             </div>
