@@ -1,7 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import Login from './Login';
 
-const Login = () => {
-
+const Signup = () => {    
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate('/Login'); 
+    };
     return (
         <>
             <div className='w-full h-[100vh] flex justify-center items-center bg-black'>
@@ -11,7 +16,7 @@ const Login = () => {
                     >
                         <div className="max-w-md mx-auto text-white">
                             <div className="flex items-center space-x-5 justify-center">
-                                <h1 className='text-2xl font-bold'>Login</h1>
+                                <h1 className='text-2xl font-bold'>Sign up</h1>
                             </div>
                             <div className="mt-5">
                                 <label
@@ -58,21 +63,12 @@ const Login = () => {
                                 />
                             </div>
                             <div classname="mt-5">
-                                <button
+                                <button onClick={handleClick}
                                     type="submit"
                                     class="py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
                                 >
-                                    Log in
+                                    Sign up
                                 </button>
-                            </div>
-                            <div class="flex items-center justify-between mt-4">
-                                <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
-                                <a
-                                    href="/Signup"
-                                    class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
-                                >or sign up</a
-                                >
-                                <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
                             </div>
                         </div>
                     </div>
@@ -82,4 +78,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Signup
