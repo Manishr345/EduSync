@@ -3,6 +3,8 @@ import Home from './pages/Home'
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import AdminStudent from './components/AdminStudent'
 import Login from './components/Login'
+import AdminSignup from './components/AdminSingup'
+import AdminLogin from './components/AdminLogin'
 
 
 function App() {
@@ -19,7 +21,8 @@ function App() {
           <Route path='/admission' element={<Admission/>}></Route> */}
           <Route path='/profile' element={<AdminStudent/>}></Route>
           <Route path='/Login' element={<Login/>}></Route>
-
+          <Route path='/adminsignup' element={<AdminSignup/>}></Route>
+          <Route path='/adminlogin' element={<AdminLogin/>}></Route>
         </Routes>
       </BrowserRouter>
     </>

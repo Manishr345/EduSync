@@ -1,8 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import Login from './Login';
 
-const Signup = () => {    
+const AdminSignup = () => {    
     const navigate = useNavigate();
     const handleClick = () => {
         navigate('/Login'); 
@@ -20,52 +19,48 @@ const Signup = () => {
                             </div>
                             <div className="mt-5">
                                 <label
-                                    for="login"
+                                    htmlFor="uid"
                                     className="font-semibold text-sm text-gray-400 pb-1 block"
-                                >UID</label
-                                >
+                                >UID</label>
                                 <input
-                                    id="login"
+                                    id="uid"
                                     type="text"
                                     required
                                     className="border-2 rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
                                 />
                                 <label
-                                    for="login"
+                                    htmlFor="username"
                                     className="font-semibold text-sm text-gray-400 pb-1 block"
-                                >Username</label
-                                >
+                                >Username</label>
                                 <input
-                                    id="login"
+                                    id="username"
                                     type="text"
                                     required
                                     className="border-2 rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
                                 />
                                 <label
-                                    for="login"
+                                    htmlFor="email"
                                     className="font-semibold text-sm text-gray-400 pb-1 block"
-                                >E-mail</label
-                                >
+                                >E-mail</label>
                                 <input
-                                    id="login"
+                                    id="email"
                                     type="email"
                                     className="border-2 rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
                                 />
                                 <label
-                                    for="password"
+                                    htmlFor="password"
                                     className="font-semibold text-sm text-gray-400 pb-1 block"
-                                >Password</label
-                                >
+                                >Password</label>
                                 <input
                                     id="password"
                                     type="password"
                                     className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
                                 />
                             </div>
-                            <div classname="mt-5">
+                            <div className="mt-5">
                                 <button onClick={handleClick}
                                     type="submit"
-                                    class="py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+                                    className="py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
                                 >
                                     Sign up
                                 </button>
@@ -78,4 +73,4 @@ const Signup = () => {
     )
 }
 
-export default Signup
+export default AdminSignup;

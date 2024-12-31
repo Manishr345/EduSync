@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const Login = () => {
+const AdminLogin = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,7 +20,7 @@ const Login = () => {
                     >
                         <div className="max-w-md mx-auto text-white">
                             <div className="flex items-center space-x-5 justify-center">
-                                <h1 className="text-2xl font-bold">Student Login</h1>
+                                <h1 className="text-2xl font-bold">Admin Login</h1>
                             </div>
                             <form onSubmit={handleSubmit}>
                                 <div className="mt-5">
@@ -77,12 +78,11 @@ const Login = () => {
                             </form>
                             <div className="flex items-center justify-between mt-4">
                                 <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
-                                <a
-                                    href="#"
-                                    className="text-sm text-gray-500 dark:text-gray-400 hover:underline"
-                                >
-                                    or ENROLL
-                                </a>
+                                <Link
+                                    to='/adminsignup'
+                                    className="text-sm text-gray-500 dark:text-gray-400 hover:underline">
+                                    or SIGNUP
+                                </Link>
                                 <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
                             </div>
                         </div>
@@ -93,4 +93,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default AdminLogin;
