@@ -16,7 +16,7 @@ const adminSchema = mongoose.Schema({
     },
     aid: {
         type: String,
-        required: true,
+        required: false,
         unique : true
     }
 })

@@ -9,7 +9,6 @@ const fetchAdmin = require('../middlewear/fetchAdmin');
 router.post('/signup', [
     body('name', 'Name should be of atleast 3 characters').isLength({ min: 3 }),
     body('email', 'Please enter a valid email').isEmail(),
-    body('aid', 'aid should be of 8 characters').isLength({ min: 8, max: 8 }),
     body('password', 'Password should be of atleast 8 characters').isLength({ min: 8 })
 ], async (req, res) => {
     const errors = validationResult(req);
