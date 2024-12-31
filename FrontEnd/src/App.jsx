@@ -5,11 +5,13 @@ import AdminStudent from './components/AdminStudent'
 import Login from './components/Login'
 import AdminSignup from './components/AdminSingup'
 import AdminLogin from './components/AdminLogin'
+import AdminState from './contexts/admin/AdminState'
 
 
 function App() {
   return (
     <>
+      <AdminState>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>}></Route>
@@ -25,6 +27,7 @@ function App() {
           <Route path='/adminlogin' element={<AdminLogin/>}></Route>
         </Routes>
       </BrowserRouter>
+      </AdminState>
     </>
   )
 }

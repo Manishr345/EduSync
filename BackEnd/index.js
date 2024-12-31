@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 const connectToMongo = require('./mangodb');
+const cors = require('cors');
 
 connectToMongo();
+
+app.use(cors());
 
 app.use(express.json());
 

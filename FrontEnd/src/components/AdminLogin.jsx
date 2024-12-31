@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import AdminContext from '../contexts/admin/AdminContext';
 
 const AdminLogin = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Logging in with:', { username, email, password });
+    const context = useContext(AdminContext);
+    const [admin, setAdmin] = useState({name: '', email: '', password: ''});
+
+    const handleSubmit = () => {
+        context.adminSignup(admin.name, admin.email, admin.password);
     };
+
+    const changeMe = (e) => {
+        setAdmin({...admin, [e.target.name]: e.target.value});
+    }
 
     return (
         <>
@@ -22,7 +27,7 @@ const AdminLogin = () => {
                             <div className="flex items-center space-x-5 justify-center">
                                 <h1 className="text-2xl font-bold">Admin Login</h1>
                             </div>
-                            <form onSubmit={handleSubmit}>
+                            <form>
                                 <div className="mt-5">
                                     <label
                                         htmlFor="username"
@@ -32,9 +37,9 @@ const AdminLogin = () => {
                                     </label>
                                     <input
                                         id="username"
+                                        onChange={changeMe}
+                                        name="name"
                                         type="text"
-                                        value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
                                         required
                                         className="outline-none border-1 rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
                                     />
@@ -46,9 +51,9 @@ const AdminLogin = () => {
                                     </label>
                                     <input
                                         id="email"
+                                        onChange={changeMe}
                                         type="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        name="email"
                                         required
                                         className="outline-none border-1 rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
                                     />
@@ -60,16 +65,17 @@ const AdminLogin = () => {
                                     </label>
                                     <input
                                         id="password"
+                                        onChange={changeMe}
                                         type="password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        name="password"
                                         required
                                         className="outline-none border-1 rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
                                     />
                                 </div>
                                 <div className="mt-5">
                                     <button
-                                        type="submit"
+                                        onClick={handleSubmit}
+                                        type='button'
                                         className="mt-4 py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
                                     >
                                         Log in
