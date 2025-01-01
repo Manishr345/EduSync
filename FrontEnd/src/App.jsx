@@ -1,12 +1,12 @@
 import './App.css'
 import Home from './pages/Home'
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
-import AdminStudent from './components/AdminStudent'
-import Login from './components/Login'
-import AdminSignup from './components/AdminSingup'
-import AdminLogin from './components/AdminLogin'
-import Admission from './components/Admission'
-import Educational from './components/Educational'
+import AdminStudent from './components/Profile/AdminStudent'
+import Login from './components/Profile/Login'
+import AdminSignup from './components/Profile/AdminSingup'
+import AdminLogin from './components/Profile/AdminLogin'
+import Admission from './components/Admission/Admission'
+import Educational from './components/Admission/Educational'
 import AdminState from './contexts/admin/AdminState'
 
 

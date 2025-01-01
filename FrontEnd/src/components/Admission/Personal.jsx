@@ -9,8 +9,8 @@ const Personal = () => {
 
     return (
         <>
-            <div className='w-full flex justify-center'>
-                <div class="mt-4 flex  flex-col bg-gray-900 rounded-lg p-4 shadow-sm w-[90%]">
+            <div className='w-full flex justify-center shadow-[-6px_-6px_15px_#0ea5e9]'>
+                <div class="mt-20 flex  flex-col bg-gray-900 rounded-lg p-4 shadow-sm w-[90%] hover:shadow-[-5px_-5px_15px_#0ea5e9] transition ease-in-out duration-700">
                     <h2 class="text-white font-bold text-lg">Personal Details</h2>
 
                     <div class="mt-4" >

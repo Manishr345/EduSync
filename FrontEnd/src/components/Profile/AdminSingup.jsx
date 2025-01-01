@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 //import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react';
-import AdminContext from '../contexts/admin/AdminContext';
+import AdminContext from '../../contexts/admin/AdminContext';
 
 
 const AdminSignup = () => {
