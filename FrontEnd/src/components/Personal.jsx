@@ -41,7 +41,7 @@ const Personal = () => {
                     <div class='mt-4 flex flex-row space-x-2'>
                         <div class="flex-1" >
                             <label class="text-white" for="contact">Contact</label>
-                            <input placeholder="Your Contact" class="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="text" required pattern="\d{10}" />
+                            <input placeholder="Your Contact" class="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="text" required pattern="\d{10}" maxLength={10}/>
                         </div>
                         <div class="flex-1">
                             <label class="text-white" for="email">Email</label>
@@ -66,7 +66,7 @@ const Personal = () => {
                         </div>
                         <div class="flex-1" >
                             <label class="text-white" for="parentcontact">Parent Contact</label>
-                            <input placeholder="Your Parent Contact" class="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="text" required pattern="\d{10}" />
+                            <input placeholder="Your Parent Contact" class="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="text" required pattern="\d{10}" maxLength={10} />
                         </div>
                     </div>
                     <div class="mt-4 flex flex-row space-x-2">
@@ -81,7 +81,7 @@ const Personal = () => {
 
                     </div>
                     <div class="mt-4 flex justify-end">
-                        <button class="bg-white text-black rounded-md px-4 py-1 hover:bg-blue-500 hover:text-white transition-all duration-200" type="submit" onClick={handleClick}>Submit</button>
+                        <button class="rounded-md bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition-all duration-200" type="submit" onClick={handleClick}>Submit</button>
                     </div>
                 </div>
 
