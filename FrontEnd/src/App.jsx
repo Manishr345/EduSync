@@ -8,11 +8,14 @@ import AdminLogin from './components/Profile/AdminLogin'
 import Admission from './components/Admission/Admission'
 import Educational from './components/Admission/Educational'
 import AdminState from './contexts/admin/AdminState'
+import HelloAdmin from './components/HelloAdmin'
+import AdmissionState from './contexts/admission/AdmissionState'
 
 
 function App() {
   return (
     <>
+    <AdmissionState>
     <AdminState>
       <BrowserRouter>
         <Routes>
@@ -27,6 +30,7 @@ function App() {
           <Route path='/Login' element={<Login/>}></Route>
           <Route path='/adminsignup' element={<AdminSignup/>}></Route>
           <Route path='/adminlogin' element={<AdminLogin/>}></Route>
+          <Route path='/helloadmin' element={<HelloAdmin/>}></Route>
 
 
 
@@ -41,6 +45,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       </AdminState>
+    </AdmissionState>
     </>
   )
 }

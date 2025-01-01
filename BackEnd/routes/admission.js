@@ -21,7 +21,7 @@ router.post('/personaldetails', [
     }
     let pcontact = await PersonalDetails.findOne({ contact: req.body.contact });
     if (pcontact) {
-        return res.status(400).josn({ error: 'Please enter a valid Contact number' });
+        return res.status(400).json({ error: 'Please enter a valid Contact number' });
     }
 
     const pd = await PersonalDetails.create({

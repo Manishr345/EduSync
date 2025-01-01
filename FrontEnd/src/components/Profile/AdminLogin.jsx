@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import AdminContext from '../../contexts/admin/AdminContext';
+import AdminContext from '../contexts/admin/AdminContext';
+import { useNavigate } from 'react-router-dom';
 
 const AdminLogin = () => {
+    const navigate = useNavigate();
    const context = useContext(AdminContext) ;
    const [admin, setAdmin] = useState({ name: '', email: '', password: '' });
    
        const handleSubmit = () => {
            context.adminLogin(admin.name, admin.email, admin.password);
-           context.fetchAdmin();
-           //navigate('/Login');
+        //    context.fetchAdmin();
+           navigate('/helloadmin');
        };
    
        const changeMe = (e) => {
