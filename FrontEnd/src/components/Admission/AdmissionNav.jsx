@@ -9,11 +9,10 @@ const AdmissionNav = () => {
                     <a className='sm:px-1 py-3 text-center hover:text-blue-500 hover:border-l hover:border-r hover:rounded-lg' href="">Education</a>
                     <a className='sm:px-1 py-3 text-center hover:text-blue-500 hover:border-l hover:border-r hover:rounded-lg' href="">Course</a>
                     <a className='sm:px-1 py-3 text-center hover:text-blue-500 hover:border-l hover:border-r hover:rounded-lg' href="">Document</a>
-                    <a className='lg:px-3 sm:px-1 py-3 text-center hover:text-blue-500 hover:border-l hover:border-r hover:rounded-lg' href="">Statement</a>
+                    <a className='sm:px-1 lg:px-3 py-3 text-center hover:text-blue-500 hover:border-l hover:border-r hover:rounded-lg' href="">Statement</a>
                     <a className='sm:px-1 py-3 text-center hover:text-blue-500 hover:border-l hover:border-r hover:rounded-lg' href="">Payment</a>
                 </div>
             </div>
-
         </>
     )
 }
