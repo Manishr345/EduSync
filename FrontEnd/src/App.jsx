@@ -9,11 +9,13 @@ import Admission from './components/Admission'
 import Educational from './components/Educational'
 import AdminState from './contexts/admin/AdminState'
 import HelloAdmin from './components/HelloAdmin'
+import AdmissionState from './contexts/admission/AdmissionState'
 
 
 function App() {
   return (
     <>
+    <AdmissionState>
     <AdminState>
       <BrowserRouter>
         <Routes>
@@ -43,6 +45,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       </AdminState>
+    </AdmissionState>
     </>
   )
 }

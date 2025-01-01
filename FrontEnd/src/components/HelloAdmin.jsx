@@ -5,10 +5,8 @@ import { useContext } from 'react'
 
 const HelloAdmin = () => {
     const context = useContext(AdminContext);
-    useEffect(() => {
       setTimeout(() => {
-        context.fetchAdmin()
-      }, 500);
+        context.fetchAdmin();
     }, [])
     
   return (
