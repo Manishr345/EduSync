@@ -4,17 +4,19 @@ import { useContext } from 'react';
 import AdminContext from '../contexts/admin/AdminContext';
 
 const AdminLogin = () => {
-
-    const context = useContext(AdminContext);
-    const [admin, setAdmin] = useState({name: '', email: '', password: ''});
-
-    const handleSubmit = () => {
-        context.adminSignup(admin.name, admin.email, admin.password);
-    };
-
-    const changeMe = (e) => {
-        setAdmin({...admin, [e.target.name]: e.target.value});
-    }
+   const context = useContext(AdminContext) ;
+   const [admin, setAdmin] = useState({ name: '', email: '', password: '' });
+   
+       const handleSubmit = () => {
+           context.adminLogin(admin.name, admin.email, admin.password);
+           context.fetchAdmin();
+           //navigate('/Login');
+       };
+   
+       const changeMe = (e) => {
+           setAdmin({ ...admin, [e.target.name]: e.target.value });
+       }
+   
 
     return (
         <>
@@ -37,7 +39,7 @@ const AdminLogin = () => {
                                     </label>
                                     <input
                                         id="username"
-                                        onChange={changeMe}
+                                       onChange={changeMe}
                                         name="name"
                                         type="text"
                                         required

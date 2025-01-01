@@ -13,7 +13,7 @@ import AdminState from './contexts/admin/AdminState'
 function App() {
   return (
     <>
-      <AdminState>
+    <AdminState>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>}></Route>
