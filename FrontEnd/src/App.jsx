@@ -8,6 +8,7 @@ import AdminLogin from './components/AdminLogin'
 import Admission from './components/Admission'
 import Educational from './components/Educational'
 import AdminState from './contexts/admin/AdminState'
+import HelloAdmin from './components/HelloAdmin'
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path='/Login' element={<Login/>}></Route>
           <Route path='/adminsignup' element={<AdminSignup/>}></Route>
           <Route path='/adminlogin' element={<AdminLogin/>}></Route>
+          <Route path='/helloadmin' element={<HelloAdmin/>}></Route>
 
 
 

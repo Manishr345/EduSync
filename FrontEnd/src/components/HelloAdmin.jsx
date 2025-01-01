@@ -6,13 +6,13 @@ import { useContext } from 'react'
 const HelloAdmin = () => {
     const context = useContext(AdminContext);
     useEffect(() => {
-      context.fetchAdmin()
-    
-      
+      setTimeout(() => {
+        context.fetchAdmin()
+      }, 500);
     }, [])
     
   return (
-    <div>{context.name}</div>
+    <div className='text-white text-3xl font-bold'>Hello {context.admin.name}</div>
   )
 }
 
