@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react';
-import AdmissionContext from '../contexts/admission/AdmissionContext';
+import AdmissionContext from '../../contexts/admission/AdmissionContext';
 
 const Personal = () => {
     const context = useContext(AdmissionContext);
