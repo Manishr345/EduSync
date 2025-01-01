@@ -7,11 +7,13 @@ import AdminSignup from './components/AdminSingup'
 import AdminLogin from './components/AdminLogin'
 import Admission from './components/Admission'
 import Educational from './components/Educational'
+import AdminState from './contexts/admin/AdminState'
 
 
 function App() {
   return (
     <>
+    <AdminState>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>}></Route>
@@ -38,6 +40,7 @@ function App() {
 
         </Routes>
       </BrowserRouter>
+      </AdminState>
     </>
   )
 }
