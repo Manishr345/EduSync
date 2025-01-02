@@ -34,5 +34,4 @@ const documentSchema = mongoose.Schema({
         required: true
     }
 })
-
-export default mongoose.model('documents', documentSchema);
+module.exports = mongoose.model('documents', documentSchema);
