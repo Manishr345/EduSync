@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react';
 import AdmissionContext from '../../contexts/admission/AdmissionContext';
 
 const Personal = () => {
     const context = useContext(AdmissionContext);
     const [personal, setPersonal] = useState({fullName: '', dob: '', gender: '', nationality: '', contact: '', email: '', address: '', parentName: '', relation: '', parentContact: '', parentEmail: '', occupation: ''});
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const handleClick = () => {
         console.log(personal);
         context.personalDetails(personal.fullName, personal.dob, personal.gender, personal.nationality, personal.contact, personal.email, personal.address, personal.parentName, personal.relation, personal.parentContact, personal.parentEmail, personal.occupation);
-        // navigate('/educational'); 
+        navigate('/admission/educational'); 
     };
 
     const changeMe = (event) => {
