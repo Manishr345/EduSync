@@ -17,6 +17,7 @@ import About from './pages/About'
 import Achievement from './pages/Achievement'
 import Courses from './pages/courses'
 import Examination from './pages/Examination'
+import Documents from './components/Admission/Documents'
 
 
 
@@ -48,12 +49,13 @@ function App() {
               {/*Admission NAV*/}
               <Route path='/personal' element={<Personal />}></Route>
               <Route path='/educational' element={<Educational />}></Route>
+              <Route path='/document' element={<Documents />}></Route>
               <Route path='/admission/educational' element={<Educational />}></Route>
+              <Route path='/admission/document' element={<Documents/>}></Route>
               <Route path='/admission/personal' element={[<AdmissionNav/> ,<Personal />]}></Route>
              
               {/*
                   <Route path='/admission/course' element={<Educational/>}></Route>
-                  <Route path='/admission/document' element={<Educational/>}></Route>
                   <Route path='/admission/statement' element={<Educational/>}></Route>
                   <Route path='/admission/payment' element={<Educational/>}></Route>
               */}
