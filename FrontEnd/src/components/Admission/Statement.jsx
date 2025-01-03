@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import AdmissionNav from './AdmissionNav';
+import { useNavigate } from 'react-router-dom'
 
 const Statement = () => {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate('/admission/document');
+    };
+    const handleClick2 = () => {
+        navigate('/admission/payment');
+    };
     const [photo, setPhoto] = useState(null);
     const [eSignature, setESignature] = useState(null);
     const [error, setError] = useState("");
@@ -39,7 +47,7 @@ const Statement = () => {
             <AdmissionNav />
             <form className='mt-5 w-full flex justify-center items-center'>
                 <br></br>
-                <div className='rounded-md bg-white text-black flex flex-col justify-center items-center px-3 py-5 sm:w-[400px]'>
+                <div className='rounded-lg bg-gray-900 text-white flex flex-col justify-center items-center px-5 py-5 sm:w-[400px] mt-10'>
                     <label htmlFor="photo">Upload Photo:</label>
                     <br />
                     <input
@@ -66,24 +74,15 @@ const Statement = () => {
                     <br />
                     {/* Display e-signature preview if available */}
                     {eSignature && <img className='rounded-lg shadow-sm shadow-sky-300' src={eSignature} alt="Uploaded E-Signature" width="100" />}
+                    <br />
+                    {/* Display error message if file type is incorrect */}
+                    {error && <p className='py-5 px-2 text-red-500 text-center shadow-md shadow-red-500'>{error}</p>}
+                    <div className="mt-10 flex justify-between gap-[150px]">
+                        <button className="rounded-md bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition-all duration-200" type="button" onClick={handleClick}>Prev</button>
+                        <button className="rounded-md bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition-all duration-200" type="button" onClick={handleClick2}>Submit</button>
+                    </div>
                 </div>
-                {/* Display error message if file type is incorrect */}
-                {error && <p className='text-red-500 text-center mt-2 shadow-sm shadow-red-300'>{error}</p>}
             </form>
-
-            {/* 
-            <div className='mt-10 flex justify-center items-center'>
-                <div className=' bg-white text-black text-xl font-semibold w-[320px] rounded-md'>
-                    <div className='pt-5 pb-5 text-center'>Important Notice</div>
-                </div>
-            </div>
-
-            <div className='bg-white text-black px-3 py-5 flex justify-center items-center'>
-                <p className='mt-2'>
-                    By proceeding with the application, you acknowledge that you have read and accepted the terms and conditions outlined in the License and Agreement. Additionally, you are required to maintain at least 75% attendance in order to be eligible for further consideration. Please ensure that all requirements are met accordingly.
-                </p>
-            </div>
-            */}
         </div>
     );
 };

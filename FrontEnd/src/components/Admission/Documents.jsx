@@ -1,6 +1,15 @@
 import React from 'react'
 import AdmissionNav from './AdmissionNav'
+import { useNavigate } from 'react-router-dom'
+
 const Documents = () => {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate('/admission/course');
+    };
+    const handleClick2 = () => {
+        navigate('/admission/statement');
+    };
 
     return (
         <>
@@ -49,8 +58,8 @@ const Documents = () => {
                    
 
                     <div className="mt-4 flex justify-between">
-                        <button className="rounded-md bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition-all duration-200" type="button" >back</button>
-                        <button className="rounded-md bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition-all duration-200" type="button" >Submit</button>
+                        <button className="rounded-md bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition-all duration-200" type="button" onClick={handleClick}>Prev</button>
+                        <button className="rounded-md bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition-all duration-200" type="button" onClick={handleClick2}>Submit</button>
                     </div>
                 </div>
 

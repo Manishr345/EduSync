@@ -90,6 +90,7 @@ const Personal = () => {
                         </div>
 
                     </div>
+                    <br></br>
                     <div className="mt-4 flex justify-end">
                         <button className="rounded-md bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition-all duration-200" type="button" onClick={handleClick}>Submit</button>
                     </div>
