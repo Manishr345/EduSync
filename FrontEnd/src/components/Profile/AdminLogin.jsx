@@ -16,7 +16,7 @@ const AdminLogin = () => {
 
     const handleSubmit = () => {
         // Save admin's credentials to localStorage
-        localStorage.setItem('admin', JSON.stringify({ name: admin.name, email: admin.email }));
+        localStorage.setItem('admin', JSON.stringify({ name: admin.name, email: admin.email ,password:admin.password}));
 
         // Navigate to the dashboard after successful login
         navigate('/helloadmin');
