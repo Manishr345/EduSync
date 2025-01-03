@@ -20,6 +20,7 @@ import Examination from './pages/Examination'
 import Documents from './components/Admission/Documents'
 import Statement from './components/Admission/Statement'
 import Payment from './components/Admission/Payment'
+import AdmissionCourse from './components/Admission/AdmissionCourse'
 
 
 
@@ -57,7 +58,7 @@ function App() {
               <Route path='/payment' element={<Payment />}></Route>
               
               <Route path='/admission/payment' element={<Payment />}></Route>
-              <Route path='/admission/course' element={<Courses />}></Route>
+              <Route path='/admission/course' element={<AdmissionCourse />}></Route>
               <Route path='/admission/statement' element={<Statement />}></Route>
               <Route path='/admission/educational' element={<Educational />}></Route>
               <Route path='/admission/document' element={<Documents/>}></Route>

@@ -15,6 +15,7 @@ const Educational = () => {
   const submitMe = () => {
     console.log(educational);
     context.educationalDetails(educational.schoolName, educational.collegeName, educational.schoolGrade, educational.collegeGrade, educational.highestQualification);
+    navigate('/admission/course')  
   }
 
   const handleClick = () => {
