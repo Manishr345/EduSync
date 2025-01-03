@@ -1,72 +1,101 @@
-import React from 'react'
-import AdmissionNav from './AdmissionNav'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import AdmissionNav from './AdmissionNav';
+import { useNavigate } from 'react-router-dom';
 
 const Documents = () => {
     const navigate = useNavigate();
+
+    const [files, setFiles] = useState({
+        passportSizePhoto: null,
+        marksheet10th: null,
+        marksheet12th: null,
+        certificate10th: null,
+        certificate12th: null,
+        identityProof: null,
+        birthCertificate: null,
+        addressProof: null,
+    });
+
+    const handleFileChange = (e) => {
+        const { name, files: fileList } = e.target;
+        setFiles((prevFiles) => ({
+            ...prevFiles,
+            [name]: fileList[0], // Store the selected file
+        }));
+    };
+
     const handleClick = () => {
         navigate('/admission/course');
     };
-    const handleClick2 = () => {
-        navigate('/admission/statement');
+
+    const handleClick2 = async () => {
+        const formData = new FormData();
+
+        // Append all files to the FormData object
+        Object.entries(files).forEach(([key, file]) => {
+            if (file) {
+                formData.append(key, file);
+            }
+        });
+
+        try {
+            const response = await fetch('http://localhost:5000/admission/documents', {
+                method: 'POST',
+                body: formData,
+            });
+            const json = await response.json();
+            console.log(json);
+        } catch (error) {
+            console.error('Error uploading documents:', error);
+        }
     };
 
     return (
         <>
-        <AdmissionNav/>
+            <AdmissionNav />
 
+            <div className="w-full flex justify-center">
+                <div className="mt-4 flex flex-col bg-gray-900 rounded-lg p-4 shadow-sm w-[90%]">
+                    <h2 className="text-white font-bold text-2xl flex w-full justify-center items-center">
+                        Documents
+                    </h2>
 
-            <div className='w-full flex justify-center'>
-                <div className="mt-4 flex  flex-col bg-gray-900 rounded-lg p-4 shadow-sm w-[90%]">
-                    <h2 className="text-white font-bold text-2xl flex w-full justify-center items-center"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff"><path d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/></svg>Documents</h2>
-
-                    <div className="mt-4" >
-                        <label className="text-white" for="photo">Passport-size Photograph</label>
-                        <input name='photo'  className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="file" accept=".png"  required />
-                    </div>
-                    <div className="mt-4" >
-                        <label className="text-white" for="10marksheet">Mark Sheets 10th</label>
-                        <input name='10marksheet'  className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="file" accept=".png"  required />
-                    </div>
-                    <div className="mt-4" >
-                        <label className="text-white" for="12marksheet">Mark Sheets 12th</label>
-                        <input name='12marksheet'  className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="file" accept=".png"  required />
-                    </div>
-                    <div className="mt-4" >
-                        <label className="text-white" for="10certificate">10th Certificate</label>
-                        <input name='10certificate'  className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="file" accept=".png"  required />
-                    </div>
-                    <div className="mt-4" >
-                        <label className="text-white" for="12certificate">12th Certificate</label>
-                        <input name='12certificate'  className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="file" accept=".png"  required />
-                    </div>
-                    <div className="mt-4" >
-                        <label className="text-white" for="identityproof">Identity Proof(eg., Passport , Driver's License)</label>
-                        <input name='identityproof'  className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="file" accept=".png" required />
-                    </div>
-                    <div className="mt-4" >
-                        <label className="text-white" for="birthcertificate">Birth Certificate</label>
-                        <input name='birthcertificate'  className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="file" accept=".png"  required />
-                    </div>
-                    <div className="mt-4" >
-                        <label className="text-white" for="addressproof">Address Proof(eg., aadhar card,pan card)</label>
-                        <input name='addressproof'  className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="file" accept=".png" required />
-                    </div>
-
-                    
-
-                   
+                    {/* File Inputs */}
+                    {Object.keys(files).map((key) => (
+                        <div className="mt-4" key={key}>
+                            <label className="text-white" htmlFor={key}>
+                                {key.replace(/([A-Z])/g, ' $1')} {/* Format the key to a readable label */}
+                            </label>
+                            <input
+                                name={key}
+                                onChange={handleFileChange}
+                                className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1"
+                                type="file"
+                                accept=".png"
+                            />
+                        </div>
+                    ))}
 
                     <div className="mt-4 flex justify-between">
-                        <button className="rounded-md bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition-all duration-200" type="button" onClick={handleClick}>Prev</button>
-                        <button className="rounded-md bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition-all duration-200" type="button" onClick={handleClick2}>Submit</button>
+                        <button
+                            className="rounded-md bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition-all duration-200"
+                            type="button"
+                            onClick={handleClick}
+                        >
+                            Prev
+                        </button>
+                        <button
+                            className="rounded-md bg-blue-600 text-white py-2 px-4 hover:bg-blue-700 transition-all duration-200"
+                            type="button"
+                            onClick={handleClick2}
+                        >
+                            Submit
+                        </button>
                     </div>
                 </div>
-
             </div>
-
         </>
-    )
-}
+    );
+};
 
-export default Documents
+export default Documents;

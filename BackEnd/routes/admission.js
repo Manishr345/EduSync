@@ -64,16 +64,38 @@ const storage = multer.memoryStorage();
 
 const upload = multer({ storage });
 
-router.post('/documents', upload.single('passportSizePhoto'), (req, res) => {
-    console.log('Received file:', req.file); // Log the file object
-    if (!req.file) {
-      return res.status(400).json({ message: 'No file uploaded' });
+router.post('/documents', upload.fields([
+  { name: 'passportSizePhoto', maxCount: 1 },
+  { name: 'marksheet10th', maxCount: 1 },
+  { name: 'marksheet12th', maxCount: 1 },
+  { name: 'certificate10th', maxCount: 1 },
+  { name: 'certificate12th', maxCount: 1 },
+  { name: 'identityProof', maxCount: 1 },
+  { name: 'birthCertificate', maxCount: 1 },
+  { name: 'addressProof', maxCount: 1 },
+]), async (req, res) => {
+  try {
+    // Check if files were uploaded
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).json({ message: 'No files uploaded' });
     }
-    
-    // Convert the file buffer to base64
-    const photoBase64 = req.file.buffer.toString('base64');
-    // Your code to save the document in the database
-  });
-  
+
+    // Convert uploaded files to base64 and prepare data for the database
+    const documentsData = {};
+    for (const [fieldName, fileArray] of Object.entries(req.files)) {
+      if (fileArray && fileArray[0]) {
+        documentsData[fieldName] = fileArray[0].buffer.toString('base64');
+      }
+    }
+
+    // Save document data to the database
+    const documents = await Documents.create(documentsData);
+
+    res.status(201).json({ message: 'Documents uploaded successfully', documents });
+  } catch (error) {
+    console.error('Error uploading documents:', error);
+    res.status(500).json({ message: 'Internal server error', error });
+  }
+});
 
 module.exports = router;
