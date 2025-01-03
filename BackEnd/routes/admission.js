@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 const PersonalDetails = require('../models/admission/personalDetails');
 const EducationDetails = require('../models/admission/educationalDetails')
+const Documents = require('../models/admission/documents')
 const { body, validationResult } = require('express-validator');
+const multer = require('multer');
+
 
 router.post('/personaldetails', [
     body('fullName', 'Full Name should be of atleast 8 characters ').isLength({ min: 8 }),
@@ -56,5 +59,21 @@ router.post('/educationaldetails/:id', async (req, res) => {
     })
     res.send(ed);
 })
+
+const storage = multer.memoryStorage();
+
+const upload = multer({ storage });
+
+router.post('/documents', upload.single('passportSizePhoto'), (req, res) => {
+    console.log('Received file:', req.file); // Log the file object
+    if (!req.file) {
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+    
+    // Convert the file buffer to base64
+    const photoBase64 = req.file.buffer.toString('base64');
+    // Your code to save the document in the database
+  });
+  
 
 module.exports = router;

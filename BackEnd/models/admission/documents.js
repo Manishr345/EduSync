@@ -7,31 +7,31 @@ const documentSchema = mongoose.Schema({
     },
     marksheet10th: {
         type: String,
-        required: true
+        required: false
     },
     marksheet12th: {
         type: String,
-        required: true
+        required: false
     },
     certificate10th: {
         type: String,
-        required: true
+        required: false
     },
     certificate12th: {
         type: String,
-        required: true
+        required: false
     },
     indentityProof: {
         type: String,
-        required: true
+        required: false
     },
     birthCertificate: {
         type: String,
-        required: true
+        required: false
     },
     addressProof: {
         type: String,
-        required: true
+        required: false
     }
 })
 module.exports = mongoose.model('documents', documentSchema);
