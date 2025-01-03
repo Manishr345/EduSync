@@ -79,19 +79,13 @@ const AdmissionCourse = () => {
 
             <div>
               <label className="text-white" htmlFor="fees">Fees</label>
-              <input
-                type="text"
-                name="fees"
-                onChange={handleChange}
-                value={courseDetails.fees}
-                className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1"
-                placeholder="Payable Fees"
-              />
+              <div className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1">
+                This is the amount you have to pay: {courseDetails.fees} {/* Displaying static text along with the fees */}
+              </div>
             </div>
-
             <div className="space-y-2">
               <div>
-                <label className="text-white flex items-center">
+                <label className="text-white flex items-center ">
                   <input
                     type="checkbox"
                     name="duration"
