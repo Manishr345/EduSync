@@ -3,36 +3,31 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-
-//  assume admin as student we are to lazy to replace the admin by student
-
-
-
 const HelloStudent = () => {
-    const [admin, setAdmin] = useState(null);
+    const [student, setstudent] = useState(null);
     const [showForgotPassword, setShowForgotPassword] = useState(false);
     const [showResetPassword, setShowResetPassword] = useState(false);
     const [uid, setUid] = useState('');
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
 
-    // Fetch admin data from localStorage 
+    // Fetch student data from localStorage 
     useEffect(() => {
-        const adminData = localStorage.getItem('admin');
-        if (adminData) {
-            setAdmin(JSON.parse(adminData));
+        const studentData = localStorage.getItem('student');
+        if (studentData) {
+            setstudent(JSON.parse(studentData));
         }
     }, []);
 
     const handleLogout = () => {
-        localStorage.removeItem('admin');
+        localStorage.removeItem('student');
         navigate('/');
     };
 
     // Handle forgot password
     const handleForgotPasswordSubmit = () => {
         if (uid && email) {
-            if (admin?.email === email) {
+            if (student?.email === email) {
                 setShowResetPassword(true);
                 setShowForgotPassword(false);
             } else {
@@ -44,7 +39,7 @@ const HelloStudent = () => {
     };
 
     
-    if (!admin) {
+    if (!student) {
         return <div className="text-white text-3xl font-bold">All credentials are deleted from the local storage. please insert your credentials to login </div>;
     }
 
@@ -58,11 +53,11 @@ const HelloStudent = () => {
                         </svg>
                     </div>
                     <div className="mt-4">
-                        <p className="text-lg font-bold">Name: {admin.name}</p>
-                        <p className="mt-2">Email: {admin.email}</p>
+                        <p className="text-lg font-bold">Name: {student.name}</p>
+                        <p className="mt-2">Email: {student.email}</p>
 
                         <div className="mt-2 flex items-center w-full justify-between">
-                            <p className="mr-2">Password: {'•'.repeat(admin.password.length)}</p>
+                            <p className="mr-2">Password: {'•'.repeat(student.password.length)}</p>
                             
                         </div>
                     </div>
