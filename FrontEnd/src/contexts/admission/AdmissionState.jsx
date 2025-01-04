@@ -43,6 +43,14 @@ const AdmissionState = (props) => {
         const json = await response.json();
         console.log(json);
     }
+    const uploadStatement = async (formData) => {
+        const response = await fetch('http://localhost:5000/admission/statement', {
+            method: 'POST',
+            body: formData,
+        });
+        const json = await response.json();
+        console.log(json);
+    }
     const courseDetails = async (courseName, year) => {
         const response = await fetch('http://localhost:5000/course/coursedetails', {
             method: 'POST',
@@ -59,7 +67,7 @@ const AdmissionState = (props) => {
         return localStorage.getItem('fees');
     }
     return (
-        <AdmissionContext.Provider value={{personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, courseDetails}}>
+        <AdmissionContext.Provider value={{personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, uploadStatement, courseDetails}}>
             {props.children}
         </AdmissionContext.Provider>
     )

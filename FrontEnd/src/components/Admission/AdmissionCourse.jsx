@@ -43,7 +43,7 @@ const AdmissionCourse = () => {
   const handleSubmit = async () => {
     console.log('Form submitted:', courseDetails);
     console.log('Fee:', fee);
-    // navigate('/admission/summary');
+    navigate('/admission/document');
   };
 
   return (

@@ -5,6 +5,7 @@ import AdmissionContext from '../../contexts/admission/AdmissionContext';
 import { useNavigate } from 'react-router-dom'
 
 const Educational = () => {
+  const navigate = useNavigate();
   const [educational, setEducational] = useState({ schoolName: '', collegeName: '', schoolGrade: '', collegeGrade: '', highestQualification: '' })
   const context = useContext(AdmissionContext);
   const changeMe = (e) => {
@@ -21,9 +22,7 @@ const Educational = () => {
   const handleClick = () => {
     navigate('/admission/personal');
   };
-  const handleClick2 = () => {
-    navigate('/admission/course');
-  };
+
 
   return (
     <>
@@ -90,14 +89,14 @@ const Educational = () => {
             <div className='w-full flex justify-between'>
               <button
                 type="button"
-                onClick={[submitMe, handleClick]}
+                onClick={handleClick}
                 className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
               >
                 Prev
               </button>
               <button
                 type="button"
-                onClick={[submitMe, handleClick2]}
+                onClick={submitMe}
                 className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
               >
                 Submit

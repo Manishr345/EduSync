@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const PersonalDetails = require('../models/admission/personalDetails');
-const EducationDetails = require('../models/admission/educationalDetails')
-const Documents = require('../models/admission/documents')
+const EducationDetails = require('../models/admission/educationalDetails');
+const Documents = require('../models/admission/documents');
+const Statement = require('../models/admission/statement');
 const { body, validationResult } = require('express-validator');
 const multer = require('multer');
+const { default: Statement } = require('../../FrontEnd/src/components/Admission/Statement');
 
 
 router.post('/personaldetails', [
@@ -94,6 +96,34 @@ router.post('/documents', upload.fields([
     res.status(201).json({ message: 'Documents uploaded successfully', documents });
   } catch (error) {
     console.error('Error uploading documents:', error);
+    res.status(500).json({ message: 'Internal server error', error });
+  }
+});
+
+router.post('/statement', upload.fields([
+  { name: 'studentSign', maxCount: 1 },
+  { name: 'parentSign', maxCount: 1 }
+]), async (req, res) => {
+  try {
+    // Check if files were uploaded
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).json({ message: 'No files uploaded' });
+    }
+
+    // Convert uploaded files to base64 and prepare data for the database
+    const statementData = {};
+    for (const [fieldName, fileArray] of Object.entries(req.files)) {
+      if (fileArray && fileArray[0]) {
+        statementData[fieldName] = fileArray[0].buffer.toString('base64');
+      }
+    }
+
+    // Save document data to the database
+    const statement = await Statement.create(statementData);
+
+    res.status(201).json({ message: 'Statement uploaded successfully', statement });
+  } catch (error) {
+    console.error('Error uploading statement:', error);
     res.status(500).json({ message: 'Internal server error', error });
   }
 });
