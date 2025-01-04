@@ -109,7 +109,7 @@ const HelloAdmin = () => {
                             onClick={() => setShowForgotPassword(true)}
                             className='bg-blue-600 text-white rounded-md px-3 py-1 font-bold hover:bg-blue-700'
                         >
-                            Forgot Password
+                            Change Password
                         </button>
                         <button
                             onClick={handleLogout}
