@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import AdmissionNav from './AdmissionNav';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import AdmissionContext from '../../contexts/admission/AdmissionContext';
 
 const Documents = () => {
+    const context = useContext(AdmissionContext);
     const navigate = useNavigate();
 
     const [files, setFiles] = useState({
@@ -39,12 +42,7 @@ const Documents = () => {
         });
 
         try {
-            const response = await fetch('http://localhost:5000/admission/documents', {
-                method: 'POST',
-                body: formData,
-            });
-            const json = await response.json();
-            console.log(json);
+            context.uploadDocuments(formData);
         } catch (error) {
             console.error('Error uploading documents:', error);
         }

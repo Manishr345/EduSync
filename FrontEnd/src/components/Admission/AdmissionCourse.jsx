@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import AdmissionNav from './AdmissionNav';
 import { useNavigate } from 'react-router-dom';
+import AdmissionContext from '../../contexts/admission/AdmissionContext';
 
 const AdmissionCourse = () => {
+  const context = useContext(AdmissionContext);
   const navigate = useNavigate();
   const [courseDetails, setCourseDetails] = useState({
     courseName: '',
@@ -12,6 +14,7 @@ const AdmissionCourse = () => {
     modeOfStudy: false,
     attendance: false,
   });
+  const [fee, setFee] = useState('');
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -26,9 +29,21 @@ const AdmissionCourse = () => {
     navigate('/admission/educational');
   };
 
-  const handleSubmit = () => {
+  const fetchFees = async () => {
+    if (courseDetails.courseName && courseDetails.year) {
+      const fetchedFee = await context.courseDetails(courseDetails.courseName, courseDetails.year);
+      setFee(fetchedFee);
+    }
+  };
+
+  useEffect(() => {
+    fetchFees();
+  }, [courseDetails.courseName, courseDetails.year]); // Trigger whenever courseName or year changes
+
+  const handleSubmit = async () => {
     console.log('Form submitted:', courseDetails);
-    navigate('/admission/summary');
+    console.log('Fee:', fee);
+    navigate('/admission/document');
   };
 
   return (
@@ -53,11 +68,11 @@ const AdmissionCourse = () => {
                 required
               >
                 <option value="">Select Course</option>
-                <option value="CS">BSC CS</option>
-                <option value="IT">BSC IT</option>
-                <option value="Animation">BSC Animation</option>
-                <option value="Physics">BSC Physics</option>
-                <option value="Maths">BSC Maths</option>
+                <option value="BSC CS">BSC CS</option>
+                <option value="BSC IT">BSC IT</option>
+                <option value="BSC Animation">Animation</option>
+                <option value="BSC Physics">Physics</option>
+                <option value="BSC Maths">Maths</option>
               </select>
             </div>
 
@@ -80,12 +95,13 @@ const AdmissionCourse = () => {
             <div>
               <label className="text-white" htmlFor="fees">Fees</label>
               <div className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1">
-                This is the amount you have to pay: {courseDetails.fees} {/* Displaying static text along with the fees */}
+                This is the amount you have to pay: {fee || 'Select course and year'} {/* Show fee dynamically */}
               </div>
             </div>
+
             <div className="space-y-2">
               <div>
-                <label className="text-white flex items-center ">
+                <label className="text-white flex items-center">
                   <input
                     type="checkbox"
                     name="duration"

@@ -21,6 +21,7 @@ import Documents from './components/Admission/Documents'
 import Statement from './components/Admission/Statement'
 import Payment from './components/Admission/Payment'
 import AdmissionCourse from './components/Admission/AdmissionCourse'
+import Header from './components/Home/Header'
 
 
 
@@ -30,6 +31,7 @@ function App() {
       <AdmissionState>
         <AdminState>
           <BrowserRouter>
+          <Header/>
             <Routes>
 
               {/*Main NAV*/}
