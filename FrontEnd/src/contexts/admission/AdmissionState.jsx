@@ -66,8 +66,11 @@ const AdmissionState = (props) => {
         }
         return localStorage.getItem('fees');
     }
+    const payFee = () => {
+        return localStorage.getItem('fees');
+    }
     return (
-        <AdmissionContext.Provider value={{personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, uploadStatement, courseDetails}}>
+        <AdmissionContext.Provider value={{personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, uploadStatement, courseDetails, payFee}}>
             {props.children}
         </AdmissionContext.Provider>
     )

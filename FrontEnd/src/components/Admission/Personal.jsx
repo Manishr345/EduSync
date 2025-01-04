@@ -5,23 +5,25 @@ import AdmissionContext from '../../contexts/admission/AdmissionContext';
 
 const Personal = () => {
     const context = useContext(AdmissionContext);
-    const [personal, setPersonal] = useState({fullName: '', dob: '', gender: '', nationality: '', contact: '', email: '', address: '', parentName: '', relation: '', parentContact: '', parentEmail: '', occupation: ''});
+    const [personal, setPersonal] = useState({ fullName: '', dob: '', gender: '', nationality: '', contact: '', email: '', address: '', parentName: '', relation: '', parentContact: '', parentEmail: '', occupation: '' });
     const navigate = useNavigate();
     const handleClick = () => {
         console.log(personal);
         context.personalDetails(personal.fullName, personal.dob, personal.gender, personal.nationality, personal.contact, personal.email, personal.address, personal.parentName, personal.relation, personal.parentContact, personal.parentEmail, personal.occupation);
-        navigate('/admission/educational'); 
+        navigate('/admission/educational');
     };
 
     const changeMe = (event) => {
-        setPersonal({...personal, [event.target.name]: event.target.value});
+        setPersonal({ ...personal, [event.target.name]: event.target.value });
     }
 
     return (
         <>
             <div className='w-full flex justify-center'>
                 <div className="mt-4 flex  flex-col bg-gray-900 rounded-lg p-4 shadow-sm w-[90%]">
-                    <h2 className="text-white font-bold text-lg">Personal Details</h2>
+                    <div className="flex justify-center items-center gap-2 mb-6">
+                        <h2 className="text-2xl font-bold text-white"><i className="fa-solid fa-graduation-cap"></i>&nbsp;Personal Details</h2>
+                    </div>
 
                     <div className="mt-4" >
                         <label className="text-white" for="name">Full Name</label>
@@ -51,7 +53,7 @@ const Personal = () => {
                     <div class='mt-4 flex flex-row space-x-2'>
                         <div className="flex-1" >
                             <label className="text-white" for="contact">Contact</label>
-                            <input onChange={changeMe} value={personal.contact} name='contact' placeholder="Your Contact" className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="text" required pattern="\d{10}" maxLength={10}/>
+                            <input onChange={changeMe} value={personal.contact} name='contact' placeholder="Your Contact" className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1" type="text" required pattern="\d{10}" maxLength={10} />
                         </div>
                         <div className="flex-1">
                             <label className="text-white" for="email">Email</label>
