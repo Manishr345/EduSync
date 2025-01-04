@@ -1,22 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    const navigate = useNavigate();
-    const handleClick = () => {
-        navigate('/hellostudent');
-    };
 
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [student, setStudent] = useState({ name: '', email: '', password: '' });
+    const navigate = useNavigate();
+
+    // Check if student is already logged in (on page reload)
+    useEffect(() => {
+        const studentData = localStorage.getItem('student');
+        if (studentData) {
+            // If there's student data in localStorage, redirect to the student dashboard
+            navigate('/hellostudent');
+        }
+    }, [navigate]);
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setStudent((prevState) => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Logging in with:', { username, email, password });
+        // Save student's credentials to localStorage
+        localStorage.setItem('student', JSON.stringify({ 
+            name: student.name, 
+            email: student.email, 
+            password: student.password 
+        }));
+
+        // Navigate to the dashboard after successful login
+        navigate('/hellostudent');
     };
-
-
 
     return (
         <>
@@ -32,16 +50,17 @@ const Login = () => {
                             <form onSubmit={handleSubmit}>
                                 <div className="mt-5">
                                     <label
-                                        htmlFor="username"
+                                        htmlFor="name"
                                         className="font-semibold text-sm text-gray-400 pb-1 block"
                                     >
                                         Username
                                     </label>
                                     <input
-                                        id="username"
+                                        id="name"
                                         type="text"
-                                        value={username}
-                                        onChange={(e) => setUsername(e.target.value)}
+                                        name="name"
+                                        value={student.name}
+                                        onChange={handleInputChange}
                                         required
                                         className="outline-none border-1 rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
                                     />
@@ -54,8 +73,9 @@ const Login = () => {
                                     <input
                                         id="email"
                                         type="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        name="email"
+                                        value={student.email}
+                                        onChange={handleInputChange}
                                         required
                                         className="outline-none border-1 rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
                                     />
@@ -68,15 +88,15 @@ const Login = () => {
                                     <input
                                         id="password"
                                         type="password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        name="password"
+                                        value={student.password}
+                                        onChange={handleInputChange}
                                         required
                                         className="outline-none border-1 rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full bg-gray-700 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-300"
                                     />
                                 </div>
                                 <div className="mt-5">
                                     <button
-                                        onClick={handleClick}
                                         type="submit"
                                         className="mt-4 py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
                                     >
