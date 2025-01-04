@@ -22,6 +22,7 @@ import Statement from './components/Admission/Statement'
 import Payment from './components/Admission/Payment'
 import AdmissionCourse from './components/Admission/AdmissionCourse'
 import Header from './components/Home/Header'
+import HelloStudent from './components/Profile/HelloStudent'
 
 
 
@@ -50,6 +51,8 @@ function App() {
               <Route path='/adminsignup' element={<AdminSignup />}></Route>
               <Route path='/adminlogin' element={<AdminLogin />}></Route>
               <Route path='/helloadmin' element={<HelloAdmin />}></Route>
+              <Route path='/hellostudent' element={<HelloStudent />}></Route>
+
               
               {/*Admission NAV*/}
               <Route path='/personal' element={<Personal />}></Route>

@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate('/hellostudent');
+    };
+
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -9,6 +15,8 @@ const Login = () => {
         e.preventDefault();
         console.log('Logging in with:', { username, email, password });
     };
+
+
 
     return (
         <>
@@ -68,6 +76,7 @@ const Login = () => {
                                 </div>
                                 <div className="mt-5">
                                     <button
+                                        onClick={handleClick}
                                         type="submit"
                                         className="mt-4 py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
                                     >

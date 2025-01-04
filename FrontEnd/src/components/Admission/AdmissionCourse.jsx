@@ -38,7 +38,7 @@ const AdmissionCourse = () => {
 
   useEffect(() => {
     fetchFees();
-  }, [courseDetails.courseName, courseDetails.year]); // Trigger whenever courseName or year changes
+  }, [courseDetails.courseName, courseDetails.year]); 
 
   const handleSubmit = async () => {
     console.log('Form submitted:', courseDetails);
@@ -95,7 +95,7 @@ const AdmissionCourse = () => {
             <div>
               <label className="text-white" htmlFor="fees">Fees</label>
               <div className="w-full bg-gray-800 rounded-md border-gray-700 text-white px-2 py-1">
-                This is the amount you have to pay: {fee || 'Select course and year'} {/* Show fee dynamically */}
+                This is the amount you have to pay: {fee || 'Select course and year'} 
               </div>
             </div>
 
