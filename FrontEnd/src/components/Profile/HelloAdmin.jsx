@@ -9,20 +9,20 @@ const HelloAdmin = () => {
     const [uid, setUid] = useState('');
     const [email, setEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
-    const [passwordVisible, setPasswordVisible] = useState(false); 
+    const [passwordVisible, setPasswordVisible] = useState(false);
     const navigate = useNavigate();
 
     // Fetch admin data from localStorage 
     useEffect(() => {
         const adminData = localStorage.getItem('admin');
         if (adminData) {
-            setAdmin(JSON.parse(adminData));  
+            setAdmin(JSON.parse(adminData));
         }
     }, []);
 
     const handleLogout = () => {
         localStorage.removeItem('admin');
-        navigate('/');  
+        navigate('/');
     };
 
     // Handle forgot password
@@ -30,7 +30,7 @@ const HelloAdmin = () => {
         if (uid && email) {
             if (admin?.email === email) {
                 setShowResetPassword(true);
-                setShowForgotPassword(false); 
+                setShowForgotPassword(false);
             } else {
                 alert('Invalid UID or Email.');
             }
@@ -71,12 +71,13 @@ const HelloAdmin = () => {
     return (
         <>
             <div className='w-full h-[100vh] flex justify-center items-center p-5'>
-                <div className="mt-4 flex flex-col bg-gray-900 rounded-lg p-4 shadow-sm w-[500px] text-white overflow-hidden">
-                    <div className="flex justify-center ">
+                <div className="mt-4 flex flex-col bg-gray-900 rounded-xl p-4 shadow-sm w-[500px] text-white overflow-hidden">
+                    <div className="flex justify-center" style={{ filter: 'drop-shadow(-5px -5px 4px #0ea5e9)' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" height="120px" viewBox="0 -960 960 960" width="120px" fill="#ffff">
                             <path d="M480-440q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0-80q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0 440q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-400Zm0-315-240 90v189q0 54 15 105t41 96q42-21 88-33t96-12q50 0 96 12t88 33q26-45 41-96t15-105v-189l-240-90Zm0 515q-36 0-70 8t-65 22q29 30 63 52t72 34q38-12 72-34t63-52q-31-14-65-22t-70-8Z" />
                         </svg>
                     </div>
+
 
                     <div className="mt-4">
                         <p className="text-lg font-bold">Name: {admin.name}</p>
@@ -106,13 +107,13 @@ const HelloAdmin = () => {
                     <div className='mt-4 flex justify-between'>
                         <button
                             onClick={() => setShowForgotPassword(true)}
-                            className='bg-blue-600 text-white rounded-md px-3 py-1'
+                            className='bg-blue-600 text-white rounded-md px-3 py-1 font-bold hover:bg-blue-700'
                         >
                             Forgot Password
                         </button>
                         <button
                             onClick={handleLogout}
-                            className='bg-red-600 text-white rounded-md px-3 py-1'
+                            className='bg-red-600 text-white rounded-md px-3 py-1 font-bold hover:bg-red-700'
                         >
                             Log Out
                         </button>
