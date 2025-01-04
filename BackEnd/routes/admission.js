@@ -6,8 +6,6 @@ const Documents = require('../models/admission/documents');
 const Statement = require('../models/admission/statement');
 const { body, validationResult } = require('express-validator');
 const multer = require('multer');
-const { default: Statement } = require('../../FrontEnd/src/components/Admission/Statement');
-
 
 router.post('/personaldetails', [
     body('fullName', 'Full Name should be of atleast 8 characters ').isLength({ min: 8 }),

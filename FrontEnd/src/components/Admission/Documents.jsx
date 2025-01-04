@@ -43,6 +43,7 @@ const Documents = () => {
 
         try {
             context.uploadDocuments(formData);
+            navigate('/admission/statement');
         } catch (error) {
             console.error('Error uploading documents:', error);
         }
