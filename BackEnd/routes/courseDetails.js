@@ -4,8 +4,8 @@ const CourseDetails = require('../models/courseDetais')
 
 router.post('/coursedetails',async(req,res)=>{
      const coursedetails = await CourseDetails.find({
-        courseName: "BSC Animation",
-        year : "3"
+        courseName: req.body.courseName,
+        year : req.body.year
 })
     res.send(coursedetails);
 })

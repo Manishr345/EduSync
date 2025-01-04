@@ -55,9 +55,9 @@ const AdmissionCourse = () => {
                 <option value="">Select Course</option>
                 <option value="CS">BSC CS</option>
                 <option value="IT">BSC IT</option>
-                <option value="Animation">Animation</option>
-                <option value="Physics">Physics</option>
-                <option value="Maths">Maths</option>
+                <option value="Animation">BSC Animation</option>
+                <option value="Physics">BSC Physics</option>
+                <option value="Maths">BSC Maths</option>
               </select>
             </div>
 
