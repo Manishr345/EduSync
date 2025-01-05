@@ -25,7 +25,7 @@ const AdmissionState = (props) => {
         })
         const json = await response.json();
         if (json._id) {
-            setId(json._id); // Update state
+            setId(json._id);
             localStorage.setItem('studentid', json._id);
         }
     }
