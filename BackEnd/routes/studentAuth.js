@@ -85,7 +85,7 @@ router.post('/login', [
     res.json({ token });
 })
 
-router.post('/student', fetchStudent, async (req, res) => {
+router.post('/fetchstudent', fetchStudent, async (req, res) => {
     const studentID = req.student.id;
     const student = await Student.findById(studentID);
     res.send(student);

@@ -7,24 +7,24 @@ const AdmissionState = (props) => {
     })
     const [fees, setFees] = useState(() => {
         return localStorage.getItem('fees') || '';
-      })
-      const [courseName, setCN] = useState(() => {
+    })
+    const [courseName, setCN] = useState(() => {
         return localStorage.getItem('courseName') || '';
-      })
-      const [year, setYear] = useState(() => {
+    })
+    const [year, setYear] = useState(() => {
         return localStorage.getItem('year') || '';
-      })
+    })
     const [personal, setPersonal] = useState({});
     const personalDetails = async (fullName, dob, gender, nationality, contact, email, address, parentName, relation, parentContact, parentEmail, occupation) => {
         const response = await fetch('http://localhost:5000/admission/personaldetails', {
-            method: 'POST', 
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({fullName, dob, gender, nationality, contact, email, address, parentName, relation, parentContact, parentEmail, occupation})
+            body: JSON.stringify({ fullName, dob, gender, nationality, contact, email, address, parentName, relation, parentContact, parentEmail, occupation })
         })
         const json = await response.json();
-        if(json._id){
+        if (json._id) {
             setId(json._id); // Update state
             localStorage.setItem('studentid', json._id);
         }
@@ -32,11 +32,11 @@ const AdmissionState = (props) => {
     const educationalDetails = async (schoolName, collegeName, schoolGrade, collegeGrade, highestQualification) => {
         const studentId = localStorage.getItem('studentid');
         const response = await fetch(`http://localhost:5000/admission/educationaldetails/${studentId}`, {
-            method: 'POST', 
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({schoolName, collegeName, schoolGrade, collegeGrade, highestQualification})
+            body: JSON.stringify({ schoolName, collegeName, schoolGrade, collegeGrade, highestQualification })
         })
         const json = await response.json();
         console.log(json);
@@ -65,19 +65,19 @@ const AdmissionState = (props) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({courseName, year})
+            body: JSON.stringify({ courseName, year })
         });
         const json = await response.json();
-        if(json[0].fees){
+        if (json[0].fees) {
             setFees(json[0].fees);
             localStorage.setItem('fees', json[0].fees);
         }
-        if(json[0].courseName){
-            setFees(json[0].courseName);
+        if (json[0].courseName) {
+            setCN(json[0].courseName);
             localStorage.setItem('courseName', json[0].courseName);
         }
-        if(json[0].year){
-            setFees(json[0].year);
+        if (json[0].year) {
+            setYear(json[0].year);
             localStorage.setItem('year', json[0].year);
         }
         return localStorage.getItem('fees');
@@ -94,17 +94,17 @@ const AdmissionState = (props) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({courseName, year, fees})
+            body: JSON.stringify({ courseName, year, fees })
         })
         const json = response.json();
         console.log(json);
         console.log('Student admission successfull');
     }
     const showPassword = () => {
-        console.log(localStorage.getItem('studentid'));
+        return localStorage.getItem('studentid');
     }
     return (
-        <AdmissionContext.Provider value={{personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, uploadStatement, courseDetails, payFee, studentSignup, showPassword}}>
+        <AdmissionContext.Provider value={{ personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, uploadStatement, courseDetails, payFee, studentSignup, showPassword }}>
             {props.children}
         </AdmissionContext.Provider>
     )
