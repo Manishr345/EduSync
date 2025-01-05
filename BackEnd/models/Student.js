@@ -122,6 +122,14 @@ const studentSchema = mongoose.Schema({
     parentSign: {
         type: String,
         required: false
+    },
+    password: {
+        type: String,
+        required: false
+    },
+    kt: {
+        type: Number,
+        required: false
     }
 });
 module.exports = mongoose.model('students', studentSchema);

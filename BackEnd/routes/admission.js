@@ -64,7 +64,7 @@ const storage = multer.memoryStorage();
 
 const upload = multer({ storage });
 
-router.post('/documents', upload.fields([
+router.post('/documents/:id', upload.fields([
   { name: 'passportSizePhoto', maxCount: 1 },
   { name: 'marksheet10th', maxCount: 1 },
   { name: 'marksheet12th', maxCount: 1 },
@@ -87,9 +87,16 @@ router.post('/documents', upload.fields([
         documentsData[fieldName] = fileArray[0].buffer.toString('base64');
       }
     }
+    const pd = await PersonalDetails.findOne({_id: req.params.id});
+    if(!pd) {
+        return res.status(400).json({error: 'Please fill your personal details first'});
+    }
 
     // Save document data to the database
-    const documents = await Documents.create(documentsData);
+    const documents = await Documents.create({
+      ...documentsData,
+      student: pd._id,
+    });
 
     res.status(201).json({ message: 'Documents uploaded successfully', documents });
   } catch (error) {
@@ -98,7 +105,7 @@ router.post('/documents', upload.fields([
   }
 });
 
-router.post('/statement', upload.fields([
+router.post('/statement/:id', upload.fields([
   { name: 'studentSign', maxCount: 1 },
   { name: 'parentSign', maxCount: 1 }
 ]), async (req, res) => {
@@ -116,8 +123,16 @@ router.post('/statement', upload.fields([
       }
     }
 
+    const pd = await PersonalDetails.findOne({_id: req.params.id});
+    if(!pd) {
+        return res.status(400).json({error: 'Please fill your personal details first'});
+    }
+
     // Save document data to the database
-    const statement = await Statement.create(statementData);
+    const statement = await Statement.create({
+      ...statementData,
+      student: pd._id,
+    });
 
     res.status(201).json({ message: 'Statement uploaded successfully', statement });
   } catch (error) {

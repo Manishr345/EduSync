@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const statementSchema = mongoose.Schema({
+    student: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'personaldetails'
+        },
     studentSign: {
         type: String,
         required: false

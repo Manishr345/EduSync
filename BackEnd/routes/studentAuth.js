@@ -1,50 +1,63 @@
 const express = require('express')
 const router = express.Router();
 const Student = require('../models/student');
+const PersonalDetails = require('../models/admission/personalDetails');
+const EducationDetails = require('../models/admission/educationalDetails');
+const Documents = require('../models/admission/documents');
+const Statement = require('../models/admission/statement');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const fetchStudent = require('../middlewear/fetchStudent');
 
-router.post('/signup', async (req, res) => {
+router.post('/signup/:id', async (req, res) => {
    let student = await Student.findOne({ email: req.body.email });
     if (student) {
         return res.status(400).json({ error: 'Student already exists' });
     }
+    const pd = await PersonalDetails.findById(req.params.id);
+    const ed = await EducationDetails.findOne({student: req.params.id});
+    const docs = await Documents.findOne({student: req.params.id});
+    const stats = await Statement.findOne({student: req.params.id});
+
     const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(req.body.password, salt);
+    const hash = await bcrypt.hash(req.params.id, salt);
     student = await Student.create({
-        fullName : req.body.fullName ,
-        dob : req.body.dob,
-        dob : req.body.dob,
-        gender : req.body.gender,
-        nationality : req.body.nationality,
-        contact : req.body.contact,
-        email : req.body.email,
-        address : req.body.address,
-        parentName : req.body.parentName,
-        relation : req.body.relation,
-        parentContact : req.body.parentContact,
-        parentEmail : req.body.parentEmail,
-        occupation : req.body.occupation,
-        schoolName : req.body.schoolName,
-        collegeName : req.body.collegeName,
-        schoolGrade : req.body.schoolGrade,
-        collegeGrade : req.body.collegeGrade,
-        highestQualification : req.body.highestQualification,
+        fullName : pd.fullName,
+        dob : pd.dob,
+        gender : pd.gender,
+        nationality : pd.nationality,
+        contact : pd.contact,
+        email : pd.email,
+        address : pd.address,
+        parentName : pd.parentName,
+        relation : pd.relation,
+        parentContact : pd.parentContact,
+        parentEmail : pd.parentEmail,
+        occupation : pd.occupation,
+        schoolName : ed.schoolName,
+        collegeName : ed.collegeName,
+        schoolGrade : ed.schoolGrade,
+        collegeGrade : ed.collegeGrade,
+        highestQualification : ed.highestQualification,
         courseName : req.body.courseName,
         year : req.body.year,
         fees : req.body.fees,
-        passportSizePhoto : req.body.passportSizePhoto,
-        marksheet10th : req.body.marksheet10th,
-        marksheet12th : req.body.marksheet12th,
-        certificate10th : req.body.certificate10th,
-        indentityProof : req.body.indentityProof,
-        birthCertificate : req.body.birthCertificate,
-        addressProof : req.body.addressProof,
-        studentSign : req.body.studentSign,
-        parentSign : req.body.parentSign
+        passportSizePhoto : docs.passportSizePhoto,
+        marksheet10th : docs.marksheet10th,
+        marksheet12th : docs.marksheet12th,
+        certificate10th : docs.certificate10th,
+        indentityProof : docs.indentityProof,
+        birthCertificate : docs.birthCertificate,
+        addressProof : docs.addressProof,
+        studentSign : stats.studentSign,
+        parentSign : stats.parentSign,
+        password: hash
     });
+    await PersonalDetails.collection.drop();
+    await EducationDetails.collection.drop();
+    await Documents.collection.drop();
+    await Statement.collection.drop();
     res.json({ Successfull: "Student signed up" });
 })
 router.post('/login', [

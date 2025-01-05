@@ -54,6 +54,7 @@ const Payment = () => {
     setTimeout(() => {
       setPaymentStatus("Payment Successful!");
       setIsModalOpen(false);
+      context.studentSignup();
     }, 2000);
   };
 

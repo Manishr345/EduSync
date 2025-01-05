@@ -8,6 +8,12 @@ const AdmissionState = (props) => {
     const [fees, setFees] = useState(() => {
         return localStorage.getItem('fees') || '';
       })
+      const [courseName, setCN] = useState(() => {
+        return localStorage.getItem('courseName') || '';
+      })
+      const [year, setYear] = useState(() => {
+        return localStorage.getItem('year') || '';
+      })
     const [personal, setPersonal] = useState({});
     const personalDetails = async (fullName, dob, gender, nationality, contact, email, address, parentName, relation, parentContact, parentEmail, occupation) => {
         const response = await fetch('http://localhost:5000/admission/personaldetails', {
@@ -36,7 +42,8 @@ const AdmissionState = (props) => {
         console.log(json);
     }
     const uploadDocuments = async (formData) => {
-        const response = await fetch('http://localhost:5000/admission/documents', {
+        const studentId = localStorage.getItem('studentid');
+        const response = await fetch(`http://localhost:5000/admission/documents/${studentId}`, {
             method: 'POST',
             body: formData,
         });
@@ -44,7 +51,8 @@ const AdmissionState = (props) => {
         console.log(json);
     }
     const uploadStatement = async (formData) => {
-        const response = await fetch('http://localhost:5000/admission/statement', {
+        const studentId = localStorage.getItem('studentid');
+        const response = await fetch(`http://localhost:5000/admission/statement/${studentId}`, {
             method: 'POST',
             body: formData,
         });
@@ -64,13 +72,39 @@ const AdmissionState = (props) => {
             setFees(json[0].fees);
             localStorage.setItem('fees', json[0].fees);
         }
+        if(json[0].courseName){
+            setFees(json[0].courseName);
+            localStorage.setItem('courseName', json[0].courseName);
+        }
+        if(json[0].year){
+            setFees(json[0].year);
+            localStorage.setItem('year', json[0].year);
+        }
         return localStorage.getItem('fees');
     }
     const payFee = () => {
         return localStorage.getItem('fees');
     }
+    const studentSignup = async () => {
+        const studentId = localStorage.getItem('studentid');
+        const courseName = localStorage.getItem('courseName');
+        const year = localStorage.getItem('year');
+        const response = await fetch(`http://localhost:5000/student/signup/${studentId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({courseName, year, fees})
+        })
+        const json = response.json();
+        console.log(json);
+        console.log('Student admission successfull');
+    }
+    const showPassword = () => {
+        console.log(localStorage.getItem('studentid'));
+    }
     return (
-        <AdmissionContext.Provider value={{personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, uploadStatement, courseDetails, payFee}}>
+        <AdmissionContext.Provider value={{personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, uploadStatement, courseDetails, payFee, studentSignup, showPassword}}>
             {props.children}
         </AdmissionContext.Provider>
     )

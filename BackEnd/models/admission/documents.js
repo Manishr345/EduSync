@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const documentSchema = mongoose.Schema({
+    student: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'personaldetails'
+    },
     passportSizePhoto: {
         type: String,
         required: true
