@@ -1,12 +1,10 @@
 import React from 'react'
-import Header from '../components/Home/Header'
+import Activitymain from '../components/Activity/Activitymain'
 
 const Activity = () => {
   return (
     <>
-    <Header/>
-    <div className='bg-black text-white'>Activity</div>
-  
+      <Activitymain/>
     </>
   )
 }
