@@ -14,6 +14,9 @@ const AdmissionState = (props) => {
     const [year, setYear] = useState(() => {
         return localStorage.getItem('year') || '';
     })
+    const [student, setStudent] = useState(() => {
+        return localStorage.getItem('student') || '';
+    })
     const [personal, setPersonal] = useState({});
     const personalDetails = async (fullName, dob, gender, nationality, contact, email, address, parentName, relation, parentContact, parentEmail, occupation) => {
         const response = await fetch('http://localhost:5000/admission/personaldetails', {
@@ -103,6 +106,21 @@ const AdmissionState = (props) => {
     const showPassword = () => {
         return localStorage.getItem('studentid');
     }
+    const showStudent = async ()=>{
+        const response=await fetch('http://localhost:5000/student/fetchstudent',
+            {
+                method : 'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                    'token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50Ijp7ImlkIjoiNjc3YmE3OTdiN2ZjMTE2MWY1ZDFiOGQ0In0sImlhdCI6MTczNjE1NzEyMn0.y1v1TRW2PDNtJJb2OgtuRoHIBAbTheiClTEftlxzjpc'
+                }
+            }
+        )
+        const json = await response.json();
+        localStorage.setItem('student',json)
+    }
+        
+    
     return (
         <AdmissionContext.Provider value={{ personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, uploadStatement, courseDetails, payFee, studentSignup, showPassword }}>
             {props.children}
