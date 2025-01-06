@@ -106,6 +106,9 @@ const AdmissionState = (props) => {
     const showPassword = () => {
         return localStorage.getItem('studentid');
     }
+    const studentLogin = async () => {
+
+    }
     const showStudent = async ()=>{
         const response=await fetch('http://localhost:5000/student/fetchstudent',
             {
@@ -117,12 +120,13 @@ const AdmissionState = (props) => {
             }
         )
         const json = await response.json();
-        localStorage.setItem('student',json)
+        console.log(json);
+        localStorage.setItem('student', JSON.stringify(json))
     }
         
     
     return (
-        <AdmissionContext.Provider value={{ personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, uploadStatement, courseDetails, payFee, studentSignup, showPassword }}>
+        <AdmissionContext.Provider value={{ personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, uploadStatement, courseDetails, payFee, studentSignup, showPassword, showStudent }}>
             {props.children}
         </AdmissionContext.Provider>
     )
