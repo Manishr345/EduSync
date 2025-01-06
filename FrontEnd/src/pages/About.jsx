@@ -1,8 +1,11 @@
 
 import React from 'react';
+import Header from '../components/Home/Header';
 
 const About = () => {
   return (
+  <>
+  <Header/>
     <div className='w-[100%] flex justify-center '>
       <div className="w-[95%] about-page ">
         <section className="py-10 bg-gray-800 text-white">
@@ -98,6 +101,8 @@ const About = () => {
 
     </div>
 
+  </>
+  
   );
 };
 

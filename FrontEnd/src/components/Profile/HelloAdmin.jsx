@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../Home/Header';
 
 const HelloAdmin = () => {
-    const [admin, setAdmin] = useState(null);
+    const [admin, setAdmin] = useState(() => {
+        return localStorage.getItem('admin') || "false";
+    });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showForgotPassword, setShowForgotPassword] = useState(false);
@@ -13,7 +16,7 @@ const HelloAdmin = () => {
     const [newPassword, setNewPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const navigate = useNavigate();
-
+    
     // Fetch admin details from the backend
     useEffect(() => {
         const fetchAdmin = async () => {
@@ -38,6 +41,7 @@ const HelloAdmin = () => {
 
                 const data = await response.json();
                 setAdmin(data);
+                localStorage.setItem('admin' ,"true")
                 setLoading(false);
             } catch (err) {
                 setError(err.message);
@@ -47,9 +51,12 @@ const HelloAdmin = () => {
 
         fetchAdmin();
     }, [navigate]);
+    
 
     const handleLogout = () => {
         localStorage.removeItem('adminToken');
+        localStorage.setItem('admin', "false");
+        setAdmin(null)
         navigate('/');
     };
 
@@ -121,6 +128,7 @@ const HelloAdmin = () => {
 
     return (
         <>
+        <Header></Header>
             <div className='w-full h-[100vh] flex justify-center items-center p-5'>
                 <div className="mt-4 flex flex-col bg-gray-900 rounded-xl p-4 shadow-sm w-[500px] text-white overflow-hidden">
                     <div className="flex justify-center" style={{ filter: 'drop-shadow(-5px -5px 4px #0ea5e9)' }}>

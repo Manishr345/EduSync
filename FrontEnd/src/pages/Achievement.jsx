@@ -1,7 +1,10 @@
-import React from 'react';
+import React from 'react'
+import Header from '../components/Home/Header'
 
 const Achievement = () => {
   return (
+    <>
+    <Header/>
     <div className="p-10">
       <section className="mb-12 p-5 sm:py-10 sm:px-10 bg-gray-900 text-white rounded-lg flex flex-col gap-10 sm:flex-row lg:gap-20">
         <div className='h-[200px] w-full rounded-lg sm:h-[250px] lg:h-[350px] xl:h-[420px]' style={{ backgroundImage: "url(https://mmo.aiircdn.com/428/6626b16a2ea61.png)", backgroundSize: "cover" }}>
@@ -100,7 +103,11 @@ const Achievement = () => {
       </section>
 
     </div >
-  );
-};
+  </>
+  )
+}
+
+    
+
 
 export default Achievement;
