@@ -1,8 +1,11 @@
 import React from 'react'
+import Activitymain from '../components/Activity/Activitymain'
 
 const Activity = () => {
   return (
-    <div className='bg-black text-white'>Activity</div>
+    <>
+      <Activitymain/>
+    </>
   )
 }
 
