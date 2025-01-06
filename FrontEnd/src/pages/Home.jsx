@@ -1,7 +1,6 @@
 import React from 'react'
 import Card from '../components/Home/Card'
 import Header from '../components/Home/Header'
-import Footer from '../components/Home/Footer'
 import Carousel from '../components/Home/Carousel'
 
 const Home = () => {
@@ -29,12 +28,6 @@ const Home = () => {
         <Card className='py-5' />
 
       </div>
-
-      <Footer />
-
-
-
-
     </>
   )
 }

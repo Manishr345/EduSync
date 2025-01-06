@@ -23,6 +23,7 @@ import Payment from './components/Admission/Payment'
 import AdmissionCourse from './components/Admission/AdmissionCourse'
 import Header from './components/Home/Header'
 import HelloStudent from './components/Profile/HelloStudent'
+import Footer from './components/Home/Footer'
 
 
 
@@ -76,6 +77,7 @@ function App() {
               */}
 
             </Routes>
+            <Footer/>
           </BrowserRouter>
         </AdminState>
       </AdmissionState>
