@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../Home/Header';
 
 const HelloAdmin = () => {
-    const [admin, setAdmin] = useState(null);
+    const [admin, setAdmin] = useState(() => {
+        return localStorage.getItem('admin') || "false";
+    });
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [showForgotPassword, setShowForgotPassword] = useState(false);
     const [showResetPassword, setShowResetPassword] = useState(false);
     const [uid, setUid] = useState('');
@@ -11,17 +16,47 @@ const HelloAdmin = () => {
     const [newPassword, setNewPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
     const navigate = useNavigate();
-
-    // Fetch admin data from localStorage 
+    
+    // Fetch admin details from the backend
     useEffect(() => {
-        const adminData = localStorage.getItem('admin');
-        if (adminData) {
-            setAdmin(JSON.parse(adminData));
-        }
-    }, []);
+        const fetchAdmin = async () => {
+            try {
+                const token = localStorage.getItem('adminToken');
+                if (!token) {
+                    navigate('/');
+                    return;
+                }
+
+                const response = await fetch('http://localhost:5000/admin/fetchadmin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'token': token
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch admin details.');
+                }
+
+                const data = await response.json();
+                setAdmin(data);
+                localStorage.setItem('admin' ,"true")
+                setLoading(false);
+            } catch (err) {
+                setError(err.message);
+                setLoading(false);
+            }
+        };
+
+        fetchAdmin();
+    }, [navigate]);
+    
 
     const handleLogout = () => {
-        localStorage.removeItem('admin');
+        localStorage.removeItem('adminToken');
+        localStorage.setItem('admin', "false");
+        setAdmin(null)
         navigate('/');
     };
 
@@ -42,18 +77,33 @@ const HelloAdmin = () => {
     // Handle password reset
     const handlePasswordResetSubmit = () => {
         if (newPassword) {
-            // Update localStorage with the new password and UID
+            // Update backend with the new password and UID
             const updatedAdminData = {
                 ...admin,
                 password: newPassword,  // Replace with new password
                 uid: uid,  // Store UID with the updated data
             };
 
-            localStorage.setItem('admin', JSON.stringify(updatedAdminData)); // Save updated credentials in localStorage
-            setAdmin(updatedAdminData); // Update state with new credentials
-
-            alert('Password has been successfully updated.');
-            setShowResetPassword(false);  // Hide the reset password panel
+            // Assuming you have an endpoint to update the password on the backend
+            fetch('http://localhost:5000/admin/reset-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
+                },
+                body: JSON.stringify(updatedAdminData),
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Failed to reset password.');
+                }
+                setAdmin(updatedAdminData); // Update state with new credentials
+                alert('Password has been successfully updated.');
+                setShowResetPassword(false);  // Hide the reset password panel
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
         } else {
             alert('Please enter a new password.');
         }
@@ -64,12 +114,21 @@ const HelloAdmin = () => {
         setPasswordVisible(!passwordVisible);
     };
 
-    if (!admin) {
+    if (loading) {
         return <div className="text-white text-3xl font-bold">Loading...</div>;
+    }
+
+    if (error) {
+        return <div className="text-red-500 text-lg font-bold">{error}</div>;
+    }
+
+    if (!admin) {
+        return <div className="text-white text-3xl font-bold">No Admin Data Available</div>;
     }
 
     return (
         <>
+        <Header></Header>
             <div className='w-full h-[100vh] flex justify-center items-center p-5'>
                 <div className="mt-4 flex flex-col bg-gray-900 rounded-xl p-4 shadow-sm w-[500px] text-white overflow-hidden">
                     <div className="flex justify-center" style={{ filter: 'drop-shadow(-5px -5px 4px #0ea5e9)' }}>
@@ -77,7 +136,6 @@ const HelloAdmin = () => {
                             <path d="M480-440q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0-80q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0 440q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-400Zm0-315-240 90v189q0 54 15 105t41 96q42-21 88-33t96-12q50 0 96 12t88 33q26-45 41-96t15-105v-189l-240-90Zm0 515q-36 0-70 8t-65 22q29 30 63 52t72 34q38-12 72-34t63-52q-31-14-65-22t-70-8Z" />
                         </svg>
                     </div>
-
 
                     <div className="mt-4">
                         <p className="text-lg font-bold">Name: {admin.name}</p>

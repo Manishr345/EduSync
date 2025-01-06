@@ -28,13 +28,10 @@ const AdminState = (props) => {
             },
             body: JSON.stringify({ name, email, password })
         });
-        const json = await response.json();
-        if (json.token) {
-            setToken(json.token); // Update state
-            localStorage.setItem('adminToken', json.token); // Persist token in Local Storage
-        }
-        console.log(json.token);
+    
+        return await response.json(); // Parse JSON response
     };
+    
 
     const fetchAdmin = async () => {
         const storedToken = localStorage.getItem('adminToken'); // Use token from Local Storage

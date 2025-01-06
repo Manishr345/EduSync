@@ -32,7 +32,7 @@ function App() {
       <AdmissionState>
         <AdminState>
           <BrowserRouter>
-          <Header/>
+          
             <Routes>
 
               {/*Main NAV*/}
