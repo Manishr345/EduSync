@@ -153,6 +153,26 @@ const Activitymain = () => {
           </div>
         </div>
 
+
+        {/* Event Section: Coming soon */}
+        <div
+          className='h-[70px] flex justify-center items-start bg-cover bg-center transition-all ease-in-out duration-700 hover:h-[400px] lg:h-[100px]'
+          style={{
+            backgroundImage: 'url(#)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+          onMouseEnter={() => setHovered('comingsoon')}
+          onMouseLeave={() => setHovered(null)}
+        >
+          {/* Header text */}
+          <div className='flex flex-col gap-5'>
+            <h1 className='px-2 py-5 text-2xl text-center text-white font-semibold'>
+              Coming soon
+            </h1>
+          </div>
+        </div>
+
       </div>
     </>
   )

@@ -2,6 +2,7 @@ import React from 'react'
 import Card from '../components/Home/Card'
 import Header from '../components/Home/Header'
 import Carousel from '../components/Home/Carousel'
+import Notice from '../components/Home/Notice'
 
 const Home = () => {
   if(localStorage.getItem('admin')=== "true"){
@@ -24,9 +25,9 @@ const Home = () => {
     <>
      <Header></Header>
       <Carousel/>
+      <Notice/>
       <div className='w-full bg-black md:w-[100%]'>
         <Card className='py-5' />
-
       </div>
     </>
   )
