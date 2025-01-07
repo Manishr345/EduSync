@@ -7,7 +7,7 @@ import AdmissionContext from '../../contexts/admission/AdmissionContext';
 
 const HelloStudent = () => {
     const [student, setStudent] = useState(() => {
-            return localStorage.getItem('admin') || "false";
+            return localStorage.getItem('studentPresence') || 'true';
         });
     const location = useLocation();
     const [render, setRender] = useState(location.pathname);
@@ -23,11 +23,12 @@ const HelloStudent = () => {
     useEffect(() => {
             const fetchAdmin = async () => {
                 try { 
+                    const token = localStorage.getItem('studentToken');
                     const response = await fetch('http://localhost:5000/student/fetchstudent', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50Ijp7ImlkIjoiNjc3YmE3OTdiN2ZjMTE2MWY1ZDFiOGQ0In0sImlhdCI6MTczNjE1NzEyMn0.y1v1TRW2PDNtJJb2OgtuRoHIBAbTheiClTEftlxzjpc'
+                            'token': token
                         },
                     });
     
@@ -37,7 +38,7 @@ const HelloStudent = () => {
     
                     const data = await response.json();
                     setStudent(data);
-                    localStorage.setItem('student' ,"true")
+                    localStorage.setItem('studentPresence' , 'true')
                     setLoading(false);
                 } catch (err) {
                     setError(err.message);
@@ -49,7 +50,7 @@ const HelloStudent = () => {
         }, [navigate]);
 
     const handleLogout = () => {
-        localStorage.removeItem('student');
+        localStorage.setItem('studentPresence', 'false');
         navigate('/');
     };
 

@@ -48,7 +48,7 @@ function App() {
              
 
               {/*Profile*/}
-              <Route path='/Login' element={<Login />}></Route>
+              <Route path='/login' element={<Login />}></Route>
               <Route path='/adminsignup' element={<AdminSignup />}></Route>
               <Route path='/adminlogin' element={<AdminLogin />}></Route>
               <Route path='/helloadmin' element={<HelloAdmin />}></Route>

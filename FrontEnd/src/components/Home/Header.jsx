@@ -8,7 +8,8 @@ const Header = () => {
   const [menuopen, setmenuopen] = useState(false);
   const toggle = () => setmenuopen(!menuopen);
   const admin = localStorage.getItem("admin");
-  console.log(admin)
+  console.log(localStorage.getItem("admin"));
+  console.log(localStorage.getItem("studentPresence"));
   useEffect(() => {
     const handleStorageChange = () => {
       setAdmin(localStorage.getItem("admin"));
@@ -89,9 +90,10 @@ const Header = () => {
                   href={
                     localStorage.getItem('admin') === "true"
                       ? "/helloadmin"
-                      : localStorage.getItem('admin') === "false"
-                        ? "/profile"
-                        : "/error"
+                      : localStorage.getItem('studentPresence') === "true"
+                        ? "/hellostudent"
+                        : (localStorage.getItem('admin') === "false") && (localStorage.getItem('admin') === "false") ? '/profile'
+                        : '/profile'
                   }
                   className="xl:text-xl block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >

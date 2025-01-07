@@ -17,6 +17,9 @@ const AdmissionState = (props) => {
     const [student, setStudent] = useState(() => {
         return localStorage.getItem('student') || '';
     })
+    const [studentToken, setStudentToken] = useState(() => {
+        return localStorage.getItem('studentToken') || '';
+    })
     const [personal, setPersonal] = useState({});
     const personalDetails = async (fullName, dob, gender, nationality, contact, email, address, parentName, relation, parentContact, parentEmail, occupation) => {
         const response = await fetch('http://localhost:5000/admission/personaldetails', {
@@ -103,19 +106,32 @@ const AdmissionState = (props) => {
         console.log(json);
         console.log('Student admission successfull');
     }
+    const studentLogin = async (name, email, password) => {
+        const response = await fetch('http://localhost:5000/student/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name, email, password})
+        })
+        const json = await response.json();
+        localStorage.setItem('studentToken', json.token);
+        setStudentToken(json.token);
+        console.log(studentToken);
+        return await json.token;
+    }
     const showPassword = () => {
         return localStorage.getItem('studentid');
     }
-    const studentLogin = async () => {
 
-    }
     const showStudent = async ()=>{
+        const token = localStorage.getItem('studentToken');
         const response=await fetch('http://localhost:5000/student/fetchstudent',
             {
                 method : 'POST',
                 headers: {
                     'Content-Type':'application/json',
-                    'token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50Ijp7ImlkIjoiNjc3YmE3OTdiN2ZjMTE2MWY1ZDFiOGQ0In0sImlhdCI6MTczNjE1NzEyMn0.y1v1TRW2PDNtJJb2OgtuRoHIBAbTheiClTEftlxzjpc'
+                    'token': token
                 }
             }
         )
@@ -126,7 +142,7 @@ const AdmissionState = (props) => {
         
     
     return (
-        <AdmissionContext.Provider value={{ personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, uploadStatement, courseDetails, payFee, studentSignup, showPassword, showStudent }}>
+        <AdmissionContext.Provider value={{ personal, setPersonal, personalDetails, educationalDetails, uploadDocuments, uploadStatement, courseDetails, payFee, studentSignup, showPassword, showStudent, studentLogin }}>
             {props.children}
         </AdmissionContext.Provider>
     )
