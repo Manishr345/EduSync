@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import AdmissionNav from './AdmissionNav';
 import { useNavigate } from 'react-router-dom';
 import AdmissionContext from '../../contexts/admission/AdmissionContext';
+import Header from '../Home/Header';
 
 const AdmissionCourse = () => {
   const context = useContext(AdmissionContext);
@@ -48,6 +49,7 @@ const AdmissionCourse = () => {
 
   return (
     <div>
+      <Header/>
       <AdmissionNav />
       <div className="min-h-screen bg-black py-12 flex justify-center items-center">
         <div className="sm:w-[90%] p-6 bg-gray-900 rounded-lg shadow-md hover:shadow-[-5px_-5px_15px_#0ea5e9] transition ease-in-out duration-700">

@@ -3,6 +3,7 @@ import AdmissionNav from './AdmissionNav';
 import { useContext } from 'react';
 import AdmissionContext from '../../contexts/admission/AdmissionContext';
 import { useNavigate } from 'react-router-dom'
+import Header from '../Home/Header';
 
 const Educational = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const Educational = () => {
 
   return (
     <>
+    <Header/>
       <AdmissionNav />
       <div className="min-h-screen bg-black py-12 flex justify-center items-center">
         <div className="sm:w-[90%] p-6 bg-gray-900 rounded-lg shadow-md hover:shadow-[-5px_-5px_15px_#0ea5e9] transition ease-in-out duration-700">

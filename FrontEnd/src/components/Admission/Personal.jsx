@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react';
 import AdmissionContext from '../../contexts/admission/AdmissionContext';
+import Header from '../Home/Header';
+import AdmissionNav from './AdmissionNav';
 
 const Personal = () => {
     const context = useContext(AdmissionContext);
@@ -19,6 +21,8 @@ const Personal = () => {
 
     return (
         <>
+        <Header/>
+        <AdmissionNav/>
             <div className='w-full flex justify-center'>
                 <div className="mt-4 flex  flex-col bg-gray-900 rounded-lg p-4 shadow-sm w-[90%]">
                     <div className="flex justify-center items-center gap-2 mb-6">

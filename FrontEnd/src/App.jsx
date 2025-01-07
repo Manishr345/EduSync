@@ -70,7 +70,7 @@ function App() {
               <Route path='/admission/statement' element={<Statement />}></Route>
               <Route path='/admission/educational' element={<Educational />}></Route>
               <Route path='/admission/document' element={<Documents/>}></Route>
-              <Route path='/admission/personal' element={[<AdmissionNav/> ,<Personal />]}></Route>
+              <Route path='/admission/personal' element={<Personal />}></Route>
              
               {/*
                   <Route path='/admission/course' element={<Educational/>}></Route>

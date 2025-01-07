@@ -6,8 +6,6 @@ const Header = () => {
   const [menuopen, setmenuopen] = useState(false);
   const toggle = () => setmenuopen(!menuopen);
   const admin = localStorage.getItem("admin");
-  console.log(localStorage.getItem("admin"));
-  console.log(localStorage.getItem("studentPresence"));
   useEffect(() => {
     const handleStorageChange = () => {
       setAdmin(localStorage.getItem("admin"));

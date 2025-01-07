@@ -3,6 +3,7 @@ import AdmissionNav from './AdmissionNav';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import AdmissionContext from '../../contexts/admission/AdmissionContext';
+import Header from '../Home/Header';
 
 const Statement = () => {
   const context = useContext(AdmissionContext);
@@ -50,6 +51,7 @@ const Statement = () => {
 
   return (
     <>
+    <Header/>
       <AdmissionNav />
       <div className="w-full flex justify-center">
         <div className="mt-4 flex flex-col bg-gray-900 rounded-lg p-4 shadow-sm w-[90%]">

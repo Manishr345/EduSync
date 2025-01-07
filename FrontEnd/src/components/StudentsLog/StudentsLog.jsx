@@ -3,7 +3,7 @@ import Header from '../Home/Header';
 
 export default function StudentsLog() {
     const [students, setStudents] = useState([]);
-    const [loading, setLoading] = useState(true); // Loading state
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchStudents = async () => {
@@ -19,7 +19,7 @@ export default function StudentsLog() {
             } catch (error) {
                 console.error('Error fetching students:', error);
             } finally {
-                setLoading(false); // Stop loading when data is fetched
+                setLoading(false);
             }
         };
         fetchStudents();
@@ -36,7 +36,7 @@ export default function StudentsLog() {
                 ) : (
                     students.map((student) => (
                         <div
-                            key={student.id} // Assuming each student has a unique ID
+                            key={student.id}
                             className="w-full max-w-4xl bg-gray-800 rounded-lg shadow-lg p-6 mb-10"
                         >
                             <div className="flex justify-center mb-10">

@@ -3,6 +3,7 @@ import AdmissionNav from "./AdmissionNav";
 import { useContext } from "react";
 import AdmissionContext from "../../contexts/admission/AdmissionContext";
 import { useNavigate } from "react-router-dom";
+import Header from "../Home/Header";
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -63,6 +64,7 @@ const Payment = () => {
 
   return (
     <>
+    <Header/>
       <AdmissionNav />
       <div className="flex items-center justify-center h-screen bg-black">
         <div className="w-full mb-52 max-w-md p-6 bg-gray-800 rounded-lg shadow-md">
