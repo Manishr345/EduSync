@@ -20,6 +20,11 @@ const Home = () => {
     } else {
       localStorage.setItem('admin', "false");
     }
+    if (localStorage.getItem('studentPresence') === "true") {
+      localStorage.setItem('studentPresence', "true");
+    } else {
+      localStorage.setItem('studentPresence', "false");
+    }
   }, []);
   return (
     <>

@@ -24,6 +24,7 @@ import AdmissionCourse from './components/Admission/AdmissionCourse'
 import Header from './components/Home/Header'
 import HelloStudent from './components/Profile/HelloStudent'
 import Footer from './components/Home/Footer'
+import StudentsLog from './components/StudentsLog/StudentsLog'
 
 
 
@@ -45,6 +46,7 @@ function App() {
               <Route path='/achievement' element={<Achievement />}></Route>
               <Route path='/courses' element={<Courses />}></Route>
               <Route path='/examination' element={<Examination />}></Route>
+              <Route path='/studentslog' element={<StudentsLog/>}></Route>
              
 
               {/*Profile*/}

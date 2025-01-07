@@ -1,168 +1,159 @@
-import { useEffect, useState } from 'react';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import AdmissionContext from '../../contexts/admission/AdmissionContext';
+import Header from '../Home/Header';
 
 const HelloStudent = () => {
-    const [student, setStudent] = useState(() => {
-            return localStorage.getItem('studentPresence') || 'true';
-        });
+    const navigate = useNavigate();
     const location = useLocation();
-    const [render, setRender] = useState(location.pathname);
-    const [showForgotPassword, setShowForgotPassword] = useState(false);
-    const [showResetPassword, setShowResetPassword] = useState(false);
+    const context = useContext(AdmissionContext);
+
+    const [student, setStudent] = useState(null);
     const [uid, setUid] = useState('');
     const [email, setEmail] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [showForgotPassword, setShowForgotPassword] = useState(false);
+    const [showResetPassword, setShowResetPassword] = useState(false);
     const [isResetComplete, setIsResetComplete] = useState(false);
-    const navigate = useNavigate();
-    const context = useContext(AdmissionContext);
 
     useEffect(() => {
-            const fetchAdmin = async () => {
-                try { 
-                    const token = localStorage.getItem('studentToken');
-                    const response = await fetch('http://localhost:5000/student/fetchstudent', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'token': token
-                        },
-                    });
-    
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch admin details.');
-                    }
-    
-                    const data = await response.json();
-                    setStudent(data);
-                    localStorage.setItem('studentPresence' , 'true')
-                    setLoading(false);
-                } catch (err) {
-                    setError(err.message);
-                    setLoading(false);
+        const fetchStudentData = async () => {
+            const token = localStorage.getItem('studentToken');
+            if (!token) {
+                navigate('/');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/student/fetchstudent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        token,
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch student details.');
                 }
-            };
-    
-            fetchAdmin();
-        }, [navigate]);
+
+                const data = await response.json();
+                setStudent(data);
+                localStorage.setItem('studentPresence', 'true');
+            } catch (error) {
+                console.error('Error fetching student data:', error);
+                navigate('/');
+            }
+        };
+
+        fetchStudentData();
+    }, [navigate]);
 
     const handleLogout = () => {
-        localStorage.setItem('studentPresence', 'false');
+        localStorage.removeItem('studentPresence');
+        localStorage.removeItem('studentToken');
         navigate('/');
     };
 
     const handleForgotPasswordSubmit = () => {
         setErrorMessage('');
-        const studentData = JSON.parse(localStorage.getItem('student') || '{}');
-        if (uid && email) {
-            if (studentData?.email === email) {
-                setShowResetPassword(true);
-                setShowForgotPassword(false);
-                setIsResetComplete(false);
-            } else {
-                setErrorMessage('Invalid UID or Email.');
-            }
+        if (uid && email && student?.email === email) {
+            setShowResetPassword(true);
+            setShowForgotPassword(false);
         } else {
-            setErrorMessage('Please fill out both fields.');
-        }
-    };
-
-    const handlePasswordResetSubmit = () => {
-        if (newPassword) {
-            setIsResetComplete(true);
-            setShowResetPassword(false);
-        } else {
-            alert('Please enter a new password.');
+            setErrorMessage('Invalid UID or Email.');
         }
     };
 
     return (
         <>
-            <div className='w-full flex flex-col justify-center items-center p-5'>
-                <div className="mt-4 flex flex-col bg-gray-900 rounded-xl p-4 shadow-sm w-full text-white overflow-hidden justify-center items-center">
-                    <div className="flex justify-center" style={{ filter: 'drop-shadow(-1px -1px 1px #0ea5e9)' }}>
-                        <img src='https://i.scdn.co/image/ab67616d0000b2736f5610a62dc5d83e4d5cef0d' className='rounded-full w-[200px] h-[200px] xl:w-[400px] xl:h-[400px] lg:w-[300px] lg:h-[300px]'></img>
+            <Header />
+            <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-10">
+                <div className="w-full max-w-4xl bg-gray-800 rounded-lg shadow-lg p-6">
+                    <h1 className="text-3xl font-bold text-center mb-6">Welcome, {student?.fullName || 'Student'}</h1>
+                    <div className="flex justify-center mb-10">
+                        <img
+                            src={`data:image/png;base64,${student?.passportSizePhoto || ''}`}
+                            alt="Student"
+                            className="w-40 h-40 rounded-full object-cover border-4 border-blue-500"
+                        />
                     </div>
-                    <div className="mt-16 grid grid-cols-1 gap-7 xl:gap-14 sm:grid-cols-2 sm:gap-x-28 md:gap-x-[200px] lg:gap-x-[400px] xl:gap-x-[500px]">
-                        <p className="text-xl font-bold xl:text-3xl xl:font-bold">Name: {student.fullName || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Date of Birth: {student.dob || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Gender: {student.gender || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Nationality: {student.nationality || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Contact: {student.contact || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Email: {student.email || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Address: {student.address || "N/A"}</p>
-                        <p className="text-lg font-bold xl:font-bold xl:text-3xl">Parent Name: {student.parentName || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Relation: {student.relation || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Parent Contact: {student.parentContact || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Parent Email: {student.parentEmail || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Occupation: {student.occupation || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">School Name: {student.schoolName || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">College Name: {student.collegeName || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">School Grade: {student.schoolGrade || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">College Grade: {student.collegeGrade || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Highest Qualification: {student.highestQualification || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Course Name: {student.courseName || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Year: {student.year || "N/A"}</p>
-                        <p className="text-xl font-bold xl:font-bold xl:text-3xl">Fees: {student.fees || "N/A"}</p>
+                    <div className="flex justify-center">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-6 mb-10 w-full max-w-2xl">
+                            {[
+                                ['Name', student?.fullName],
+                                ['Date of Birth', student?.dob],
+                                ['Gender', student?.gender],
+                                ['Nationality', student?.nationality],
+                                ['Contact', student?.contact],
+                                ['Email', student?.email],
+                                ['Address', student?.address],
+                                ['Parent Name', student?.parentName],
+                                ['Relation', student?.relation],
+                                ['Parent Contact', student?.parentContact],
+                                ['School Name', student?.schoolName],
+                                ['College Name', student?.collegeName],
+                                ['School Grade', student?.schoolGrade],
+                                ['College Grade', student?.collegeGrade],
+                                ['Course Name', student?.courseName],
+                                ['Year', student?.year],
+                                ['Fees', student?.fees],
+                            ].map(([label, value]) => (
+                                <p key={label} className="text-lg font-medium">
+                                    <span className="text-gray-400">{label}:</span> {value || 'N/A'}
+                                </p>
+                            ))}
+                        </div>
                     </div>
 
-                    <div className='mt-14 flex justify-between gap-5 sm:gap-[320px] md:gap-[455px] lg:gap-[660px] xl:gap-[1000px]'>
+                    <div className="flex justify-between">
                         <button
                             onClick={() => setShowForgotPassword(true)}
-                            className='bg-blue-600 text-white rounded-md px-3 py-1 font-bold hover:bg-blue-700 w-full'
+                            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold"
                         >
                             Change Password
                         </button>
                         <button
                             onClick={handleLogout}
-                            className='bg-red-600 text-white rounded-md px-3 py-1 font-bold hover:bg-red-700 w-full'
+                            className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold"
                         >
                             Log Out
                         </button>
                     </div>
-
-                    {/* Forgot Password Panel */}
-                    {showForgotPassword && (
-                        <div className="mt-4 p-4 bg-gray-800 rounded-md">
-                            <h3 className="text-lg font-bold mb-2">Reset Password</h3>
-                            <label className="text-sm">UID</label>
-                            <input
-                                type="text"
-                                value={uid}
-                                onChange={(e) => setUid(e.target.value)}
-                                className="w-full p-2 mb-2 text-black rounded-md"
-                                placeholder="Enter UID"
-                            />
-                            <label className="text-sm">Email</label>
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="w-full p-2 mb-2 text-black rounded-md"
-                                placeholder="Enter Email"
-                            />
-                            <button
-                                onClick={handleForgotPasswordSubmit}
-                                className="bg-green-600 text-white rounded-md px-3 py-1 mt-2"
-                            >
-                                Submit
-                            </button>
-                        </div>
-                    )}
-
-                    {/* Error Message */}
-                    {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
-
-                    {/* Reset Password Panel */}
-                    {showResetPassword && !isResetComplete ? (
-                        <div className="mt-4 p-4 bg-gray-800 rounded-md">
-                            <h3 className="text-lg font-bold mb-2 text-green-400">Your Password Has Been Forwarded To Your Email</h3>
-                        </div>
-                    ) : null}
                 </div>
+
+                {showForgotPassword && (
+                    <div className="mt-8 w-full max-w-md bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <h3 className="text-lg font-bold mb-4">Reset Password</h3>
+                        <label className="block mb-2">UID</label>
+                        <input
+                            type="text"
+                            value={uid}
+                            onChange={(e) => setUid(e.target.value)}
+                            className="w-full p-2 mb-4 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500"
+                        />
+                        <label className="block mb-2">Email</label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full p-2 mb-4 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring focus:ring-blue-500"
+                        />
+                        {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
+                        <button
+                            onClick={handleForgotPasswordSubmit}
+                            className="w-full py-2 bg-green-600 hover:bg-green-700 rounded-lg text-white font-semibold"
+                        >
+                            Submit
+                        </button>
+                    </div>
+                )}
+
+                {showResetPassword && !isResetComplete && (
+                    <div className="mt-8 w-full max-w-md bg-gray-800 p-6 rounded-lg shadow-lg">
+                        <h3 className="text-lg font-bold text-green-500">Password reset instructions sent to your email.</h3>
+                    </div>
+                )}
             </div>
         </>
     );

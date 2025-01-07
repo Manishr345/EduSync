@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const Admin = require('../models/admin');
+const Student = require('../models/student');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -31,6 +32,11 @@ router.post('/fetchadmin', fetchAdmin, async (req, res) => {
     const adminID = req.admin.id;
     const admin = await Admin.findById(adminID);
     res.send(admin);
+})
+
+router.post('/fetchstudents', async (req, res) => {
+    const students = await Student.find();
+    res.send(students);
 })
 
 module.exports = router;

@@ -19,7 +19,7 @@ export default function Carousel() {
     <div className="relative w-full mt-5 mb-5 pl-5 pr-5 grid grid-cols-1 gap-7 sm:grid-cols-2">
         {/*Notice part*/}
         <div className=' bg-black text-white w-full pl-5 pr-5 flex justify-center items-center flex-wrap gap-10 text-center sm:gap-2 md:p-[40px] lg:'>
-          <h1 className='text-6xl  lg:text-8xl xl:text-[50px]'>HOGWARTS INSTITUTE OF WICHCRAFT AND WIZRDRY</h1>
+          <h1 className='text-6xl  lg:text-8xl xl:text-[50px]'>HOGWARTS INSTITUTE</h1>
           <h2 className='text-xl  lg:text-2xl xl:text-3xl'>
             SYNC LATEST SKILLS WITH US REGRETS ARISE FOR NOT APPLYING ON US, GIVE A TRY!
             NEW WAY OF LEARNING BEGINS.
