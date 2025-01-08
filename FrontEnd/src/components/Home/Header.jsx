@@ -7,6 +7,21 @@ const Header = () => {
   const toggle = () => setmenuopen(!menuopen);
   const admin = localStorage.getItem("admin");
   useEffect(() => {
+    if(localStorage.getItem('admin')=== "true"){
+      localStorage.setItem('admin', "true");
+    }
+    else{
+      localStorage.setItem('admin', "false");
+    }
+    console.log(localStorage.getItem('admin'))
+    
+    if (localStorage.getItem('studentPresence') === "true") {
+      localStorage.setItem('studentPresence', "false");
+    } else {
+      localStorage.setItem('studentPresence', "true");
+    }
+    console.log('student',localStorage.getItem('studentPresence'));
+    console.log('admin', localStorage.getItem('admin'));
     const handleStorageChange = () => {
       setAdmin(localStorage.getItem("admin"));
     };

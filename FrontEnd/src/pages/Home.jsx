@@ -5,27 +5,33 @@ import Carousel from '../components/Home/Carousel'
 import Notice from '../components/Home/Notice'
 
 const Home = () => {
-  if(localStorage.getItem('admin')=== "true"){
-    localStorage.setItem('admin', "true");
-  }
-  else{
-    localStorage.setItem('admin', "false");
-  }
-  console.log(localStorage.getItem('admin'))
+  // if(localStorage.getItem('admin')=== "true"){
+  //   localStorage.setItem('admin', "true");
+  // }
+  // else{
+  //   localStorage.setItem('admin', "false");
+  // }
+  // console.log(localStorage.getItem('admin'))
+
+  // if (localStorage.getItem('studentPresence') === "true") {
+  //   localStorage.setItem('studentPresence', "true");
+  // } else {
+  //   localStorage.setItem('studentPresence', "false");
+  // }
 
 
-  React.useEffect(() => {
-    if (localStorage.getItem('admin') === "true") {
-      localStorage.setItem('admin', "true");
-    } else {
-      localStorage.setItem('admin', "false");
-    }
-    if (localStorage.getItem('studentPresence') === "true") {
-      localStorage.setItem('studentPresence', "true");
-    } else {
-      localStorage.setItem('studentPresence', "false");
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   if (localStorage.getItem('admin') === "true") {
+  //     localStorage.setItem('admin', "true");
+  //   } else {
+  //     localStorage.setItem('admin', "false");
+  //   }
+  //   if (localStorage.getItem('studentPresence') === "true") {
+  //     localStorage.setItem('studentPresence', "true");
+  //   } else {
+  //     localStorage.setItem('studentPresence', "false");
+  //   }
+  // }, []);
   return (
     <>
      <Header></Header>
