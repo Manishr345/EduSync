@@ -70,7 +70,7 @@ const Payment = () => {
     <Header/>
       <AdmissionNav />
       <div className="flex items-center justify-center h-screen bg-black">
-        <div className="w-full mb-0  max-w-md p-6 bg-gray-800 rounded-lg shadow-md">
+        <div className="w-full mb-52 max-w-md p-6 bg-gray-900 rounded-lg shadow-md">
           <h2 className="text-2xl text-white font-bold text-center mb-6">Fee Payment</h2>
           <form>
             <div className="mb-4">
