@@ -71,14 +71,14 @@ const Courses = () => {
   return (
     <>
       <Header />
-      <div className="p-10 bg-gray-900 text-white">
+      <div className="p-10 bg-black text-white">
         <div className="container mx-auto">
           <h1 className="text-6xl font-bold text-center mb-10">Our Courses</h1>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {courses.map((course, index) => (
               <div
                 key={index}
-                className="p-5 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                className="p-5 bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
               >
                 <div
                   className="h-40 w-full rounded-lg mb-4"

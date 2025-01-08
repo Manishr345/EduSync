@@ -92,8 +92,8 @@ const HelloStudent = () => {
         return (
             <>
                 <Header />
-                <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-10">
-                    <div className="w-full max-w-4xl bg-gray-800 rounded-lg shadow-lg p-6">
+                <div className="min-h-screen bg-black text-white flex flex-col items-center py-10">
+                    <div className="w-full max-w-4xl bg-gray-900 rounded-lg shadow-lg p-6">
                         <h1 className="text-3xl font-bold text-center mb-6">Welcome, {student?.fullName || 'Student'}</h1>
                         <div className="flex justify-center mb-10">
                             <img
