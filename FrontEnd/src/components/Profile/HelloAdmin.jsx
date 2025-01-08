@@ -163,12 +163,12 @@ const HelloAdmin = () => {
                     </div>
 
                     <div className='mt-4 flex justify-between'>
-                        <button
+                        {/* <button
                             onClick={() => setShowForgotPassword(true)}
                             className='bg-blue-600 text-white rounded-md px-3 py-1 font-bold hover:bg-blue-700'
                         >
                             Change Password
-                        </button>
+                        </button> */}
                         <button
                             onClick={handleLogout}
                             className='bg-red-600 text-white rounded-md px-3 py-1 font-bold hover:bg-red-700'
@@ -178,7 +178,7 @@ const HelloAdmin = () => {
                     </div>
 
                     {/* Forgot Password Panel */}
-                    {showForgotPassword && (
+                    {/* {showForgotPassword && (
                         <div className="mt-4 p-4 bg-gray-800 rounded-md">
                             <h3 className="text-lg font-bold mb-2">Reset Password</h3>
                             <label className="text-sm">UID</label>
@@ -206,7 +206,7 @@ const HelloAdmin = () => {
                         </div>
                     )}
 
-                    {/* Reset Password Panel */}
+                    
                     {showResetPassword && (
                         <div className="mt-4 p-4 bg-gray-800 rounded-md">
                             <h3 className="text-lg font-bold mb-2">Set New Password</h3>
@@ -225,7 +225,7 @@ const HelloAdmin = () => {
                                 Update Password
                             </button>
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
         </>

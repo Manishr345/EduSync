@@ -10,7 +10,7 @@ import Educational from './components/Admission/Educational'
 import AdminState from './contexts/admin/AdminState'
 import HelloAdmin from './components/Profile/HelloAdmin'
 import AdmissionState from './contexts/admission/AdmissionState'
-import Personal from './components/Admission/personal'
+import Personal from './components/Admission/Personal'
 import AdmissionNav from './components/Admission/AdmissionNav'
 import Activity from './pages/Activity'
 import About from './pages/About'
@@ -24,8 +24,9 @@ import AdmissionCourse from './components/Admission/AdmissionCourse'
 import Header from './components/Home/Header'
 import HelloStudent from './components/Profile/HelloStudent'
 import Footer from './components/Home/Footer'
-import StudentsLog from './components/StudentsLog/StudentsLog'
+import StudentsLog from './components/OnlyAdmin/StudentsLog'
 import Kt from './components/Examination/Kt'
+import KTStudents from './components/OnlyAdmin/KTStudents'
 
 
 
@@ -48,6 +49,7 @@ function App() {
               <Route path='/courses' element={<Courses />}></Route>
               <Route path='/examination' element={<Examination />}></Route>
               <Route path='/studentslog' element={<StudentsLog/>}></Route>
+              <Route path='/ktstudents' element={<KTStudents/>}></Route>
               <Route path='/kt-form' element={<Kt/>}></Route>
              
 
