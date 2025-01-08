@@ -29,9 +29,9 @@ const Activitymain = () => {
 
         {/* Event Section: Hackathon */}
         <div
-          className='h-[70px] flex justify-center items-start bg-cover bg-center transition-all ease-in-out duration-700 hover:h-[400px] lg:h-[100px]'
+          className='h-[70px] flex justify-center items-start bg-cover bg-center transition-all ease-in-out duration-75 hover:h-[400px] lg:h-[100px]'
           style={{
-            backgroundImage: 'url(https://i.pinimg.com/736x/54/8c/6b/548c6bf3167f10bc5e96dffba56cf1d7.jpg)',
+            backgroundImage: 'url(https://www.sih.gov.in/img1/software-result-bg.jpg)',
           }}
           onMouseEnter={() => setHovered('hackathon')}
           onMouseLeave={() => setHovered(null)}
@@ -59,7 +59,7 @@ const Activitymain = () => {
 
         {/* Event Section: E-sports */}
         <div
-          className='h-[70px] flex justify-center items-start bg-cover bg-center transition-all ease-in-out duration-700 hover:h-[400px] lg:h-[100px]'
+          className='h-[70px] flex justify-center items-start bg-cover bg-center transition-all ease-in-out duration-100 hover:h-[400px] lg:h-[100px]'
           style={{
             backgroundImage: 'url(https://i.pinimg.com/736x/16/50/cb/1650cb4a41f0938e9fa58ee809a9233e.jpg)',
             backgroundSize: 'cover',
@@ -90,7 +90,7 @@ const Activitymain = () => {
 
         {/* Event Section: Cultural */}
         <div
-          className='h-[70px] flex justify-center items-start bg-cover bg-center transition-all ease-in-out duration-700 hover:h-[400px] lg:h-[100px]'
+          className='h-[70px] flex justify-center items-start bg-cover bg-center transition-all ease-in-out duration-100 hover:h-[400px] lg:h-[100px]'
           style={{
             backgroundImage: 'url(https://i.pinimg.com/736x/9d/df/8e/9ddf8ed957a99f9ed603d40f8680e5e7.jpg)',
             backgroundSize: 'cover',
@@ -123,7 +123,7 @@ const Activitymain = () => {
 
         {/* Event Section: Sports */}
         <div
-          className='h-[70px] flex justify-center items-start bg-cover bg-center transition-all ease-in-out duration-700 hover:h-[400px] lg:h-[100px]'
+          className='h-[70px] flex justify-center items-start bg-cover bg-center transition-all ease-in-out duration-100 hover:h-[400px] lg:h-[100px]'
           style={{
             backgroundImage: 'url(https://i.pinimg.com/736x/dc/9f/0e/dc9f0ea1a49e80ab8f50391df42fafac.jpg)',
             backgroundSize: 'cover',
@@ -156,7 +156,7 @@ const Activitymain = () => {
 
         {/* Event Section: Coming soon */}
         <div
-          className='h-[70px] flex justify-center items-start bg-cover bg-center transition-all ease-in-out duration-700 hover:h-[400px] lg:h-[100px]'
+          className='h-[70px] flex justify-center items-start bg-cover bg-center transition-all ease-in-out duration-100 hover:h-[400px] lg:h-[100px]'
           style={{
             backgroundImage: 'url(#)',
             backgroundSize: 'cover',

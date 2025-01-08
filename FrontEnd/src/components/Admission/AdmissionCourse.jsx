@@ -5,6 +5,8 @@ import AdmissionContext from '../../contexts/admission/AdmissionContext';
 import Header from '../Home/Header';
 
 const AdmissionCourse = () => {
+  localStorage.setItem('cddone', "false");
+
   const context = useContext(AdmissionContext);
   const navigate = useNavigate();
   const [courseDetails, setCourseDetails] = useState({
@@ -42,6 +44,7 @@ const AdmissionCourse = () => {
   }, [courseDetails.courseName, courseDetails.year]); 
 
   const handleSubmit = async () => {
+    localStorage.setItem('cddone', "true");
     console.log('Form submitted:', courseDetails);
     console.log('Fee:', fee);
     navigate('/admission/document');

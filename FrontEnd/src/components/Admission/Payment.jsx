@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Home/Header";
 
 const Payment = () => {
+  localStorage.setItem('payddone', "false");
   const navigate = useNavigate();
   const context = useContext(AdmissionContext);
   const [fees, setFees] = useState('');
@@ -53,12 +54,14 @@ const Payment = () => {
   };
 
   const processPayment = () => {
+    
     setPaymentStatus("Processing...");
     setTimeout(() => {
       setPaymentStatus("Payment Successful!");
       setPassword(context.showPassword()); // Get the password from context after payment
       setIsModalOpen(false);
       context.studentSignup(); // Proceed with student signup
+      localStorage.setItem('payddone', "true");
     }, 2000);
   };
 
@@ -67,7 +70,7 @@ const Payment = () => {
     <Header/>
       <AdmissionNav />
       <div className="flex items-center justify-center h-screen bg-black">
-        <div className="w-full mb-52 max-w-md p-6 bg-gray-800 rounded-lg shadow-md">
+        <div className="w-full mb-0  max-w-md p-6 bg-gray-800 rounded-lg shadow-md">
           <h2 className="text-2xl text-white font-bold text-center mb-6">Fee Payment</h2>
           <form>
             <div className="mb-4">

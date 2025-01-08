@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import Header from '../Home/Header';
 
 const Educational = () => {
+  localStorage.setItem('eddone', "false");
+
   const navigate = useNavigate();
   const [educational, setEducational] = useState({ schoolName: '', collegeName: '', schoolGrade: '', collegeGrade: '', highestQualification: '' })
   const context = useContext(AdmissionContext);
@@ -15,6 +17,7 @@ const Educational = () => {
   };
 
   const submitMe = () => {
+    localStorage.setItem('eddone', "true");
     console.log(educational);
     context.educationalDetails(educational.schoolName, educational.collegeName, educational.schoolGrade, educational.collegeGrade, educational.highestQualification);
     navigate('/admission/course')  

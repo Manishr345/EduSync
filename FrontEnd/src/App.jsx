@@ -39,7 +39,7 @@ function App() {
 
               {/*Main NAV*/}
               <Route path='/' element={<Home />}></Route>
-              <Route path='/admission' element={<Admission />}></Route>   
+              {/* <Route path='/admission' element={<Admission />}></Route>  ?  */}
               <Route path='/profile' element={<AdminStudent />}></Route>
               <Route path='/about' element={<About />}></Route>
               <Route path='/activity' element={<Activity />}></Route>
