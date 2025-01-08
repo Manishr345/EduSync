@@ -129,7 +129,8 @@ const studentSchema = mongoose.Schema({
     },
     kt: {
         type: Number,
-        required: false
+        required: false, 
+        default:0
     }
 });
 module.exports = mongoose.model('students', studentSchema);
