@@ -25,6 +25,7 @@ import Header from './components/Home/Header'
 import HelloStudent from './components/Profile/HelloStudent'
 import Footer from './components/Home/Footer'
 import StudentsLog from './components/StudentsLog/StudentsLog'
+import Kt from './components/Examination/Kt'
 
 
 
@@ -47,6 +48,7 @@ function App() {
               <Route path='/courses' element={<Courses />}></Route>
               <Route path='/examination' element={<Examination />}></Route>
               <Route path='/studentslog' element={<StudentsLog/>}></Route>
+              <Route path='/kt-form' element={<Kt/>}></Route>
              
 
               {/*Profile*/}
