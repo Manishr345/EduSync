@@ -88,18 +88,29 @@ const HelloStudent = () => {
 
     const downloadAdmissionForm = () => {
         const doc = new jsPDF();
-    
-        // Add a title to the form
-        doc.setFontSize(18);
-        doc.text('Admission Form', 105, 20, { align: 'center' });
-    
-        // Add an image placeholder
-        const placeholderImage = `data:image/png;base64,${student.passportSizePhoto}`; // Replace with your actual base64 image or use a URL.
-        doc.addImage(placeholderImage, 'PNG', 85, 25, 40, 40); // Position and size of the image
-    
+        const collegeLogo = '/Hogwarts logo.png';
+        const collegeName = "HOGWARTS INSTITUTE";
+        const collegeAddress = "123 Wizarding Way, Magical Town, Fantasyland";
+        if (!student) {
+            alert('Student data is not available.');
+            return;
+        }
+        try {
+            doc.addImage(collegeLogo, 'PNG', 10, 10, 30, 30);
+        } catch (error) {
+            console.error('Error adding college logo:', error);
+        }
+        doc.setFontSize(16);
+        doc.text(collegeName, 105, 20, { align: 'center' });
         doc.setFontSize(12);
-    
-        // Add form fields with image placeholders
+        doc.text(collegeAddress, 105, 30, { align: 'center' });
+        try {
+            const applicantPhoto = `data:image/png;base64,${student.passportSizePhoto || ''}`;
+            doc.addImage(applicantPhoto, 'PNG', 160, 10, 30, 30);
+        } catch (error) {
+            console.error('Error adding applicant photo:', error);
+        }
+        doc.setFontSize(12);
         const fields = [
             ['Name', student?.fullName],
             ['Date of Birth', student?.dob],
@@ -121,29 +132,19 @@ const HelloStudent = () => {
             ['Parent Signature', '________________'],
             ['Student Signature', '________________'],
         ];
-    
-        // Add each field with a section for an image block
-        let yOffset = 70; // Initial Y offset
-        fields.forEach(([label, value], index) => {
-            // Add an image block placeholder for each field
-            doc.addImage(placeholderImage, 'PNG', 20, yOffset, 15, 15); // Adjust position and size as needed
-    
-            // Add text for the field
-            doc.text(`${label}: ${value || 'N/A'}`, 40, yOffset + 10);
-    
-            // Adjust Y offset for the next field
-            yOffset += 20;
+
+        let yOffset = 50;
+        fields.forEach(([label, value]) => {
+            doc.text(`${label}: ${value || 'N/A'}`, 20, yOffset);
+            yOffset += 10;
             if (yOffset > 280) {
                 doc.addPage();
                 yOffset = 20;
             }
         });
-    
-        // Save the form as a PDF
+
         doc.save('Admission_Form.pdf');
     };
-    
-
     return (
         <>
             <Header />
@@ -158,32 +159,32 @@ const HelloStudent = () => {
                         />
                     </div>
                     <div className="flex justify-center">
-    <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-6 mb-10 w-full max-w-2xl">
-        {[
-            ['Name', student?.fullName],
-            ['Date of Birth', student?.dob],
-            ['Gender', student?.gender],
-            ['Nationality', student?.nationality],
-            ['Contact', student?.contact],
-            ['Email', student?.email],
-            ['Address', student?.address],
-            ['Parent Name', student?.parentName],
-            ['Relation', student?.relation],
-            ['Parent Contact', student?.parentContact],
-            ['School Name', student?.schoolName],
-            ['College Name', student?.collegeName],
-            ['School Grade', student?.schoolGrade],
-            ['College Grade', student?.collegeGrade],
-            ['Course Name', student?.courseName],
-            ['Year', student?.year],
-            ['Fees', student?.fees],
-        ].map(([label, value]) => (
-            <p key={label} className="text-lg font-medium">
-                <span className="text-gray-400">{label}:</span> {value || 'N/A'}
-            </p>
-        ))}
-    </div>
-</div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-6 mb-10 w-full max-w-2xl">
+                            {[
+                                ['Name', student?.fullName],
+                                ['Date of Birth', student?.dob],
+                                ['Gender', student?.gender],
+                                ['Nationality', student?.nationality],
+                                ['Contact', student?.contact],
+                                ['Email', student?.email],
+                                ['Address', student?.address],
+                                ['Parent Name', student?.parentName],
+                                ['Relation', student?.relation],
+                                ['Parent Contact', student?.parentContact],
+                                ['School Name', student?.schoolName],
+                                ['College Name', student?.collegeName],
+                                ['School Grade', student?.schoolGrade],
+                                ['College Grade', student?.collegeGrade],
+                                ['Course Name', student?.courseName],
+                                ['Year', student?.year],
+                                ['Fees', student?.fees],
+                            ].map(([label, value]) => (
+                                <p key={label} className="text-lg font-medium">
+                                    <span className="text-gray-400">{label}:</span> {value || 'N/A'}
+                                </p>
+                            ))}
+                        </div>
+                    </div>
 
 
                     <div className="flex justify-between">
@@ -213,7 +214,6 @@ const HelloStudent = () => {
                         </button>
                     </div>
                 </div>
-                {/* Other Components */}
             </div>
         </>
     );
