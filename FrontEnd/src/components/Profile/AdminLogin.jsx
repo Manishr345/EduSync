@@ -9,7 +9,7 @@ const AdminLogin = () => {
     const [admin, setAdmin] = useState({ name: '', email: '', password: '' });
     const [error, setError] = useState('');
 
-    // Check if admin is already logged in (on page reload)
+    
     useEffect(() => {
         const checkTokenValidity = async () => {
             const adminToken = localStorage.getItem('adminToken');
@@ -27,11 +27,11 @@ const AdminLogin = () => {
                     if (data.success) {
                         navigate('/helloadmin');
                     } else {
-                        localStorage.removeItem('adminToken'); // Remove invalid token
+                        localStorage.removeItem('adminToken'); 
                     }
                 } catch (error) {
                     console.error('Error verifying token:', error);
-                    localStorage.removeItem('adminToken'); // Remove invalid token
+                    localStorage.removeItem('adminToken'); 
                 }
             }
         };
@@ -41,13 +41,12 @@ const AdminLogin = () => {
 
     const handleSubmit = async () => {
         try {
-            // Use the `adminLogin` function to authenticate
+           
             const response = await context.adminLogin(admin.name, admin.email, admin.password);
 
             if (response && response.token) {
-                localStorage.setItem('adminToken', response.token); // Store the token
-                navigate('/helloadmin'); // Redirect on successful login
-            } else {
+                localStorage.setItem('adminToken', response.token); 
+                navigate('/helloadmin'); 
                 throw new Error(response.error || 'Invalid credentials. Please try again.');
             }
         } catch (err) {
@@ -57,7 +56,7 @@ const AdminLogin = () => {
 
     const handleInputChange = (e) => {
         setAdmin({ ...admin, [e.target.name]: e.target.value });
-        setError(''); // Clear the error message on input change
+        setError(''); 
     };
 
     return (
