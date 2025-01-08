@@ -55,7 +55,7 @@ const AdmissionCourse = () => {
       <Header/>
       <AdmissionNav />
       <div className="min-h-screen bg-black py-12 flex justify-center items-center">
-        <div className="sm:w-[90%] p-6 bg-gray-900 rounded-lg shadow-md hover:shadow-[-5px_-5px_15px_#0ea5e9] transition ease-in-out duration-700">
+        <div className="sm:w-[90%] p-6 bg-gray-900 rounded-lg">
           <div className="flex justify-center items-center gap-2 mb-6">
             <h2 className="text-2xl font-bold text-white">
               <i className="fa-solid fa-graduation-cap"></i>&nbsp;Course Details
