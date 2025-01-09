@@ -26,7 +26,7 @@ const Personal = () => {
         <Header/>
         <AdmissionNav/>
             <div className='w-full flex justify-center'>
-                <div className="mt-4 flex  flex-col bg-gray-900 rounded-lg p-4 shadow-sm w-[90%]">
+                <div className="mt-8 mb-10 flex  flex-col bg-gray-900 rounded-lg p-4 shadow-sm w-[90%]">
                     <div className="flex justify-center items-center gap-2 mb-6">
                         <h2 className="text-2xl font-bold text-white"><i className="fa-solid fa-graduation-cap"></i>&nbsp;Personal Details</h2>
                     </div>
