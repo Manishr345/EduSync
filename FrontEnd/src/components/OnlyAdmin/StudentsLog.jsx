@@ -28,7 +28,7 @@ export default function StudentsLog() {
     return (
         <>
             <Header />
-            <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-10">
+            <div className="min-h-screen bg-black text-white flex flex-col items-center py-10">
                 {loading ? (
                     <div className="flex justify-center items-center h-screen">
                         <p className="text-xl font-semibold">Loading students data...</p>
@@ -37,7 +37,7 @@ export default function StudentsLog() {
                     students.map((student) => (
                         <div
                             key={student.id}
-                            className="w-full max-w-4xl bg-gray-800 rounded-lg shadow-lg p-6 mb-10"
+                            className="w-full max-w-4xl bg-gray-900 rounded-lg shadow-lg p-6 mb-10"
                         >
                             <div className="flex justify-center mb-10">
                                 <img
