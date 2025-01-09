@@ -25,8 +25,8 @@ export default function KTStudents() {
         fetchStudents();
     }, []);
 
-    // Filter students with KT
-    const ktStudents = students.filter(student => student.kt > 0);
+    // Filter students with KT and non-empty KT subjects
+    const ktStudents = students.filter(student => student.ktSubjects?.length > 0);
 
     return (
         <>
@@ -53,13 +53,14 @@ export default function KTStudents() {
                                     </div>
                                     <div className="flex justify-center">
                                         <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-6 w-full max-w-2xl">
-                                            {[
+                                            {[ 
                                                 ['Name', student?.fullName],
                                                 ['Gender', student?.gender],
                                                 ['Contact', student?.contact],
                                                 ['Email', student?.email],
                                                 ['Course Name', student?.courseName],
                                                 ['Year', student?.year],
+                                                ['KT Subjects', student.ktSubjects.join(', ')],
                                             ].map(([label, value]) => (
                                                 <p key={label} className="text-lg font-medium">
                                                     <span className="text-gray-400">{label}:</span> {value || 'N/A'}
@@ -72,7 +73,7 @@ export default function KTStudents() {
                         ) : (
                             <div className="text-center">
                                 <p className="text-2xl font-semibold">
-                                    No Students with KT
+                                    No Students with KT subjects
                                 </p>
                             </div>
                         )}

@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const Student = require('../models/student');
+const Student = require('../models/Student');
 const PersonalDetails = require('../models/admission/personalDetails');
 const EducationDetails = require('../models/admission/educationalDetails');
 const Documents = require('../models/admission/documents');
@@ -89,6 +89,17 @@ router.post('/fetchstudent', fetchStudent, async (req, res) => {
     const studentID = req.student.id;
     const student = await Student.findById(studentID);
     res.send(student);
+})
+
+router.post('/addkt', async (req, res) => {
+    const { ktSubjects } = req.body;
+    const id = req.header('id');
+    const student = await Student.findByIdAndUpdate(
+        id,
+        { $addToSet: { ktSubjects: { $each: ktSubjects } } },
+        { new: true }
+      );
+      res.send(student);
 })
 
 module.exports = router;

@@ -238,14 +238,34 @@ const HelloStudent = () => {
                         />
                     </div>
                     <div className="flex justify-center">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-6 mb-10 w-full max-w-2xl">
-                            {[['Name', student?.fullName], ['Date of Birth', student?.dob], ['Gender', student?.gender], ['Nationality', student?.nationality], ['Contact', student?.contact], ['Email', student?.email], ['Address', student?.address], ['Parent Name', student?.parentName], ['Relation', student?.relation], ['Parent Contact', student?.parentContact], ['School Name', student?.schoolName], ['College Name', student?.collegeName], ['School Grade', student?.schoolGrade], ['College Grade', student?.collegeGrade], ['Course Name', student?.courseName], ['Year', student?.year], ['Fees', student?.fees]].map(([label, value]) => (
-                                <p key={label} className="text-lg font-medium">
-                                    <span className="text-gray-400">{label}:</span> {value || 'N/A'}
-                                </p>
-                            ))}
-                        </div>
-                    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-6 mb-10 w-full max-w-2xl">
+        {[
+            ['Name', student?.fullName],
+            ['Date of Birth', student?.dob],
+            ['Gender', student?.gender],
+            ['Nationality', student?.nationality],
+            ['Contact', student?.contact],
+            ['Email', student?.email],
+            ['Address', student?.address],
+            ['Parent Name', student?.parentName],
+            ['Relation', student?.relation],
+            ['Parent Contact', student?.parentContact],
+            ['School Name', student?.schoolName],
+            ['College Name', student?.collegeName],
+            ['School Grade', student?.schoolGrade],
+            ['College Grade', student?.collegeGrade],
+            ['Course Name', student?.courseName],
+            ['Year', student?.year],
+            ['Fees', student?.fees],
+            ...(student?.ktSubjects?.length > 0 ? [['KT Subjects', student.ktSubjects.join(', ')]] : []),
+        ].map(([label, value]) => (
+            <p key={label} className="text-lg font-medium">
+                <span className="text-gray-400">{label}:</span> {value || 'N/A'}
+            </p>
+        ))}
+    </div>
+</div>
+
 
                     <div className="flex flex-wrap justify-between">
                         <button
