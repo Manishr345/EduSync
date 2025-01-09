@@ -32,7 +32,6 @@ const studentSchema = mongoose.Schema({
     studentSign: { type: String, required: false },
     parentSign: { type: String, required: false },
     password: { type: String, required: false },
-    kt: { type: Number, required: false, default: 0 },
     ktSubjects: { type: [String], required: false },
 });
 

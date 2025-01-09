@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Home/Header";
 
 const Payment = () => {
-  localStorage.setItem('payddone', "false");
+  sessionStorage.setItem('payddone', "false");
   const navigate = useNavigate();
   const context = useContext(AdmissionContext);
   const [fees, setFees] = useState('');
@@ -61,7 +61,7 @@ const Payment = () => {
       setPassword(context.showPassword()); // Get the password from context after payment
       setIsModalOpen(false);
       context.studentSignup(); // Proceed with student signup
-      localStorage.setItem('payddone', "true");
+      sessionStorage.setItem('payddone', "true");
     }, 2000);
   };
 

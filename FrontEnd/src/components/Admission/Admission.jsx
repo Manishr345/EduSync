@@ -1,5 +1,5 @@
 import React from 'react'
-import Personal from './personal'
+import Personal from './Personal'
 
 const Admission = () => {
   return (

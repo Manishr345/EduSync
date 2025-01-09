@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Import for navigation
+import { useNavigate } from 'react-router-dom'; 
 import Header from '../components/Home/Header';
 
 const Examination = () => {
@@ -26,7 +26,6 @@ const Examination = () => {
         <>
             <Header />
             <div className="w-full p-4 bg-black min-h-screen">
-                {/* Exam Schedule Section */}
                 <div className="bg-gray-900 shadow-md rounded-lg p-6">
                     <h2 className="text-2xl font-bold text-white mb-4">Examination Schedule</h2>
                     <table className="min-w-full table-auto">
@@ -49,7 +48,6 @@ const Examination = () => {
                     </table>
                 </div>
 
-                {/* KT Student Section */}
                 <div className="mt-8 bg-gray-900 shadow-md rounded-lg p-6">
                     <h2 className="text-2xl font-bold text-white mb-4">KT Students Re-Examination</h2>
                     <p className="text-gray-400 mb-4">
@@ -75,7 +73,6 @@ const Examination = () => {
                     </table>
                 </div>
 
-                {/* New KT Form Section */}
                 <div className="mt-8 bg-gray-900 shadow-md rounded-lg p-6">
                     <h2 className="text-2xl font-bold text-white mb-4">KT Form Submission</h2>
                     <p className="text-gray-400 mb-4">

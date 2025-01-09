@@ -5,7 +5,7 @@ import Header from '../Home/Header';
 
 const HelloAdmin = () => {
     const [admin, setAdmin] = useState(() => {
-        return localStorage.getItem('admin') || "false";
+        return sessionStorage.getItem('admin') || "false";
     });
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -17,11 +17,10 @@ const HelloAdmin = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const navigate = useNavigate();
     
-    // Fetch admin details from the backend
     useEffect(() => {
         const fetchAdmin = async () => {
             try {
-                const token = localStorage.getItem('adminToken');
+                const token = sessionStorage.getItem('adminToken');
                 if (!token) {
                     navigate('/');
                     return;
@@ -41,7 +40,7 @@ const HelloAdmin = () => {
 
                 const data = await response.json();
                 setAdmin(data);
-                localStorage.setItem('admin' ,"true")
+                sessionStorage.setItem('admin' ,"true")
                 setLoading(false);
             } catch (err) {
                 setError(err.message);
@@ -54,13 +53,12 @@ const HelloAdmin = () => {
     
 
     const handleLogout = () => {
-        localStorage.removeItem('adminToken');
-        localStorage.setItem('admin', "false");
+        sessionStorage.removeItem('adminToken');
+        sessionStorage.setItem('admin', "false");
         setAdmin(null)
         navigate('/');
     };
 
-    // Handle forgot password
     const handleForgotPasswordSubmit = () => {
         if (uid && email) {
             if (admin?.email === email) {
@@ -74,22 +72,20 @@ const HelloAdmin = () => {
         }
     };
 
-    // Handle password reset
     const handlePasswordResetSubmit = () => {
         if (newPassword) {
-            // Update backend with the new password and UID
             const updatedAdminData = {
                 ...admin,
-                password: newPassword,  // Replace with new password
-                uid: uid,  // Store UID with the updated data
+                password: newPassword,  
+                uid: uid, 
             };
 
-            // Assuming you have an endpoint to update the password on the backend
+          
             fetch('http://localhost:5000/admin/reset-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
+                    Authorization: `Bearer ${sessionStorage.getItem('adminToken')}`,
                 },
                 body: JSON.stringify(updatedAdminData),
             })
@@ -97,9 +93,9 @@ const HelloAdmin = () => {
                 if (!response.ok) {
                     throw new Error('Failed to reset password.');
                 }
-                setAdmin(updatedAdminData); // Update state with new credentials
+                setAdmin(updatedAdminData); 
                 alert('Password has been successfully updated.');
-                setShowResetPassword(false);  // Hide the reset password panel
+                setShowResetPassword(false); 
             })
             .catch((error) => {
                 alert(error.message);
@@ -109,7 +105,6 @@ const HelloAdmin = () => {
         }
     };
 
-    // Toggle password visibility
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
     };

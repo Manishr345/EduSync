@@ -3,22 +3,22 @@ import AdmissionContext from "./AdmissionContext";
 
 const AdmissionState = (props) => {
     const [id, setId] = useState(() => {
-        return localStorage.getItem('studentid') || '';
+        return sessionStorage.getItem('studentid') || '';
     })
     const [fees, setFees] = useState(() => {
-        return localStorage.getItem('fees') || '';
+        return sessionStorage.getItem('fees') || '';
     })
     const [courseName, setCN] = useState(() => {
-        return localStorage.getItem('courseName') || '';
+        return sessionStorage.getItem('courseName') || '';
     })
     const [year, setYear] = useState(() => {
-        return localStorage.getItem('year') || '';
+        return sessionStorage.getItem('year') || '';
     })
     const [student, setStudent] = useState(() => {
-        return localStorage.getItem('student') || '';
+        return sessionStorage.getItem('student') || '';
     })
     const [studentToken, setStudentToken] = useState(() => {
-        return localStorage.getItem('studentToken') || '';
+        return sessionStorage.getItem('studentToken') || '';
     })
     const [personal, setPersonal] = useState({});
     const personalDetails = async (fullName, dob, gender, nationality, contact, email, address, parentName, relation, parentContact, parentEmail, occupation) => {
@@ -32,11 +32,11 @@ const AdmissionState = (props) => {
         const json = await response.json();
         if (json._id) {
             setId(json._id);
-            localStorage.setItem('studentid', json._id);
+            sessionStorage.setItem('studentid', json._id);
         }
     }
     const educationalDetails = async (schoolName, collegeName, schoolGrade, collegeGrade, highestQualification) => {
-        const studentId = localStorage.getItem('studentid');
+        const studentId = sessionStorage.getItem('studentid');
         const response = await fetch(`http://localhost:5000/admission/educationaldetails/${studentId}`, {
             method: 'POST',
             headers: {
@@ -48,7 +48,7 @@ const AdmissionState = (props) => {
         console.log(json);
     }
     const uploadDocuments = async (formData) => {
-        const studentId = localStorage.getItem('studentid');
+        const studentId = sessionStorage.getItem('studentid');
         const response = await fetch(`http://localhost:5000/admission/documents/${studentId}`, {
             method: 'POST',
             body: formData,
@@ -57,7 +57,7 @@ const AdmissionState = (props) => {
         console.log(json);
     }
     const uploadStatement = async (formData) => {
-        const studentId = localStorage.getItem('studentid');
+        const studentId = sessionStorage.getItem('studentid');
         const response = await fetch(`http://localhost:5000/admission/statement/${studentId}`, {
             method: 'POST',
             body: formData,
@@ -76,25 +76,25 @@ const AdmissionState = (props) => {
         const json = await response.json();
         if (json[0].fees) {
             setFees(json[0].fees);
-            localStorage.setItem('fees', json[0].fees);
+            sessionStorage.setItem('fees', json[0].fees);
         }
         if (json[0].courseName) {
             setCN(json[0].courseName);
-            localStorage.setItem('courseName', json[0].courseName);
+            sessionStorage.setItem('courseName', json[0].courseName);
         }
         if (json[0].year) {
             setYear(json[0].year);
-            localStorage.setItem('year', json[0].year);
+            sessionStorage.setItem('year', json[0].year);
         }
-        return localStorage.getItem('fees');
+        return sessionStorage.getItem('fees');
     }
     const payFee = () => {
-        return localStorage.getItem('fees');
+        return sessionStorage.getItem('fees');
     }
     const studentSignup = async () => {
-        const studentId = localStorage.getItem('studentid');
-        const courseName = localStorage.getItem('courseName');
-        const year = localStorage.getItem('year');
+        const studentId = sessionStorage.getItem('studentid');
+        const courseName = sessionStorage.getItem('courseName');
+        const year = sessionStorage.getItem('year');
         const response = await fetch(`http://localhost:5000/student/signup/${studentId}`, {
             method: 'POST',
             headers: {
@@ -115,17 +115,17 @@ const AdmissionState = (props) => {
             body: JSON.stringify({name, email, password})
         })
         const json = await response.json();
-        localStorage.setItem('studentToken', json.token);
+        sessionStorage.setItem('studentToken', json.token);
         setStudentToken(json.token);
         console.log(studentToken);
         return await json.token;
     }
     const showPassword = () => {
-        return localStorage.getItem('studentid');
+        return sessionStorage.getItem('studentid');
     }
 
     const showStudent = async ()=>{
-        const token = localStorage.getItem('studentToken');
+        const token = sessionStorage.getItem('studentToken');
         const response=await fetch('http://localhost:5000/student/fetchstudent',
             {
                 method : 'POST',
@@ -137,7 +137,7 @@ const AdmissionState = (props) => {
         )
         const json = await response.json();
         console.log(json);
-        localStorage.setItem('student', JSON.stringify(json))
+        sessionStorage.setItem('student', JSON.stringify(json))
     }
         
     

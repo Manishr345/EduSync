@@ -6,12 +6,12 @@ import Header from '../Home/Header';
 import AdmissionNav from './AdmissionNav';
 
 const Personal = () => {
-    localStorage.setItem('pddone', "false");
+    sessionStorage.setItem('pddone', "false");
     const context = useContext(AdmissionContext);
     const [personal, setPersonal] = useState({ fullName: '', dob: '', gender: '', nationality: '', contact: '', email: '', address: '', parentName: '', relation: '', parentContact: '', parentEmail: '', occupation: '' });
     const navigate = useNavigate();
     const handleClick = () => {
-        localStorage.setItem('pddone', "true");
+        sessionStorage.setItem('pddone', "true");
         console.log(personal);
         context.personalDetails(personal.fullName, personal.dob, personal.gender, personal.nationality, personal.contact, personal.email, personal.address, personal.parentName, personal.relation, personal.parentContact, personal.parentEmail, personal.occupation);
         navigate('/admission/educational');

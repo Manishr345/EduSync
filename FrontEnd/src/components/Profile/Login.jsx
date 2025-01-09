@@ -10,9 +10,8 @@ const Login = () => {
     const [student, setStudent] = useState({ name: '', email: '', password: '' });
     const [error, setError] = useState('');
 
-    // Check if the student is already logged in (on page reload)
     // useEffect(() => {
-    //     const studentToken = localStorage.getItem('studentToken');
+    //     const studentToken = sessionStorage.getItem('studentToken');
     //     if (studentToken) {
     //         // If token exists, navigate to the student dashboard
     //         navigate('/hellostudent');
@@ -25,25 +24,22 @@ const Login = () => {
             ...prevState,
             [name]: value,
         }));
-        setError(''); // Clear error on input change
+        setError('');
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            // Call the `studentLogin` function from context
             const token = await context.studentLogin(student.name, student.email, student.password);
 
             if (token) {
-                // Save token to localStorage and navigate to the student dashboard
-                localStorage.setItem('studentToken', token);
+                sessionStorage.setItem('studentToken', token);
                 navigate('/hellostudent');
             } else {
                 throw new Error('Login failed. Please check your credentials.');
             }
         } catch (err) {
-            // Handle errors during login
             setError(err.message || 'Something went wrong. Please try again.');
         }
     };

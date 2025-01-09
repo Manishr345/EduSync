@@ -4,8 +4,7 @@ import AdminContext from "./AdminContext";
 const AdminState = (props) => {
     const [admin, setAdmin] = useState({});
     const [token, setToken] = useState(() => {
-        // Retrieve token from Local Storage on initialization
-        return localStorage.getItem('adminToken') || '';
+        return sessionStorage.getItem('adminToken') || '';
     });
 
     const adminSignup = async (name, email, password) => {
@@ -34,7 +33,7 @@ const AdminState = (props) => {
     
 
     const fetchAdmin = async () => {
-        const storedToken = localStorage.getItem('adminToken'); // Use token from Local Storage
+        const storedToken = sessionStorage.getItem('adminToken'); // Use token from Local Storage
         if (!storedToken) {
             console.error("No token found. Please log in.");
             return;
@@ -55,9 +54,9 @@ const AdminState = (props) => {
     useEffect(() => {
         // If token changes, update Local Storage
         if (token) {
-            localStorage.setItem('adminToken', token);
+            sessionStorage.setItem('adminToken', token);
         } else {
-            localStorage.removeItem('adminToken'); // Clear token if it becomes empty
+            sessionStorage.removeItem('adminToken'); // Clear token if it becomes empty
         }
     }, [token]);
 

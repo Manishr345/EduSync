@@ -6,7 +6,7 @@ import AdmissionContext from '../../contexts/admission/AdmissionContext';
 import Header from '../Home/Header';
 
 const Statement = () => {
-  localStorage.setItem('sddone', "false");
+  sessionStorage.setItem('sddone', "false");
   const context = useContext(AdmissionContext);
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const Statement = () => {
   };
 
   const handleSubmit = async () => {
-    localStorage.setItem('sddone', "true");
+    sessionStorage.setItem('sddone', "true");
     const formData = new FormData();
 
     // Append all files to the FormData object

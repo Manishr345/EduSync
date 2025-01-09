@@ -19,7 +19,7 @@ const HelloStudent = () => {
 
     useEffect(() => {
         const fetchStudentData = async () => {
-            const token = localStorage.getItem('studentToken');
+            const token = sessionStorage.getItem('studentToken');
             if (!token) {
                 navigate('/');
                 return;
@@ -40,7 +40,7 @@ const HelloStudent = () => {
 
                 const data = await response.json();
                 setStudent(data);
-                localStorage.setItem('studentPresence', 'true');
+                sessionStorage.setItem('studentPresence', 'true');
             } catch (error) {
                 console.error('Error fetching student data:', error);
                 navigate('/');
@@ -51,8 +51,8 @@ const HelloStudent = () => {
     }, [navigate]);
 
     const handleLogout = () => {
-        localStorage.removeItem('studentPresence');
-        localStorage.removeItem('studentToken');
+        sessionStorage.removeItem('studentPresence');
+        sessionStorage.removeItem('studentToken');
         navigate('/');
     };
 

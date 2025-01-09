@@ -12,7 +12,7 @@ const AdminLogin = () => {
     
     useEffect(() => {
         const checkTokenValidity = async () => {
-            const adminToken = localStorage.getItem('adminToken');
+            const adminToken = sessionStorage.getItem('adminToken');
             if (adminToken) {
                 try {
                     const response = await fetch('http://localhost:5000/admin/verifyToken', {
@@ -27,11 +27,11 @@ const AdminLogin = () => {
                     if (data.success) {
                         navigate('/helloadmin');
                     } else {
-                        localStorage.removeItem('adminToken'); 
+                        sessionStorage.removeItem('adminToken'); 
                     }
                 } catch (error) {
                     console.error('Error verifying token:', error);
-                    localStorage.removeItem('adminToken'); 
+                    sessionStorage.removeItem('adminToken'); 
                 }
             }
         };
@@ -45,7 +45,7 @@ const AdminLogin = () => {
             const response = await context.adminLogin(admin.name, admin.email, admin.password);
 
             if (response && response.token) {
-                localStorage.setItem('adminToken', response.token); 
+                sessionStorage.setItem('adminToken', response.token); 
                 navigate('/helloadmin'); 
                 throw new Error(response.error || 'Invalid credentials. Please try again.');
             }
