@@ -58,7 +58,7 @@ const Documents = () => {
             <AdmissionNav />
 
             <div className="w-full flex justify-center">
-                <div className="mt-4 flex flex-col bg-gray-900 rounded-lg p-4 shadow-sm w-[90%]">
+                <div className="mt-8 mb-10 flex flex-col bg-gray-900 rounded-lg p-4 shadow-sm w-[90%]">
                     <h2 className="text-white font-bold text-2xl flex w-full justify-center items-center">
                         Documents
                     </h2>
