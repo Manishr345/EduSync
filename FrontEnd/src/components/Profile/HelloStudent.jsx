@@ -15,7 +15,7 @@ const HelloStudent = () => {
     const [tenure, setTenure] = useState('');
     const [railwayClass, setRailwayClass] = useState('');
     const [concessionAmount, setConcessionAmount] = useState(0);
-    const [showConcessionForm, setShowConcessionForm] = useState(false); // Define state to control form visibility
+    const [showConcessionForm, setShowConcessionForm] = useState(false);
 
     useEffect(() => {
         const fetchStudentData = async () => {
@@ -61,20 +61,20 @@ const HelloStudent = () => {
 
         if (modeOfTransport === 'Railway') {
             if (railwayClass === 'First Class') {
-                amount = 100; // Example value
+                amount = 100;
             } else if (railwayClass === 'Second Class') {
-                amount = 50; // Example value
+                amount = 50;
             }
         }
 
         if (modeOfTransport === 'Bus') {
-            amount = 20; // Example value
+            amount = 20;
         }
 
         if (tenure === '3 Months') {
-            amount += 10; // Add more concession based on tenure
+            amount += 10;
         } else if (tenure === '6 Months') {
-            amount += 20; // Add more concession based on tenure
+            amount += 20;
         }
 
         setConcessionAmount(amount);
@@ -83,34 +83,85 @@ const HelloStudent = () => {
     useEffect(() => {
         calculateConcession();
     }, [modeOfTransport, source, destination, tenure, railwayClass]);
-
-    const handleConcessionFormSubmit = async () => {
-        console.log('Processing payment...');
-        setTimeout(() => {
-            alert('Payment Successful!');
-            downloadAdmissionForm();
-        }, 2000);
-    };
-
-    const downloadReceipt = () => {
+    const downloadConcessionForm = () => {
         const doc = new jsPDF();
-
-        doc.setFontSize(18);
-        doc.text('Fee Receipt', 105, 20, { align: 'center' });
-
+        const collegeLogo = '/Hogwarts logo.png'; 
+        const collegeName = "HOGWARTS INSTITUTE";
+        const collegeAddress = "123 Wizarding Way, Magical Town, Fantasyland";
+    
+        
+        try {
+            doc.addImage(collegeLogo, 'PNG', 10, 10, 30, 30); 
+        } catch (error) {
+            console.error('Error adding college logo:', error);
+        }
+    
+        doc.setFontSize(16);
+        doc.text(collegeName, 105, 15, { align: 'center' }); 
         doc.setFontSize(12);
-        doc.text(`Name: ${student.fullName}`, 20, 40);
-        doc.text(`Email: ${student.email}`, 20, 50);
-        doc.text(`Course: ${student.courseName}`, 20, 60);
-        doc.text(`Year: ${student.year}`, 20, 70);
-        doc.text(`Amount: ${student.fees}`, 20, 80);
-        doc.text('College: HOGWARTS INSTITUTE', 20, 90);
-
+        doc.text(collegeAddress, 105, 25, { align: 'center' }); 
+    
+        doc.setFontSize(16);
+        doc.text('Concession Form', 105, 40, { align: 'center' }); 
+    
+        doc.setFontSize(12);
+    
+        const fields = [
+            ['Name', student?.fullName],
+            ['Course Name', student?.courseName],
+            ['Mode of Transport', modeOfTransport],
+            ['Concession Amount', concessionAmount],
+            ['Tenure', tenure],
+        ];
+    
+        let yOffset = 50;
+        fields.forEach(([label, value]) => {
+            doc.text(`${label}: ${value || 'N/A'}`, 20, yOffset);
+            yOffset += 10;
+            if (yOffset > 280) {
+                doc.addPage();
+                yOffset = 20;
+            }
+        });
+    
+        doc.save('Concession_Form.pdf');
+    };
+    
+    const downloadFeeReceipt = () => {
+        const doc = new jsPDF();
+        const collegeLogo = '/Hogwarts logo.png'; 
+        const collegeName = "HOGWARTS INSTITUTE";
+        const collegeAddress = "123 Wizarding Way, Magical Town, Fantasyland";
+    
+        
+        try {
+            doc.addImage(collegeLogo, 'PNG', 10, 10, 30, 30); 
+        } catch (error) {
+            console.error('Error adding college logo:', error);
+        }
+    
+       
+        doc.setFontSize(16);
+        doc.text(collegeName, 105, 15, { align: 'center' }); 
+        doc.setFontSize(12);
+        doc.text(collegeAddress, 105, 25, { align: 'center' }); 
+        doc.setFontSize(18);
+        doc.text('Fee Receipt', 105, 40, { align: 'center' });
+    
+        doc.setFontSize(12);
+        doc.text(`Name: ${student.fullName}`, 20, 50);
+        doc.text(`Email: ${student.email}`, 20, 60);
+        doc.text(`Course: ${student.courseName}`, 20, 70);
+        doc.text(`Year: ${student.year}`, 20, 80);
+        doc.text(`Amount: ${student.fees}`, 20, 90);
+        doc.text('College: HOGWARTS INSTITUTE', 20, 100);
+    
         doc.setFontSize(10);
-        doc.text('Thank you for your payment!', 105, 110, { align: 'center' });
-
+        doc.text('Thank you for your payment!', 105, 120, { align: 'center' });
+    
         doc.save('Fee_Receipt.pdf');
     };
+    
 
     const downloadAdmissionForm = () => {
         const doc = new jsPDF();
@@ -157,7 +208,6 @@ const HelloStudent = () => {
             ['Course Name', student?.courseName],
             ['Year', student?.year],
             ['Fees', student?.fees],
-            ['Concession Amount', concessionAmount],
             ['Parent Signature', '________________'],
             ['Student Signature', '________________'],
         ];
@@ -205,7 +255,7 @@ const HelloStudent = () => {
                             {showConcessionForm ? 'Close Concession Form' : 'Fill Concession Form'}
                         </button>
                         <button
-                            onClick={downloadReceipt}
+                            onClick={downloadFeeReceipt}
                             className="px-4 m-2 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold"
                         >
                             Download Fee Receipt
@@ -318,7 +368,7 @@ const HelloStudent = () => {
                             </div>
 
                             <button
-                                onClick={handleConcessionFormSubmit}
+                                onClick={downloadConcessionForm}
                                 className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold"
                             >
                                 Submit Concession Form
