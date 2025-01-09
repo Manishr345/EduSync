@@ -55,7 +55,9 @@ const Achievement = () => {
           <h2 className="text-3xl font-bold mb-4 xl:text-5xl">Infrastructure and Facilities</h2>
           <ul className="list-disc list-inside space-y-2 xl:text-2xl">
           <li>Campus Development</li>
+          <li>Hostel and Accommodation</li>
           <li>Technological Advancements</li>
+          <li>Auditoriums and Seminar Halls</li>
           </ul>
         </div>
         <div className='h-[200px] w-full rounded-lg sm:h-[250px] lg:h-[350px] xl:h-[420px]' style={{ backgroundImage: "url(infrastructure.jpg)", backgroundSize: "cover" }}>
@@ -80,8 +82,10 @@ const Achievement = () => {
       <div className='flex flex-col justify-center  w-full'>
           <h2 className="text-3xl font-bold mb-4 xl:text-5xl">Alumni Achievements</h2>
           <ul className="list-disc list-inside space-y-2 xl:text-2xl">
-          <li>Successful Alumni</li>
           <li>Alumni Networks</li>
+          <li>Successful Alumni</li>
+          <li>Contributions to Society</li>
+          <li>Leadership in Global Corporations</li>
           </ul>
         </div>
         
@@ -96,7 +100,9 @@ const Achievement = () => {
           <h2 className="text-3xl font-bold mb-4 xl:text-5xl">Cultural and Extracurricular Milestones</h2>
           <ul className="list-disc list-inside space-y-2 xl:text-2xl">
           <li>Cultural Festivities</li>
+          <li>Clubs and Societies</li>
           <li>Extracurricular Programs</li>
+          <li>Cultural Heritage and Diversity</li>
           </ul>
         </div>
 
