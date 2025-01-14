@@ -7,18 +7,6 @@ const AdminState = (props) => {
         return sessionStorage.getItem('adminToken') || '';
     });
 
-    const adminSignup = async (name, email, password) => {
-        const response = await fetch('http://localhost:5000/admin/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, email, password })
-        });
-        const json = await response.json();
-        console.log(json);
-    };
-
     const adminLogin = async (name, email, password) => {
         const response = await fetch('http://localhost:5000/admin/login', {
             method: "POST",
@@ -61,7 +49,7 @@ const AdminState = (props) => {
     }, [token]);
 
     return (
-        <AdminContext.Provider value={{ admin, setAdmin, adminSignup, adminLogin, fetchAdmin, token }}>
+        <AdminContext.Provider value={{ admin, setAdmin, adminLogin, fetchAdmin, token }}>
             {props.children}
         </AdminContext.Provider>
     );

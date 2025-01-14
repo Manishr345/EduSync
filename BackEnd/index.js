@@ -4,6 +4,8 @@ const connectToMongo = require('./mangodb');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+require('dotenv').config();
+
 connectToMongo();
 
 app.use(cors());
@@ -20,5 +22,5 @@ app.use('/admission' , require('./routes/admission'));
 app.use('/course', require('./routes/courseDetails'));
 
 app.listen(5000, () => {
-    console.log('App is running at http://localhost:5000')
+    console.log('App is running')
 })
