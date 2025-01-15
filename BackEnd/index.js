@@ -21,6 +21,8 @@ app.use('/admission' , require('./routes/admission'));
 
 app.use('/course', require('./routes/courseDetails'));
 
+app.use('/', require('./routes/attendence'));
+
 app.listen(5000, () => {
     console.log('App is running')
 })
