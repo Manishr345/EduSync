@@ -114,7 +114,7 @@ const AdminLogin = () => {
                                 </button>
                             </div>
                         </form>
-                        <div className="flex items-center justify-between mt-4">
+                        {/* <div className="flex items-center justify-between mt-4">
                             <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
                             <Link
                                 to="/adminsignup"
@@ -123,7 +123,7 @@ const AdminLogin = () => {
                                 or SIGNUP
                             </Link>
                             <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
