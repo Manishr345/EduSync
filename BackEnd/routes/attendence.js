@@ -15,7 +15,8 @@ router.post('/attendence', async (req, res) => {
 
 router.post('/fetchattendence', async (req, res) => { 
     const studnentId = req.header('id');
-    const attendence = await Attendence.findAll({id: studnentId});
+    const attendence = await Attendence.find({student: studnentId});
+    res.send(attendence);
 })
 
 module.exports = router;
