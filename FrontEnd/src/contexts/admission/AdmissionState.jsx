@@ -2,6 +2,7 @@ import { useState } from "react";
 import AdmissionContext from "./AdmissionContext";
 
 const AdmissionState = (props) => {
+    const [user, setUser] = useState(null);
     const [id, setId] = useState(() => {
         return sessionStorage.getItem('studentid') || '';
     })
@@ -103,6 +104,7 @@ const AdmissionState = (props) => {
             body: JSON.stringify({ courseName, year, fees })
         })
         const json = response.json();
+        setUser(json);
         console.log(json);
         console.log('Student admission successfull');
     }

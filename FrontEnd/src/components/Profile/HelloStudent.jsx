@@ -5,6 +5,11 @@ import Header from '../Home/Header';
 import jsPDF from 'jspdf';
 
 const HelloStudent = () => {
+
+    const handleattendance = () => {
+        navigate('/attendance');
+    };
+
     const navigate = useNavigate();
     const context = useContext(AdmissionContext);
 
@@ -291,6 +296,12 @@ const HelloStudent = () => {
                             className="px-4 m-2 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold"
                         >
                             Log Out
+                        </button>
+                    </div>
+
+                    <div className='mt-5'>
+                        <button className='bg-green-500 py-3 rounded-md px-5' onClick={handleattendance}>
+                            subject attendance and docs upload
                         </button>
                     </div>
 
