@@ -85,27 +85,27 @@ const HelloStudent = () => {
     }, [modeOfTransport, source, destination, tenure, railwayClass]);
     const downloadConcessionForm = () => {
         const doc = new jsPDF();
-        const collegeLogo = '/Hogwarts logo.png'; 
+        const collegeLogo = '/Hogwarts logo.png';
         const collegeName = "HOGWARTS INSTITUTE";
         const collegeAddress = "123 Wizarding Way, Magical Town, Fantasyland";
-    
-        
+
+
         try {
-            doc.addImage(collegeLogo, 'PNG', 10, 10, 30, 30); 
+            doc.addImage(collegeLogo, 'PNG', 10, 10, 30, 30);
         } catch (error) {
             console.error('Error adding college logo:', error);
         }
-    
+
         doc.setFontSize(16);
-        doc.text(collegeName, 105, 15, { align: 'center' }); 
+        doc.text(collegeName, 105, 15, { align: 'center' });
         doc.setFontSize(12);
-        doc.text(collegeAddress, 105, 25, { align: 'center' }); 
-    
+        doc.text(collegeAddress, 105, 25, { align: 'center' });
+
         doc.setFontSize(16);
-        doc.text('Concession Form', 105, 40, { align: 'center' }); 
-    
+        doc.text('Concession Form', 105, 40, { align: 'center' });
+
         doc.setFontSize(12);
-    
+
         const fields = [
             ['Name', student?.fullName],
             ['Course Name', student?.courseName],
@@ -113,7 +113,7 @@ const HelloStudent = () => {
             ['Concession Amount', concessionAmount],
             ['Tenure', tenure],
         ];
-    
+
         let yOffset = 50;
         fields.forEach(([label, value]) => {
             doc.text(`${label}: ${value || 'N/A'}`, 20, yOffset);
@@ -123,31 +123,31 @@ const HelloStudent = () => {
                 yOffset = 20;
             }
         });
-    
+
         doc.save('Concession_Form.pdf');
     };
-    
+
     const downloadFeeReceipt = () => {
         const doc = new jsPDF();
-        const collegeLogo = '/Hogwarts logo.png'; 
+        const collegeLogo = '/Hogwarts logo.png';
         const collegeName = "HOGWARTS INSTITUTE";
         const collegeAddress = "123 Wizarding Way, Magical Town, Fantasyland";
-    
-        
+
+
         try {
-            doc.addImage(collegeLogo, 'PNG', 10, 10, 30, 30); 
+            doc.addImage(collegeLogo, 'PNG', 10, 10, 30, 30);
         } catch (error) {
             console.error('Error adding college logo:', error);
         }
-    
-       
+
+
         doc.setFontSize(16);
-        doc.text(collegeName, 105, 15, { align: 'center' }); 
+        doc.text(collegeName, 105, 15, { align: 'center' });
         doc.setFontSize(12);
-        doc.text(collegeAddress, 105, 25, { align: 'center' }); 
+        doc.text(collegeAddress, 105, 25, { align: 'center' });
         doc.setFontSize(18);
         doc.text('Fee Receipt', 105, 40, { align: 'center' });
-    
+
         doc.setFontSize(12);
         doc.text(`Name: ${student.fullName}`, 20, 50);
         doc.text(`Email: ${student.email}`, 20, 60);
@@ -155,13 +155,13 @@ const HelloStudent = () => {
         doc.text(`Year: ${student.year}`, 20, 80);
         doc.text(`Amount: ${student.fees}`, 20, 90);
         doc.text('College: HOGWARTS INSTITUTE', 20, 100);
-    
+
         doc.setFontSize(10);
         doc.text('Thank you for your payment!', 105, 120, { align: 'center' });
-    
+
         doc.save('Fee_Receipt.pdf');
     };
-    
+
 
     const downloadAdmissionForm = () => {
         const doc = new jsPDF();
@@ -238,33 +238,33 @@ const HelloStudent = () => {
                         />
                     </div>
                     <div className="flex justify-center">
-    <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-6 mb-10 w-full max-w-2xl">
-        {[
-            ['Name', student?.fullName],
-            ['Date of Birth', student?.dob],
-            ['Gender', student?.gender],
-            ['Nationality', student?.nationality],
-            ['Contact', student?.contact],
-            ['Email', student?.email],
-            ['Address', student?.address],
-            ['Parent Name', student?.parentName],
-            ['Relation', student?.relation],
-            ['Parent Contact', student?.parentContact],
-            ['School Name', student?.schoolName],
-            ['College Name', student?.collegeName],
-            ['School Grade', student?.schoolGrade],
-            ['College Grade', student?.collegeGrade],
-            ['Course Name', student?.courseName],
-            ['Year', student?.year],
-            ['Fees', student?.fees],
-            ...(student?.ktSubjects?.length > 0 ? [['KT Subjects', student.ktSubjects.join(', ')]] : []),
-        ].map(([label, value]) => (
-            <p key={label} className="text-lg font-medium">
-                <span className="text-gray-400">{label}:</span> {value || 'N/A'}
-            </p>
-        ))}
-    </div>
-</div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-6 mb-10 w-full max-w-2xl">
+                            {[
+                                ['Name', student?.fullName],
+                                ['Date of Birth', student?.dob],
+                                ['Gender', student?.gender],
+                                ['Nationality', student?.nationality],
+                                ['Contact', student?.contact],
+                                ['Email', student?.email],
+                                ['Address', student?.address],
+                                ['Parent Name', student?.parentName],
+                                ['Relation', student?.relation],
+                                ['Parent Contact', student?.parentContact],
+                                ['School Name', student?.schoolName],
+                                ['College Name', student?.collegeName],
+                                ['School Grade', student?.schoolGrade],
+                                ['College Grade', student?.collegeGrade],
+                                ['Course Name', student?.courseName],
+                                ['Year', student?.year],
+                                ['Fees', student?.fees],
+                                ...(student?.ktSubjects?.length > 0 ? [['KT Subjects', student.ktSubjects.join(', ')]] : []),
+                            ].map(([label, value]) => (
+                                <p key={label} className="text-lg font-medium">
+                                    <span className="text-gray-400">{label}:</span> {value || 'N/A'}
+                                </p>
+                            ))}
+                        </div>
+                    </div>
 
 
                     <div className="flex flex-wrap justify-between">

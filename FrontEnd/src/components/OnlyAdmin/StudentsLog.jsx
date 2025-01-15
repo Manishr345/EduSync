@@ -81,6 +81,34 @@ export default function StudentsLog() {
                                                     ))}
                                                 </div>
                                             </div>
+                                            {student.courseName==='BSC CS'?
+                                            <div className='flex w-full gap-3 justify-center items-center'>
+                                                <h1 className='font-bold'>attendance</h1>
+                                            <button className='text-white bg-green-500 p-5'>java</button>
+                                            <button className='text-white bg-green-500 p-5'>python</button>
+                                            <button className='text-white bg-green-500 p-5'>dcn</button>
+                                        </div> : student.courseName ==='BSC IT'?  <div className='flex w-full gap-3 justify-center items-center'>
+                                        <h1 className='font-bold'>attendance</h1>
+                                            <button className='text-white bg-green-500 p-5'>iot</button>
+                                            <button className='text-white bg-green-500 p-5'>c++</button>
+                                            <button className='text-white bg-green-500 p-5'>ai</button>
+                                        </div> :student.courseName==='BSC Maths'? <div className='flex w-full gap-3 justify-center items-center'>
+                                        <h1 className='font-bold'>attendance</h1>
+                                            <button className='text-white bg-green-500 p-5'>statistics</button>
+                                            <button className='text-white bg-green-500 p-5'>aljebra</button>
+                                            <button className='text-white bg-green-500 p-5'>maths part2</button>
+                                        </div>: student.courseName ==='BSC Physics'?  <div className='flex w-full gap-3 justify-center items-center'>
+                                        <h1 className='font-bold'>attendance</h1>
+                                            <button className='text-white bg-green-500 p-5'>mechanical</button>
+                                            <button className='text-white bg-green-500 p-5'>gravity</button>
+                                            <button className='text-white bg-green-500 p-5'>electrical</button>
+                                        </div> :  <div className='flex w-full gap-3 justify-center items-center'>
+                                        <h1 className='font-bold'>attendance</h1>
+                                            <button className='text-white bg-green-500 p-5'>photograph</button>
+                                            <button className='text-white bg-green-500 p-5'>vfx</button>
+                                            <button className='text-white bg-green-500 p-5'>shooting</button>
+                                        </div> }
+                                             
                                         </div>
                                     ))
                                 ) : (
