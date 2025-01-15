@@ -27,6 +27,7 @@ import Footer from './components/Home/Footer'
 import StudentsLog from './components/OnlyAdmin/StudentsLog'
 import Kt from './components/Examination/Kt'
 import KTStudents from './components/OnlyAdmin/KTStudents'
+import Attedance from './components/Profile/Attedance'
 
 
 
@@ -59,7 +60,7 @@ function App() {
               <Route path='/adminlogin' element={<AdminLogin />}></Route>
               <Route path='/helloadmin' element={<HelloAdmin />}></Route>
               <Route path='/hellostudent' element={<HelloStudent />}></Route>
-
+              <Route path='/attendance' element={<Attedance/>}></Route>
               
               {/*Admission NAV*/}
               <Route path='/personal' element={<Personal />}></Route>

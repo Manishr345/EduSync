@@ -95,8 +95,8 @@ export default function StudentsLog() {
                                         </div> :student.courseName==='BSC Maths'? <div className='flex w-full gap-3 justify-center items-center'>
                                         <h1 className='font-bold'>attendance</h1>
                                             <button className='text-white bg-green-500 p-5'>statistics</button>
-                                            <button className='text-white bg-green-500 p-5'>aljebra</button>
-                                            <button className='text-white bg-green-500 p-5'>maths part2</button>
+                                            <button className='text-white bg-green-500 p-5'>algebra</button>
+                                            <button className='text-white bg-green-500 p-5'>geometry</button>
                                         </div>: student.courseName ==='BSC Physics'?  <div className='flex w-full gap-3 justify-center items-center'>
                                         <h1 className='font-bold'>attendance</h1>
                                             <button className='text-white bg-green-500 p-5'>mechanical</button>
