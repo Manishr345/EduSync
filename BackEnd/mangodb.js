@@ -6,16 +6,22 @@ const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cl
 const connectToMongo = async () => {
     try {
         if (mongoose.connections[0].readyState) {
+            console.log('Using existing MongoDB connection');
             return;
         }
         
-        await mongoose.connect(mongoURI, {
+        const conn = await mongoose.connect(mongoURI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 5000,
+            socketTimeoutMS: 45000,
         });
-        console.log('Connected to MongoDB');
+
+        console.log('MongoDB Connected');
+        return conn;
     } catch (error) {
         console.error('MongoDB connection error:', error.message);
+        throw error; // Propagate error for handling
     }
 };
 
