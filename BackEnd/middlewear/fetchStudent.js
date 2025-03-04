@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const jwtSecret = 'Nothing';
+const jwtSecret = process.env.JWT_SECRET || 'Nothing';
 
 const fetchStudent = (req, res, next) => {
     const token = req.header('token');

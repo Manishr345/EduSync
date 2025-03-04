@@ -8,7 +8,11 @@ require('dotenv').config();
 
 connectToMongo();
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -23,6 +27,19 @@ app.use('/course', require('./routes/courseDetails'));
 
 app.use('/', require('./routes/attendence'));
 
-app.listen(5000, () => {
-    console.log('App is running')
-})
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
+const PORT = process.env.PORT || 5000;
+
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`App is running on port ${PORT}`);
+  });
+}
+
+// For Vercel
+module.exports = app;
