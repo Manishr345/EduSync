@@ -1,6 +1,8 @@
 import { useState } from "react";
 import AdmissionContext from "./AdmissionContext";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const AdmissionState = (props) => {
     const [user, setUser] = useState(null);
     const [id, setId] = useState(() => {
@@ -23,7 +25,7 @@ const AdmissionState = (props) => {
     })
     const [personal, setPersonal] = useState({});
     const personalDetails = async (fullName, dob, gender, nationality, contact, email, address, parentName, relation, parentContact, parentEmail, occupation) => {
-        const response = await fetch('http://localhost:5000/admission/personaldetails', {
+        const response = await fetch(`${API_URL}/admission/personaldetails`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +40,7 @@ const AdmissionState = (props) => {
     }
     const educationalDetails = async (schoolName, collegeName, schoolGrade, collegeGrade, highestQualification) => {
         const studentId = sessionStorage.getItem('studentid');
-        const response = await fetch(`http://localhost:5000/admission/educationaldetails/${studentId}`, {
+        const response = await fetch(`${API_URL}/admission/educationaldetails/${studentId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -50,7 +52,7 @@ const AdmissionState = (props) => {
     }
     const uploadDocuments = async (formData) => {
         const studentId = sessionStorage.getItem('studentid');
-        const response = await fetch(`http://localhost:5000/admission/documents/${studentId}`, {
+        const response = await fetch(`${API_URL}/admission/documents/${studentId}`, {
             method: 'POST',
             body: formData,
         });
@@ -59,7 +61,7 @@ const AdmissionState = (props) => {
     }
     const uploadStatement = async (formData) => {
         const studentId = sessionStorage.getItem('studentid');
-        const response = await fetch(`http://localhost:5000/admission/statement/${studentId}`, {
+        const response = await fetch(`${API_URL}/admission/statement/${studentId}`, {
             method: 'POST',
             body: formData,
         });
@@ -67,7 +69,7 @@ const AdmissionState = (props) => {
         console.log(json);
     }
     const courseDetails = async (courseName, year) => {
-        const response = await fetch('http://localhost:5000/course/coursedetails', {
+        const response = await fetch(`${API_URL}/course/coursedetails`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -96,20 +98,20 @@ const AdmissionState = (props) => {
         const studentId = sessionStorage.getItem('studentid');
         const courseName = sessionStorage.getItem('courseName');
         const year = sessionStorage.getItem('year');
-        const response = await fetch(`http://localhost:5000/student/signup/${studentId}`, {
+        const response = await fetch(`${API_URL}/student/signup/${studentId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ courseName, year, fees })
         })
-        const json = response.json();
+        const json = await response.json();
         setUser(json);
         console.log(json);
-        console.log('Student admission successfull');
+        console.log('Student admission successful');
     }
     const studentLogin = async (name, email, password) => {
-        const response = await fetch('http://localhost:5000/student/login', {
+        const response = await fetch(`${API_URL}/student/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -128,7 +130,7 @@ const AdmissionState = (props) => {
 
     const showStudent = async ()=>{
         const token = sessionStorage.getItem('studentToken');
-        const response=await fetch('http://localhost:5000/student/fetchstudent',
+        const response=await fetch(`${API_URL}/student/fetchstudent`,
             {
                 method : 'POST',
                 headers: {

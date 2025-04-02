@@ -4,6 +4,8 @@ import AdmissionContext from '../../contexts/admission/AdmissionContext';
 import Header from '../Home/Header';
 import jsPDF from 'jspdf';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const HelloStudent = () => {
 
     const handleattendance = () => {
@@ -31,7 +33,7 @@ const HelloStudent = () => {
             }
 
             try {
-                const response = await fetch('http://localhost:5000/student/fetchstudent', {
+                const response = await fetch(`${API_URL}/student/fetchstudent`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -3,22 +3,23 @@ import Header from '../Home/Header';
 import { useContext } from 'react';
 import AdmissionContext from '../../contexts/admission/AdmissionContext';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Attedance = () => {
     const context = useContext(AdmissionContext);
     const [student, setStudent] = useState(null);
     useEffect(() => {
         const funk = async() => {
-            const res = await fetch('http://localhost:5000/fetchattendence', {
+            const res = await fetch(`${API_URL}/fetchattendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type':'application/json',
-
                 }
             })
         }
         const func = async() => {
             const token = sessionStorage.getItem('studentToken');
-        const response = await fetch('http://localhost:5000/student/fetchstudent',
+        const response = await fetch(`${API_URL}/student/fetchstudent`,
             {
                 method : 'POST',
                 headers: {

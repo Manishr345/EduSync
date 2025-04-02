@@ -3,6 +3,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Home/Header';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const HelloAdmin = () => {
     const [admin, setAdmin] = useState(() => {
         return sessionStorage.getItem('admin') || "false";
@@ -26,7 +28,7 @@ const HelloAdmin = () => {
                     return;
                 }
 
-                const response = await fetch('http://localhost:5000/admin/fetchadmin', {
+                const response = await fetch(`${API_URL}/admin/fetchadmin`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -81,7 +83,7 @@ const HelloAdmin = () => {
             };
 
           
-            fetch('http://localhost:5000/admin/reset-password', {
+            fetch(`${API_URL}/admin/reset-password`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

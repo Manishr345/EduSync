@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import AdminContext from "./AdminContext";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const AdminState = (props) => {
     const [admin, setAdmin] = useState({});
     const [token, setToken] = useState(() => {
@@ -8,7 +10,7 @@ const AdminState = (props) => {
     });
 
     const adminLogin = async (name, email, password) => {
-        const response = await fetch('http://localhost:5000/admin/login', {
+        const response = await fetch(`${API_URL}/admin/login`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -27,7 +29,7 @@ const AdminState = (props) => {
             return;
         }
 
-        const response = await fetch('http://localhost:5000/admin/fetchadmin', {
+        const response = await fetch(`${API_URL}/admin/fetchadmin`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

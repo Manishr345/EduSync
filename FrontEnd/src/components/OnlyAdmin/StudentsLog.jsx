@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Home/Header';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function StudentsLog() {
     const [students, setStudents] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -8,7 +10,7 @@ export default function StudentsLog() {
 
     const clickMeJava = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -22,7 +24,7 @@ export default function StudentsLog() {
     }
     const clickMePython = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,7 +37,7 @@ export default function StudentsLog() {
     }
     const clickMeDCN = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,7 +50,7 @@ export default function StudentsLog() {
     }
     const clickMeIOT = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,7 +63,7 @@ export default function StudentsLog() {
     }
     const clickMeCPP = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -74,7 +76,7 @@ export default function StudentsLog() {
     }
     const clickMeAI = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,7 +89,7 @@ export default function StudentsLog() {
     }
     const clickMeStatistics = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -100,7 +102,7 @@ export default function StudentsLog() {
     }
     const clickMeAlgebra = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -113,7 +115,7 @@ export default function StudentsLog() {
     }
     const clickMeMathspart2 = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -126,7 +128,7 @@ export default function StudentsLog() {
     }
     const clickMeMechanical = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -139,7 +141,7 @@ export default function StudentsLog() {
     }
     const clickMeGravity= () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -152,7 +154,7 @@ export default function StudentsLog() {
     }
     const clickMeElectrical = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -165,7 +167,7 @@ export default function StudentsLog() {
     }
     const clickMePhotograph = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -178,7 +180,7 @@ export default function StudentsLog() {
     }
     const clickMeVFX = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -191,7 +193,7 @@ export default function StudentsLog() {
     }
     const clickMeShooting = () => {
         const attendence = async () => {
-            const response = await fetch('http://localhost:5000/attendence', {
+            const response = await fetch(`${API_URL}/attendence`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -210,7 +212,7 @@ export default function StudentsLog() {
     useEffect(() => {
         const fetchStudents = async () => {
             try {
-                const response = await fetch('http://localhost:5000/admin/fetchstudents', {
+                const response = await fetch(`${API_URL}/admin/fetchstudents`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

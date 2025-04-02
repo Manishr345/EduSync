@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Home/Header';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function KTStudents() {
     const [students, setStudents] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -8,7 +10,7 @@ export default function KTStudents() {
     useEffect(() => {
         const fetchStudents = async () => {
             try {
-                const response = await fetch('http://localhost:5000/admin/fetchstudents', {
+                const response = await fetch(`${API_URL}/admin/fetchstudents`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

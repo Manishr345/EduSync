@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "build": {
+      "env": {
+        "NODE_VERSION": "18"
+      }
+    },
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/(student|admin|admission|course.*)", 
+        "destination": "https://edu-sync-backend-seven.vercel.app/$1"
+      }
+    ]
+  }
+  

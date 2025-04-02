@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import AdminContext from '../../contexts/admin/AdminContext';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const AdminLogin = () => {
     const context = useContext(AdminContext);
     const navigate = useNavigate();
@@ -15,7 +17,7 @@ const AdminLogin = () => {
             const adminToken = sessionStorage.getItem('adminToken');
             if (adminToken) {
                 try {
-                    const response = await fetch('http://localhost:5000/admin/verifyToken', {
+                    const response = await fetch(`${API_URL}/admin/verifyToken`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
