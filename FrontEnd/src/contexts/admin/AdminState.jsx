@@ -10,15 +10,26 @@ const AdminState = (props) => {
     });
 
     const adminLogin = async (name, email, password) => {
-        const response = await fetch(`${API_URL}/admin/login`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name, email, password })
-        });
-    
-        return await response.json(); // Parse JSON response
+        try {
+            const response = await fetch(`${API_URL}/admin/login`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email, password })
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                return { error: data.error || 'Login failed' };
+            }
+            
+            return data;
+        } catch (error) {
+            console.error('Login error:', error);
+            return { error: 'Failed to connect to server' };
+        }
     };
     
 

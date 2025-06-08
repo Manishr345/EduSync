@@ -25,17 +25,31 @@ const AdmissionState = (props) => {
     })
     const [personal, setPersonal] = useState({});
     const personalDetails = async (fullName, dob, gender, nationality, contact, email, address, parentName, relation, parentContact, parentEmail, occupation) => {
-        const response = await fetch(`${API_URL}/admission/personaldetails`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ fullName, dob, gender, nationality, contact, email, address, parentName, relation, parentContact, parentEmail, occupation })
-        })
-        const json = await response.json();
-        if (json._id) {
-            setId(json._id);
-            sessionStorage.setItem('studentid', json._id);
+        try {
+            const response = await fetch(`${API_URL}/admission/personaldetails`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ fullName, dob, gender, nationality, contact, email, address, parentName, relation, parentContact, parentEmail, occupation })
+            });
+            
+            const json = await response.json();
+            
+            if (!response.ok) {
+                if (json.errors) {
+                    throw new Error(json.errors[0].msg || 'Validation error');
+                }
+                throw new Error(json.error || 'Failed to submit personal details');
+            }
+            
+            if (json._id) {
+                setId(json._id);
+                sessionStorage.setItem('studentid', json._id);
+            }
+        } catch (error) {
+            console.error('Error submitting personal details:', error);
+            throw error;
         }
     }
     const educationalDetails = async (schoolName, collegeName, schoolGrade, collegeGrade, highestQualification) => {
@@ -98,31 +112,48 @@ const AdmissionState = (props) => {
         const studentId = sessionStorage.getItem('studentid');
         const courseName = sessionStorage.getItem('courseName');
         const year = sessionStorage.getItem('year');
+        const password = sessionStorage.getItem('studentid'); // Use student ID as initial password
         const response = await fetch(`${API_URL}/student/signup/${studentId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ courseName, year, fees })
+            body: JSON.stringify({ courseName, year, fees, password })
         })
         const json = await response.json();
         setUser(json);
-        console.log(json);
         console.log('Student admission successful');
     }
     const studentLogin = async (name, email, password) => {
-        const response = await fetch(`${API_URL}/student/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({name, email, password})
-        })
-        const json = await response.json();
-        sessionStorage.setItem('studentToken', json.token);
-        setStudentToken(json.token);
-        console.log(studentToken);
-        return await json.token;
+        try {
+            const response = await fetch(`${API_URL}/student/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({name, email, password})
+            });
+            
+            const json = await response.json();
+            
+            if (!response.ok) {
+                if (Array.isArray(json.error)) {
+                    throw new Error(json.error[0].msg || 'Validation error');
+                }
+                throw new Error(json.error || 'Login failed');
+            }
+            
+            if (json.token) {
+                sessionStorage.setItem('studentToken', json.token);
+                setStudentToken(json.token);
+                return json.token;
+            } else {
+                throw new Error('Invalid response from server');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            throw error;
+        }
     }
     const showPassword = () => {
         return sessionStorage.getItem('studentid');

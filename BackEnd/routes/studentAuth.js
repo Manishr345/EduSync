@@ -21,7 +21,7 @@ router.post('/signup/:id', async (req, res) => {
     const stats = await Statement.findOne({student: req.params.id});
 
     const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(req.params.id, salt);
+    const hash = await bcrypt.hash(req.body.password, salt);
     student = await Student.create({
         fullName : pd.fullName,
         dob : pd.dob,
@@ -69,7 +69,10 @@ router.post('/login', [
     if (!errors.isEmpty()) {
         return res.status(400).json({ error: errors.array() });
     }
-    let student = await Student.findOne({ email: req.body.email });
+    let student = await Student.findOne({ 
+        email: req.body.email,
+        fullName: req.body.name 
+    });
     if (!student) {
         return res.status(400).json({ error: 'Please enter valid credentials' })
     }

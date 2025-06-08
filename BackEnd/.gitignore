@@ -11,20 +11,15 @@ yarn-error.log
 
 # Build output
 dist/
-dist-ssr/
-*.local
+build/
 
 # IDE and editor files
 .idea/
-.vscode/*
-!.vscode/extensions.json
+.vscode/
+*.swp
+*.swo
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 
 # Logs
 logs
-*.log
+*.log 

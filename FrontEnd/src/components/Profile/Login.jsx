@@ -29,15 +29,13 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
 
         try {
             const token = await context.studentLogin(student.name, student.email, student.password);
-
             if (token) {
                 sessionStorage.setItem('studentToken', token);
                 navigate('/hellostudent');
-            } else {
-                throw new Error('Login failed. Please check your credentials.');
             }
         } catch (err) {
             setError(err.message || 'Something went wrong. Please try again.');

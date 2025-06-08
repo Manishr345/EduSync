@@ -110,7 +110,7 @@ const AdmissionCourse = () => {
                   <input
                     type="checkbox"
                     name="duration"
-                    required="true"
+                    required={true}
                     onChange={handleChange}
                     checked={courseDetails.duration}
                     className="mr-2"
@@ -123,7 +123,7 @@ const AdmissionCourse = () => {
                   <input
                     type="checkbox"
                     name="modeOfStudy"
-                    required="true"
+                    required={true}
                     onChange={handleChange}
                     checked={courseDetails.modeOfStudy}
                     className="mr-2"
@@ -136,7 +136,7 @@ const AdmissionCourse = () => {
                   <input
                     type="checkbox"
                     name="attendance"
-                    required="true"
+                    required={true}
                     onChange={handleChange}
                     checked={courseDetails.attendance}
                     className="mr-2"

@@ -43,13 +43,23 @@ const AdminLogin = () => {
 
     const handleSubmit = async () => {
         try {
-           
             const response = await context.adminLogin(admin.name, admin.email, admin.password);
+            
+            if (response.error) {
+                // Handle array of validation errors
+                if (Array.isArray(response.error)) {
+                    setError(response.error[0].msg || 'Validation error');
+                } else {
+                    setError(response.error);
+                }
+                return;
+            }
 
-            if (response && response.token) {
-                sessionStorage.setItem('adminToken', response.token); 
-                navigate('/helloadmin'); 
-                throw new Error(response.error || 'Invalid credentials. Please try again.');
+            if (response.token) {
+                sessionStorage.setItem('adminToken', response.token);
+                navigate('/helloadmin');
+            } else {
+                setError('Invalid response from server');
             }
         } catch (err) {
             setError(err.message || 'Something went wrong. Please try again.');

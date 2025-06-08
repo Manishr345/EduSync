@@ -12,21 +12,39 @@ router.post('/login', [
     body('email', 'Please enter a valid email').isEmail(),
     body('password', 'Password should be of atleast 8 characters').isLength({ min: 8 })
 ], async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ error: errors.array() });
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ error: errors.array() });
+        }
+
+        const { name, email, password } = req.body;
+        
+        // Find admin by email
+        const admin = await Admin.findOne({ email });
+        if (!admin) {
+            return res.status(400).json({ error: 'Please enter valid credentials' });
+        }
+
+        // Verify password
+        const isPasswordValid = await bcrypt.compare(password, admin.password);
+        if (!isPasswordValid) {
+            return res.status(400).json({ error: 'Please enter valid credentials' });
+        }
+
+        // Create JWT token
+        const adminID = {
+            admin: { id: admin.id }
+        };
+        const jwtSecret = process.env.JWT_SECRET || 'Nothing';
+        const token = jwt.sign(adminID, jwtSecret);
+        
+        res.json({ token });
+    } catch (error) {
+        console.error('Login error:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-    let admin = await Admin.findOne({ email: req.body.email });
-    if (!admin) {
-        return res.status(400).json({ error: 'Please enter valid credentials' })
-    }
-    const adminID = {
-        admin: { id: admin.id }
-    }
-    const jwtSecret = 'Nothing';
-    const token = jwt.sign(adminID, jwtSecret);
-    res.json({ token });
-})
+});
 
 router.post('/fetchadmin', fetchAdmin, async (req, res) => {
     const adminID = req.admin.id;
