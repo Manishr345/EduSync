@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const mongoURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster.mrbar.mongodb.net/?retryWrites=true&w=majority&appName=Cluster`;
-
 const connectToMongo = async () => {
     try {
         if (mongoose.connections[0].readyState) {
@@ -10,7 +8,7 @@ const connectToMongo = async () => {
             return;
         }
         
-        const conn = await mongoose.connect(mongoURI, {
+        const conn = await mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             serverSelectionTimeoutMS: 5000,
