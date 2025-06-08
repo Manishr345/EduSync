@@ -6,7 +6,7 @@ const EducationDetails = require('../models/admission/educationalDetails');
 const Documents = require('../models/admission/documents');
 const Statement = require('../models/admission/statement');
 const { body, validationResult } = require('express-validator');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchStudent = require('../middlewear/fetchStudent');
 
@@ -60,6 +60,7 @@ router.post('/signup/:id', async (req, res) => {
     await Statement.collection.drop();
     res.json({ Successfull: "Student signed up" });
 })
+
 router.post('/login', [
     body('name', 'Name should be of atleast 3 characters').isLength({ min: 3 }),
     body('email', 'Please enter a valid email').isEmail(),
