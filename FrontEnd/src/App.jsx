@@ -1,35 +1,38 @@
 import './App.css'
-import Home from './pages/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import AdminStudent from './components/Profile/AdminStudent'
-import Login from './components/Profile/Login'
-import AdminSignup from './components/Profile/AdminSingup'
-import AdminLogin from './components/Profile/AdminLogin'
-import Admission from './components/Admission/Admission'
-import Educational from './components/Admission/Educational'
+import { lazy, Suspense } from 'react'
 import AdminState from './contexts/admin/AdminState'
-import HelloAdmin from './components/Profile/HelloAdmin'
 import AdmissionState from './contexts/admission/AdmissionState'
-import Personal from './components/Admission/Personal'
-import AdmissionNav from './components/Admission/AdmissionNav'
-import Activity from './pages/Activity'
-import About from './pages/About'
-import Achievement from './pages/Achievement'
-import Courses from './pages/Courses'
-import Examination from './pages/Examination'
-import Documents from './components/Admission/Documents'
-import Statement from './components/Admission/Statement'
-import Payment from './components/Admission/Payment'
-import AdmissionCourse from './components/Admission/AdmissionCourse'
-import Header from './components/Home/Header'
-import HelloStudent from './components/Profile/HelloStudent'
 import Footer from './components/Home/Footer'
-import StudentsLog from './components/OnlyAdmin/StudentsLog'
-import Kt from './components/Examination/Kt'
-import KTStudents from './components/OnlyAdmin/KTStudents'
-import Attedance from './components/Profile/Attedance'
 
+// Lazy load components
+const Home = lazy(() => import('./pages/Home'))
+const AdminStudent = lazy(() => import('./components/Profile/AdminStudent'))
+const Login = lazy(() => import('./components/Profile/Login'))
+const AdminSignup = lazy(() => import('./components/Profile/AdminSingup'))
+const AdminLogin = lazy(() => import('./components/Profile/AdminLogin'))
+const Admission = lazy(() => import('./components/Admission/Admission'))
+const Educational = lazy(() => import('./components/Admission/Educational'))
+const HelloAdmin = lazy(() => import('./components/Profile/HelloAdmin'))
+const Personal = lazy(() => import('./components/Admission/Personal'))
+const AdmissionNav = lazy(() => import('./components/Admission/AdmissionNav'))
+const Activity = lazy(() => import('./pages/Activity'))
+const About = lazy(() => import('./pages/About'))
+const Achievement = lazy(() => import('./pages/Achievement'))
+const Courses = lazy(() => import('./pages/Courses'))
+const Examination = lazy(() => import('./pages/Examination'))
+const Documents = lazy(() => import('./components/Admission/Documents'))
+const Statement = lazy(() => import('./components/Admission/Statement'))
+const Payment = lazy(() => import('./components/Admission/Payment'))
+const AdmissionCourse = lazy(() => import('./components/Admission/AdmissionCourse'))
+const HelloStudent = lazy(() => import('./components/Profile/HelloStudent'))
+const StudentsLog = lazy(() => import('./components/OnlyAdmin/StudentsLog'))
+const Kt = lazy(() => import('./components/Examination/Kt'))
+const KTStudents = lazy(() => import('./components/OnlyAdmin/KTStudents'))
+const Attedance = lazy(() => import('./components/Profile/Attedance'))
 
+// Loading component
+const Loading = () => <div>Loading...</div>
 
 function App() {
   return (
@@ -37,53 +40,44 @@ function App() {
       <AdmissionState>
         <AdminState>
           <BrowserRouter>
-          
-            <Routes>
+            <Suspense fallback={<Loading />}>
+              <Routes>
+                {/*Main NAV*/}
+                <Route path='/' element={<Home />} />
+                <Route path='/profile' element={<AdminStudent />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/activity' element={<Activity />} />
+                <Route path='/achievement' element={<Achievement />} />
+                <Route path='/courses' element={<Courses />} />
+                <Route path='/examination' element={<Examination />} />
+                <Route path='/studentslog' element={<StudentsLog/>} />
+                <Route path='/ktstudents' element={<KTStudents/>} />
+                <Route path='/kt-form' element={<Kt/>} />
 
-              {/*Main NAV*/}
-              <Route path='/' element={<Home />}></Route>
-              {/* <Route path='/admission' element={<Admission />}></Route>  ?  */}
-              <Route path='/profile' element={<AdminStudent />}></Route>
-              <Route path='/about' element={<About />}></Route>
-              <Route path='/activity' element={<Activity />}></Route>
-              <Route path='/achievement' element={<Achievement />}></Route>
-              <Route path='/courses' element={<Courses />}></Route>
-              <Route path='/examination' element={<Examination />}></Route>
-              <Route path='/studentslog' element={<StudentsLog/>}></Route>
-              <Route path='/ktstudents' element={<KTStudents/>}></Route>
-              <Route path='/kt-form' element={<Kt/>}></Route>
-             
-
-              {/*Profile*/}
-              <Route path='/login' element={<Login />}></Route>
-              <Route path='/adminsignup' element={<AdminSignup />}></Route>
-              <Route path='/adminlogin' element={<AdminLogin />}></Route>
-              <Route path='/helloadmin' element={<HelloAdmin />}></Route>
-              <Route path='/hellostudent' element={<HelloStudent />}></Route>
-              <Route path='/attendance' element={<Attedance/>}></Route>
-              
-              {/*Admission NAV*/}
-              <Route path='/personal' element={<Personal />}></Route>
-              <Route path='/educational' element={<Educational />}></Route>
-              <Route path='/document' element={<Documents />}></Route>
-              <Route path='/statement' element={<Statement />}></Route>
-              <Route path='/course' element={<Courses />}></Route>
-              <Route path='/payment' element={<Payment />}></Route>
-              
-              <Route path='/admission/payment' element={<Payment />}></Route>
-              <Route path='/admission/course' element={<AdmissionCourse />}></Route>
-              <Route path='/admission/statement' element={<Statement />}></Route>
-              <Route path='/admission/educational' element={<Educational />}></Route>
-              <Route path='/admission/document' element={<Documents/>}></Route>
-              <Route path='/admission/personal' element={<Personal />}></Route>
-             
-              {/*
-                  <Route path='/admission/course' element={<Educational/>}></Route>
-                  <Route path='/admission/statement' element={<Educational/>}></Route>
-                  <Route path='/admission/payment' element={<Educational/>}></Route>
-              */}
-
-            </Routes>
+                {/*Profile*/}
+                <Route path='/login' element={<Login />} />
+                <Route path='/adminsignup' element={<AdminSignup />} />
+                <Route path='/adminlogin' element={<AdminLogin />} />
+                <Route path='/helloadmin' element={<HelloAdmin />} />
+                <Route path='/hellostudent' element={<HelloStudent />} />
+                <Route path='/attendance' element={<Attedance/>} />
+                
+                {/*Admission NAV*/}
+                <Route path='/personal' element={<Personal />} />
+                <Route path='/educational' element={<Educational />} />
+                <Route path='/document' element={<Documents />} />
+                <Route path='/statement' element={<Statement />} />
+                <Route path='/course' element={<Courses />} />
+                <Route path='/payment' element={<Payment />} />
+                
+                <Route path='/admission/payment' element={<Payment />} />
+                <Route path='/admission/course' element={<AdmissionCourse />} />
+                <Route path='/admission/statement' element={<Statement />} />
+                <Route path='/admission/educational' element={<Educational />} />
+                <Route path='/admission/document' element={<Documents/>} />
+                <Route path='/admission/personal' element={<Personal />} />
+              </Routes>
+            </Suspense>
             <Footer/>
           </BrowserRouter>
         </AdminState>
@@ -91,4 +85,5 @@ function App() {
     </>
   )
 }
+
 export default App

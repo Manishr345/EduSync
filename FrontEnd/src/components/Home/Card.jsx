@@ -4,34 +4,67 @@ const Card = () => {
     return (
         <>
             {/* <div className='w-full h-[90vh] bg-gray-500 min-[768px]:max-[1023px]:w-[110%]'></div> */}
-            <div className='w-full sm:max-[800px]:h-[130vh] sm:h-[90vh] text-white sm:flex flex-col justify-center items-center mb-7'>
+            <div className="w-full flex justify-center items-center">
+                <hr className="w-11/12 border-t-2 border-white opacity-40 mb-3 mt-8" />
+            </div>
+            <div className='w-full sm:max-[800px]:h-[130vh] sm:h-[90vh] text-white flex flex-col justify-center items-center mb-7'>
                 <div>
-                    <h1 className='text-3xl font-bold text-center'>Features</h1>
+                    <h1 className='text-4xl font-extrabold text-center tracking-wide mb-2 drop-shadow-lg'>Features</h1>
+                    <p className='text-center text-lg text-gray-300 mb-6'>What makes EduSync Institute stand out</p>
                 </div>
-                <div className='w-full sm:h-[clac(90vh-36px)] grid sm:grid-cols-3 sm:gap-x-[3vw] lg:gap-x-25 gap-y-20 sm:px-20 px-10 mt-10 grid-cols-1 sm:max-[800px]:grid-cols-2'>
-                    <div className=' rounded-xl p-6  border-l-4 border-b-4 border-white text-center flex flex-col  items-center' style={{ backgroundColor: '#021D3C' }}>
-                        <h2 className='text-xl font-bold text-center'>FACULTIES</h2>
-                        <p className='mt-4'>PHD <br />CEO <br />Ex-FANG</p>
+                <div className='w-full grid sm:grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-8 sm:px-10 md:px-20 mt-6 px-4'>
+                    <div className='rounded-2xl p-7 bg-gradient-to-br from-[#021D3C] via-[#0a2a4d] to-[#021D3C] border border-white/20 shadow-lg text-center flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl'>
+                        <h2 className='text-2xl font-bold mb-2 tracking-wide'>FACULTIES</h2>
+                        <ul className='mt-3 space-y-1 text-base text-gray-200'>
+                            <li>PHD</li>
+                            <li>CEO</li>
+                            <li>Ex-FANG</li>
+                        </ul>
                     </div>
-                    <div className=' rounded-xl p-6 border-l-4 border-b-4 border-white text-center flex flex-col  items-center' style={{ backgroundColor: '#021D3C' }}>
-                        <h2 className='text-xl font-bold text-center'>PLACEMENT</h2>
-                        <p className='mt-4'>FANG <br />Wipro<br />JP Morgan</p>
+                    <div className='rounded-2xl p-7 bg-gradient-to-br from-[#021D3C] via-[#0a2a4d] to-[#021D3C] border border-white/20 shadow-lg text-center flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl'>
+                        <h2 className='text-2xl font-bold mb-2 tracking-wide'>PLACEMENT</h2>
+                        <ul className='mt-3 space-y-1 text-base text-gray-200'>
+                            <li>FANG</li>
+                            <li>Wipro</li>
+                            <li>JP Morgan</li>
+                        </ul>
                     </div>
-                    <div className=' rounded-xl  sm:p-6 py-5 border-l-4 border-b-4 border-white text-center flex flex-col  items-center' style={{ backgroundColor: '#021D3C' }}>
-                        <h2 className='text-xl font-bold text-center '>INFRASTRUCTURE</h2>
-                        <p className='mt-4 '>Turf <br />Adv Library<br /> Adv Seminar Halls<br />Adv Labs/Classrooms</p>
+                    <div className='rounded-2xl p-7 bg-gradient-to-br from-[#021D3C] via-[#0a2a4d] to-[#021D3C] border border-white/20 shadow-lg text-center flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl'>
+                        <h2 className='text-2xl font-bold mb-2 tracking-wide'>INFRASTRUCTURE</h2>
+                        <ul className='mt-3 space-y-1 text-base text-gray-200'>
+                            <li>Turf</li>
+                            <li>Adv Library</li>
+                            <li>Adv Seminar Halls</li>
+                            <li>Adv Labs/Classrooms</li>
+                        </ul>
                     </div>
-                    <div className=' rounded-xl p-6 border-l-4 border-b-4 border-white text-center flex flex-col  items-center' style={{ backgroundColor: '#021D3C' }}>
-                        <h2 className='text-xl font-bold text-center'>SCHOLARSHIPS</h2>
-                        <p className='mt-4'>Ews<br />Others<br /> Minority <br />Grade based </p>
+                    <div className='rounded-2xl p-7 bg-gradient-to-br from-[#021D3C] via-[#0a2a4d] to-[#021D3C] border border-white/20 shadow-lg text-center flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl'>
+                        <h2 className='text-2xl font-bold mb-2 tracking-wide'>SCHOLARSHIPS</h2>
+                        <ul className='mt-3 space-y-1 text-base text-gray-200'>
+                            <li>EWS</li>
+                            <li>Others</li>
+                            <li>Minority</li>
+                            <li>Grade based</li>
+                        </ul>
                     </div>
-                    <div className=' rounded-xl p-6 border-l-4 border-b-4 border-white text-center flex flex-col  items-center' style={{ backgroundColor: '#021D3C' }}>
-                        <h2 className='text-xl font-bold text-center'>PROGRAMS</h2>
-                        <p className='mt-4'>Workshop <br />hackathon <br />Dual-Degree <br />International exachange program</p>
+                    <div className='rounded-2xl p-7 bg-gradient-to-br from-[#021D3C] via-[#0a2a4d] to-[#021D3C] border border-white/20 shadow-lg text-center flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl'>
+                        <h2 className='text-2xl font-bold mb-2 tracking-wide'>PROGRAMS</h2>
+                        <ul className='mt-3 space-y-1 text-base text-gray-200'>
+                            <li>Workshop</li>
+                            <li>Hackathon</li>
+                            <li>Dual-Degree</li>
+                            <li>International Exchange Program</li>
+                        </ul>
                     </div>
-                    <div className=' rounded-xl p-6 border-l-4 border-b-4 border-white text-center flex flex-col  items-center' style={{ backgroundColor: '#021D3C' }}>
-                        <h2 className='text-xl font-bold text-center'>COMMITTEES</h2>
-                        <p className='mt-4'>Tech <br />NSS<br />NCC <br /> Finance <br />Cultural</p>
+                    <div className='rounded-2xl p-7 bg-gradient-to-br from-[#021D3C] via-[#0a2a4d] to-[#021D3C] border border-white/20 shadow-lg text-center flex flex-col items-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl'>
+                        <h2 className='text-2xl font-bold mb-2 tracking-wide'>COMMITTEES</h2>
+                        <ul className='mt-3 space-y-1 text-base text-gray-200'>
+                            <li>Tech</li>
+                            <li>NSS</li>
+                            <li>NCC</li>
+                            <li>Finance</li>
+                            <li>Cultural</li>
+                        </ul>
                     </div>
                 </div>
             </div>
