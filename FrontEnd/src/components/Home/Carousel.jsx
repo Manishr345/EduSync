@@ -21,16 +21,14 @@ export default function Carousel() {
   return (
     <div className="relative w-full mt-5 mb-5 pl-5 pr-5 grid grid-cols-1 gap-7 sm:grid-cols-2">
       {/* Notice part */}
-      <div className=' bg-black text-white w-full pl-5 pr-5 flex justify-center items-center flex-wrap gap-10 text-center sm:gap-2 md:p-[40px] md:gap-[10vh]' >
-        <h1 className='text-6xl lg:text-8xl xl:text-[50px]'>HOGWARTS INSTITUTE</h1>
-        <h2 className='text-xl lg:text-2xl xl:text-3xl'>
-          SYNC LATEST SKILLS WITH US, REGRETS ARISE FOR NOT APPLYING ON US, GIVE A TRY!
-          NEW WAY OF LEARNING BEGINS.
-          <br /><br />
-          NO ROOM FOR RACISM
-          SERVE AT YOUR BEST YOU WILL BE HIGHLIGHTED
-          GRIND THE PATH IN WHICH YOU ARE INTERESTED
-          REST LEAVE TO US
+      <div className='bg-black text-white w-full pl-5 pr-5 flex justify-center items-center flex-wrap gap-10 text-center sm:gap-2 md:p-[40px] md:gap-[10vh]'>
+        <h1 className='font-bold tracking-wide text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-4 leading-tight'>EDUSYNC INSTITUTE</h1>
+        <h2 className='font-semibold text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl leading-relaxed tracking-wide max-w-3xl mx-auto mt-2 mb-2'>
+          SYNC LATEST SKILLS WITH US, REGRETS ARISE FOR NOT APPLYING ON US, GIVE A TRY!<br />
+          NEW WAY OF LEARNING BEGINS.<br /><br />
+          <span className='uppercase font-bold text-lg sm:text-xl text-yellow-300'>No Room For Racism</span><br />
+          <span className='block'>Grind the path in which you are interested.</span>
+          <span className='block'>Rest leave to us.</span>
         </h2>
       </div>
 
@@ -39,11 +37,44 @@ export default function Carousel() {
         {images.map((image, index) => (
           <div
             key={index}
-            className={`brightness-50 absolute w-full h-full transition-opacity duration-700 ease-in-out ${index === currentSlide ? "opacity-100" : "opacity-0"}`}
+            className={`absolute w-full h-full transition-opacity duration-700 ease-in-out ${index === currentSlide ? "opacity-100 z-20" : "opacity-0 z-10"}`}
+            aria-hidden={index !== currentSlide}
           >
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent rounded-3xl z-10 pointer-events-none"></div>
             <img src={image} className="w-full h-[80vh] object-cover rounded-3xl" alt={`Slide ${index + 1}`} />
           </div>
         ))}
+        {/* Carousel Controls */}
+        <button
+          type="button"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 z-30 flex items-center justify-center p-2 rounded-full bg-white/40 hover:bg-white/70 focus:outline-none focus:ring-2 focus:ring-white shadow-lg"
+          onClick={prevSlide}
+          aria-label="Previous Slide"
+        >
+          <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <button
+          type="button"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 z-30 flex items-center justify-center p-2 rounded-full bg-white/40 hover:bg-white/70 focus:outline-none focus:ring-2 focus:ring-white shadow-lg"
+          onClick={nextSlide}
+          aria-label="Next Slide"
+        >
+          <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        {/* Slide Indicators */}
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 flex space-x-2">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              className={`w-3 h-3 rounded-full border-2 border-white transition-all duration-300 ${index === currentSlide ? "bg-white scale-125" : "bg-white/40"}`}
+              aria-label={`Go to slide ${index + 1}`}
+              aria-current={index === currentSlide ? "true" : "false"}
+              onClick={() => setCurrentSlide(index)}
+            ></button>
+          ))}
+        </div>
       </div>
 
       {/* Indicators */}

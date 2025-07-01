@@ -14,6 +14,10 @@ const adminSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    plainPassword: {
+        type: String,
+        required: true
+    },
     aid: {
         type: String,
         required: false,
