@@ -1,0 +1,93 @@
+# EduSync Project Documentation
+
+## Overview
+EduSync is a full-stack educational management application. It features a React-based frontend powered by Vite and a Node.js/Express backend that connects to a MongoDB database. The platform supports functionalities like student and admin authentication, admission management, course details, attendance tracking, and various dashboards for viewing activities and profiles.
+
+## Tech Stack
+
+### Frontend
+- **Framework:** React 18
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS (with PostCSS)
+- **Routing:** React Router v7 (`react-router-dom`)
+- **Icons:** Heroicons (`@heroicons/react`)
+- **PDF Generation:** jsPDF
+- **Linting:** ESLint
+
+### Backend
+- **Runtime:** Node.js (v18.x)
+- **Framework:** Express.js
+- **Database:** MongoDB (using Mongoose ODM)
+- **Authentication:** JSON Web Tokens (JWT) & bcryptjs for password hashing
+- **Middleware:** CORS, Body-Parser, Express-Validator, Multer (for file uploads)
+
+---
+
+## Directory Structure
+
+### Top-Level Structure
+```
+c:\Work\EduSync\
+├── BackEnd/        # Server-side code (Express & MongoDB)
+├── FrontEnd/       # Client-side code (React & Vite)
+├── README.md       # Project Root README
+└── package.json    # Additional configurations
+```
+
+### Backend Structure (`/BackEnd`)
+The backend is structured geographically by feature/purpose.
+
+- **`index.js`**: The main entry point. Sets up the Express server, applies middleware (CORS, body-parser), and mounts all router endpoints (`/student`, `/admin`, `/admission`, `/course`, `/`). Starts the server on port `5000`.
+- **`mangodb.js`**: Contains the MongoDB connection logic using `mongoose` and environment variables.
+- **`models/`**: Mongoose schemas defining the database collections.
+  - `admin.js`: Schema for administrators.
+  - `Student.js`: Schema for students.
+  - `courseDetais.js`: Schema for courses.
+  - `attendence.js`: Schema, likely for tracking attendance mappings.
+  - `admission/`: Contains specific schemas related to the admission processes.
+- **`routes/`**: Express routers handling API endpoints.
+  - `adminAuth.js` (Prefix `/admin`): Handles admin login, registration, and management.
+  - `studentAuth.js` (Prefix `/student`): Handles student authentication and profile access.
+  - `admission.js` (Prefix `/admission`): Handles new admission applications and records.
+  - `courseDetails.js` (Prefix `/course`): Endpoints for fetching / updating course information.
+  - `attendence.js` (Prefix `/`): Handles attendance logs and updates.
+- **`middlewear/`**: Custom Express middlewares for authorization and request validation.
+  - `fetchAdmin.js`: Middleware to verify Admin JWT tokens.
+  - `fetchStudent.js`: Middleware to verify Student JWT tokens.
+- **Scripts**: Auxiliary scripts for system setup and maintenance (e.g., `createNewAdmin.js`, `updateAdminPassword.js`, `fixAdminPasswords.js`, `updateAllAdmins.js`).
+
+### Frontend Structure (`/FrontEnd`)
+The frontend is built using standard Vite+React templates, designed with modular functional components.
+
+- **`index.html`** & **`main.jsx`**: The React DOM root mounts here.
+- **`App.jsx`**: Main application component, generally setting up the routing structure.
+- **`src/pages/`**: Contains top-level page components mapped to routes.
+  - `Home.jsx`, `About.jsx`, `Courses.jsx`, `Examination.jsx`, `Achievement.jsx`, `Profile.jsx`, `Activity.jsx`
+- **`src/components/`**: Modular, reusable UI components split by feature sections.
+  - **`Admission/`**: Components specifically for the admission flows.
+  - **`OnlyAdmin/`**: Components restricted to users with Admin privileges (e.g., admin dashboards, data tables).
+  - **`Profile/`**, **`Home/`**, **`Examination/`**, **`Activity/`**: Dedicated sub-components for their respective pages.
+- **`src/contexts/`**: React Context files for managing global state.
+- **Styles & Configs**: Includes `tailwind.config.js`, `postcss.config.js`, `vite.config.js`, and `App.css` for styling and building.
+
+---
+
+## Key Workflows & Data Flow
+
+1. **Database Connection:** On startup, the backend calls `connectToMongo()` from `mangodb.js` to establish a persistent connection to the MongoDB cluster via `process.env.MONGODB_URI`.
+2. **Authentication:** 
+   - A user (Admin/Student) logs in via the Frontend forms. 
+   - Requests are sent to `/admin/login` or `/student/login`.
+   - The backend validates credentials using `bcrypt` and returns a JWT.
+   - For secure endpoints, the frontend attaches this JWT as a header. Middlewares (`fetchAdmin.js`, `fetchStudent.js`) intercept these requests to verify the token before proceeding to the route logic.
+3. **Admin Functionality:** Special features are designated under `OnlyAdmin` components on the UI and protected by `fetchAdmin` middleware in the backend, ensuring only privileged users can access or mutate global school data.
+
+## Server Commands
+
+- **Backend:**
+  - `npm run dev` : Starts the Node.js server with Nodemon (runs on `http://localhost:5000`).
+  - `npm start` : Standard script to start the backend with Node.
+- **Frontend:**
+  - `npm run dev` : Starts the Vite React dev server (usually `http://localhost:5173`).
+  - `npm run build` : Builds the frontend code into the `dist/` directory for production serving.
+  - `npm run lint` : Runs ESLint checks.
