@@ -22,7 +22,7 @@
     "multer": "^1.4.5-lru"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.1.14"
   },
   "engines": {
     "node": "18.x"
